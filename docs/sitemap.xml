@@ -3,42 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/</loc>
+    <loc>https://krossovochkin.github.io/personal-website/</loc>
     <lastmod>2020-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/</loc>
+    <loc>https://krossovochkin.github.io/personal-website/posts/</loc>
     <lastmod>2020-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/test/</loc>
+    <loc>https://krossovochkin.github.io/personal-website/posts/test/</loc>
     <lastmod>2020-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/something/</loc>
+    <loc>https://krossovochkin.github.io/personal-website/tags/something/</loc>
     <lastmod>2020-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/something2/</loc>
+    <loc>https://krossovochkin.github.io/personal-website/tags/something2/</loc>
     <lastmod>2020-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>https://krossovochkin.github.io/personal-website/tags/</loc>
     <lastmod>2020-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>https://krossovochkin.github.io/personal-website/about/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>https://krossovochkin.github.io/personal-website/categories/</loc>
   </url>
   
 </urlset>
