@@ -27,7 +27,27 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://krossovochkin.github.io/personal-website/about/</guid>
-      <description>Hello, I&amp;rsquo;m Krossovochkin</description>
+      <description>Vasya Drobushkov @krossovochkin
+About me Android developer with mathematical background. Experienced in developing smart applications for Android, and also in mobile game development. Punctual, always pay attention to details. Fast learner, greedy for knowledge.
+ Links LinkedIn
+Github
+StackOverflow
+GoodReads
+Medium
+HackerNoon
+Facebook
+Twitter
+Kaggle
+SpeakerDeck
+Reddit
+HackerRank
+LeetCode
+ Projects Fibery Unofficial
+Android client for fibery.io.
+MVVM, Android Architecture components, coroutines.
+KWeather
+Android weather app.
+MVI, Kotlin MPP, Jetpack Compose.</description>
     </item>
     
   </channel>

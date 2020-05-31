@@ -10,6 +10,8 @@ description = "Comparing threading in RxJava 2 and Kotlin Flow"
 showFullContent = false
 +++
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/from-rxjava-2-to-kotlin-flow-threading-8618867e1955) [![](https://img.shields.io/badge/androidweekly-%23398-blue)](https://androidweekly.net/issues/issue-398) [![](https://img.shields.io/badge/proandroiddev%20digest-%2314-green)](https://proandroiddev.com/proandroiddev-digest-14-b7247f25292f)
+
 Introduction
 ===
 
