@@ -9,7 +9,7 @@ publishDir = "docs"
   contentTypeName = "posts"
 
   # ["orange", "blue", "red", "green", "pink"]
-  themeColor = "orange"
+  themeColor = "yellow"
 
   # if you set this to 0, only submenu trigger will be visible
   showMenuItems = 2
@@ -51,7 +51,7 @@ publishDir = "docs"
 
     [languages.en.params.logo]
       logoText = "Krossovochkin"
-      logoHomeLink = "/"
+      logoHomeLink = "/personal-website"
 
     [languages.en.menu]
       [[languages.en.menu.main]]
