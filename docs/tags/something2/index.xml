@@ -1,26 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>something2 on Krossovochkin</title>
-    <link>https://krossovochkin.github.io/personal-website/tags/something2/</link>
-    <description>Recent content in something2 on Krossovochkin</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>© 2020 Vasya Drobushkov</copyright>
-    <lastBuildDate>Sat, 30 May 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://krossovochkin.github.io/personal-website/tags/something2/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Something</title>
-      <link>https://krossovochkin.github.io/personal-website/posts/test/</link>
-      <pubDate>Sat, 30 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://krossovochkin.github.io/personal-website/posts/test/</guid>
-      <description>Hello, something
-fun hello() {println(&amp;quot;hello&amp;quot;)}fun hello() {println(&amp;#34;hello&amp;#34;)} </description>
-    </item>
-    
-  </channel>
-</rss>

@@ -7,26 +7,53 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© 2020 Vasya Drobushkov</copyright>
-    <lastBuildDate>Sat, 30 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://krossovochkin.github.io/personal-website/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>something</title>
-      <link>https://krossovochkin.github.io/personal-website/tags/something/</link>
-      <pubDate>Sat, 30 May 2020 00:00:00 +0000</pubDate>
+      <title>flow</title>
+      <link>https://krossovochkin.github.io/personal-website/tags/flow/</link>
+      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://krossovochkin.github.io/personal-website/tags/something/</guid>
+      <guid>https://krossovochkin.github.io/personal-website/tags/flow/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>something2</title>
-      <link>https://krossovochkin.github.io/personal-website/tags/something2/</link>
-      <pubDate>Sat, 30 May 2020 00:00:00 +0000</pubDate>
+      <title>kotlin</title>
+      <link>https://krossovochkin.github.io/personal-website/tags/kotlin/</link>
+      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://krossovochkin.github.io/personal-website/tags/something2/</guid>
+      <guid>https://krossovochkin.github.io/personal-website/tags/kotlin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rxjava</title>
+      <link>https://krossovochkin.github.io/personal-website/tags/rxjava/</link>
+      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://krossovochkin.github.io/personal-website/tags/rxjava/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rxjava2</title>
+      <link>https://krossovochkin.github.io/personal-website/tags/rxjava2/</link>
+      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://krossovochkin.github.io/personal-website/tags/rxjava2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>thread</title>
+      <link>https://krossovochkin.github.io/personal-website/tags/thread/</link>
+      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://krossovochkin.github.io/personal-website/tags/thread/</guid>
       <description></description>
     </item>
     

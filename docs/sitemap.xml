@@ -3,33 +3,48 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://krossovochkin.github.io/personal-website/tags/flow/</loc>
+    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krossovochkin.github.io/personal-website/posts/2020_01_25_from_rxjava2_to_kotlin_flow_threading/</loc>
+    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krossovochkin.github.io/personal-website/tags/kotlin/</loc>
+    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://krossovochkin.github.io/personal-website/</loc>
-    <lastmod>2020-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://krossovochkin.github.io/personal-website/posts/</loc>
-    <lastmod>2020-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://krossovochkin.github.io/personal-website/posts/test/</loc>
-    <lastmod>2020-05-30T00:00:00+00:00</lastmod>
+    <loc>https://krossovochkin.github.io/personal-website/tags/rxjava/</loc>
+    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://krossovochkin.github.io/personal-website/tags/something/</loc>
-    <lastmod>2020-05-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://krossovochkin.github.io/personal-website/tags/something2/</loc>
-    <lastmod>2020-05-30T00:00:00+00:00</lastmod>
+    <loc>https://krossovochkin.github.io/personal-website/tags/rxjava2/</loc>
+    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://krossovochkin.github.io/personal-website/tags/</loc>
-    <lastmod>2020-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://krossovochkin.github.io/personal-website/tags/thread/</loc>
+    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
