@@ -12,18 +12,18 @@ Fast learner, greedy for knowledge.
 
 ###### Links
 
-[LinkedIn](https://www.linkedin.com/in/vasyadrobushkov/)  
-[Github](https://github.com/krossovochkin)  
-[StackOverflow](https://stackoverflow.com/users/1533933/krossovochkin)  
-[GoodReads](https://www.goodreads.com/user/show/21544616-krossovochkin)  
-[Medium](https://medium.com/@krossovochkin)  
-[HackerNoon](https://hackernoon.com/u/krossovochkin)  
-[Facebook](https://www.facebook.com/vasya.drobushkov)  
-[Twitter](https://twitter.com/krossovochkin)  
-[Kaggle](https://www.kaggle.com/krossovochkin)  
-[SpeakerDeck](https://speakerdeck.com/krossovochkin)  
-[Reddit](https://www.reddit.com/user/krossovochkin)  
-[HackerRank](https://www.hackerrank.com/krossovochkin)  
+[LinkedIn](https://www.linkedin.com/in/vasyadrobushkov/) 
+[Github](https://github.com/krossovochkin) 
+[StackOverflow](https://stackoverflow.com/users/1533933/krossovochkin) 
+[GoodReads](https://www.goodreads.com/user/show/21544616-krossovochkin) 
+[Medium](https://medium.com/@krossovochkin) 
+[HackerNoon](https://hackernoon.com/u/krossovochkin) 
+[Facebook](https://www.facebook.com/vasya.drobushkov) 
+[Twitter](https://twitter.com/krossovochkin) 
+[Kaggle](https://www.kaggle.com/krossovochkin) 
+[SpeakerDeck](https://speakerdeck.com/krossovochkin) 
+[Reddit](https://www.reddit.com/user/krossovochkin) 
+[HackerRank](https://www.hackerrank.com/krossovochkin) 
 [LeetCode](https://leetcode.com/krossovochkin/)  
 
 ---
