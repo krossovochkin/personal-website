@@ -364,7 +364,7 @@ In this cube dimensions of pieces state the placement and orientation instead of
 
 There are a lot of different cubes which mimic some real-world objects.
 
-![[Source](https://www.cubelelo.com/yj-love-heart-cube)](https://cdn-images-1.medium.com/max/2000/0*7AIqosz0dEX0Ai_a)*[Source](https://www.cubelelo.com/yj-love-heart-cube)*
+![[Source](https://www.cubelelo.com/yj-love-heart-cube)](../../0_7AIqosz0dEX0Ai_a.jpg)*[Source](https://www.cubelelo.com/yj-love-heart-cube)*
 
 ![[Source](https://store.tribox.com/products/detail.php?product_id=1135)](../../img/0_e8PpbTFV0FCNuezT.png)*[Source](https://store.tribox.com/products/detail.php?product_id=1135)*
 

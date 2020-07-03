@@ -10,7 +10,7 @@ description = "Short synopsis on lectures about Category theory and programming"
 showFullContent = false
 +++
 
-![[Source](https://unsplash.com/photos/5mZ_M06Fc9g)](https://cdn-images-1.medium.com/max/2000/0*jmBKs8ZyL7WkG5op)*[Source](https://unsplash.com/photos/5mZ_M06Fc9g)*
+![[Source](https://unsplash.com/photos/5mZ_M06Fc9g)](https://images.unsplash.com/photo-1453733190371-0a9bedd82893?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/5mZ_M06Fc9g)*
 
 ## Disclaimer
 

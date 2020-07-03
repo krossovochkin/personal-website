@@ -10,7 +10,7 @@ description = "Looking at what compiler can generate and in which situations."
 showFullContent = false
 +++
 
-![[Source](https://unsplash.com/photos/tdsG7cUNrOo)](https://cdn-images-1.medium.com/max/2000/0*dXfqvjwEHtCF8a14)*[Source](https://unsplash.com/photos/tdsG7cUNrOo)*
+![[Source](https://unsplash.com/photos/tdsG7cUNrOo)](https://images.unsplash.com/photo-1563951163384-ddbc3fbaacd4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/tdsG7cUNrOo)*
 
 ## Introduction
 

@@ -10,7 +10,7 @@ description = "Comparing Error Handling in RxJava and Kotlin Flow"
 showFullContent = false
 +++
 
-![[Source](https://unsplash.com/photos/aYNyC6fIH84)](https://cdn-images-1.medium.com/max/2000/0*vDKPkBinqLNmwO1Z)*[Source](https://unsplash.com/photos/aYNyC6fIH84)*
+![[Source](https://unsplash.com/photos/aYNyC6fIH84)](https://images.unsplash.com/photo-1580357991342-89ec1672c98a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/aYNyC6fIH84)*
 > This post is part of series of comparing RxJava to Kotlin Flow. Previous articles were about [Threading ](https://proandroiddev.com/from-rxjava-2-to-kotlin-flow-threading-8618867e1955)and [Backpressure](https://proandroiddev.com/from-rxjava-to-kotlin-flow-backpressure-d1fb91e6dea8).
 
 ## Introduction

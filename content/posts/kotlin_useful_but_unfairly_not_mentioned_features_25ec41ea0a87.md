@@ -10,7 +10,7 @@ description = "Exploring some good Kotlin features which are not so widely discu
 showFullContent = false
 +++
 
-![[Source](https://unsplash.com/photos/5EoKAdyStik)](https://cdn-images-1.medium.com/max/2000/0*Gj3qpLouvA7zca9R)*[Source](https://unsplash.com/photos/5EoKAdyStik)*
+![[Source](https://unsplash.com/photos/5EoKAdyStik)](https://images.unsplash.com/photo-1519963759188-0e9264cd7992?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/5EoKAdyStik)*
 
 ## Introduction
 

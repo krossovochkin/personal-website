@@ -10,7 +10,7 @@ description = "Investigating issues which might result in poor accessibility wit
 showFullContent = false
 +++
 
-![[Source](https://unsplash.com/photos/Jky9coxzeHI)](https://cdn-images-1.medium.com/max/2000/0*Iv5aczYj_vV5ZH_g)*[Source](https://unsplash.com/photos/Jky9coxzeHI)*
+![[Source](https://unsplash.com/photos/Jky9coxzeHI)](https://images.unsplash.com/photo-1465403843003-b277b46a1120?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/Jky9coxzeHI)*
 
 ## Introduction
 

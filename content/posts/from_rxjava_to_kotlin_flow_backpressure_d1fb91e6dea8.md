@@ -18,7 +18,7 @@ This is somewhat continuation to previous article about comparison of RxJava and
 [**From RxJava 2 to Kotlin Flow: Threading**
 *Comparing threading in RxJava 2 and Kotlin Flow*proandroiddev.com](https://proandroiddev.com/from-rxjava-2-to-kotlin-flow-threading-8618867e1955)
 
-![[Source](https://unsplash.com/photos/Y3brPR0gjb4)](https://cdn-images-1.medium.com/max/2000/0*GRNaxx7CjTR66UrD)*[Source](https://unsplash.com/photos/Y3brPR0gjb4)*
+![[Source](https://unsplash.com/photos/Y3brPR0gjb4)](https://images.unsplash.com/photo-1530122577122-6b8010d1a6b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/Y3brPR0gjb4)*
 
 ## Introduction
 

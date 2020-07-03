@@ -10,7 +10,7 @@ description = "Comparing Stream Types in RxJava and Kotlin Flow"
 showFullContent = false
 +++
 
-![[Source](https://unsplash.com/photos/JcimvPDC3as)](https://cdn-images-1.medium.com/max/2000/0*DvTaCm4Nl03qBW7z)*[Source](https://unsplash.com/photos/JcimvPDC3as)*
+![[Source](https://unsplash.com/photos/JcimvPDC3as)](https://images.unsplash.com/photo-1516192891955-70642cf1ac88?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/JcimvPDC3as)*
 > This post is part of series of comparing RxJava to Kotlin Flow. Previous articles were about [Threading](https://proandroiddev.com/from-rxjava-2-to-kotlin-flow-threading-8618867e1955), [Backpressure](https://proandroiddev.com/from-rxjava-to-kotlin-flow-backpressure-d1fb91e6dea8), [Error Handling](https://proandroiddev.com/from-rxjava-to-kotlin-flow-error-handling-da1f6a4f2708)
 
 ## Introduction

@@ -10,7 +10,7 @@ description = "Analyzing memory and performance of our code at the low-level."
 showFullContent = false
 +++
 
-![[Source](https://unsplash.com/photos/5MvL55-rSvI)](https://cdn-images-1.medium.com/max/2000/0*1WZ6pLSRp0VbWBBI)*[Source](https://unsplash.com/photos/5MvL55-rSvI)*
+![[Source](https://unsplash.com/photos/5MvL55-rSvI)](https://images.unsplash.com/photo-1501721709601-744e5bf3440d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/5MvL55-rSvI)*
 
 ## Introduction
 

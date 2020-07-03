@@ -10,7 +10,7 @@ description = "Comparing threading in RxJava 2 and Kotlin Flow"
 showFullContent = false
 +++
 
-![[Source](https://unsplash.com/photos/vyyVbUOYNPc)](https://cdn-images-1.medium.com/max/2000/0*piI5NnrRuivMUOKD)*[Source](https://unsplash.com/photos/vyyVbUOYNPc)*
+![[Source](https://unsplash.com/photos/vyyVbUOYNPc)](https://images.unsplash.com/photo-1552034412-443022194b52?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/vyyVbUOYNPc)*
 
 ## Introduction
 

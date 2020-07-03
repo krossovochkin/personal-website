@@ -10,7 +10,7 @@ description = "Attempt to analyze the benefits of Kotlin Flow over RxJava."
 showFullContent = false
 +++
 
-![[Source](https://unsplash.com/photos/Lks7vei-eAg)](https://cdn-images-1.medium.com/max/2000/0*lLIxJ9waNokV4i4N)*[Source](https://unsplash.com/photos/Lks7vei-eAg)*
+![[Source](https://unsplash.com/photos/Lks7vei-eAg)](https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/Lks7vei-eAg)*
 
 ## Introduction
 
