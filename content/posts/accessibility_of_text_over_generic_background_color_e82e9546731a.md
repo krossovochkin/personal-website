@@ -12,6 +12,9 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/Jky9coxzeHI)](https://images.unsplash.com/photo-1465403843003-b277b46a1120?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/Jky9coxzeHI)*
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/accessibility-of-text-over-generic-background-color-e82e9546731a)
+[![](https://img.shields.io/badge/proandroiddevdigest-18-green)](https://proandroiddev.com/proandroiddev-digest-18-4c6a096fc7e8)
+
 ## Introduction
 
 One of the important parts of application development is to make it accessible to as many users as possible. This includes people with impaired vision, color blindness, impaired hearing, impaired dexterity, cognitive disabilities, and many other disabilities.

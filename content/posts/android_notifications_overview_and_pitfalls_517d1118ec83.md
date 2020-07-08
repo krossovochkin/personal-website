@@ -10,6 +10,8 @@ description = ""
 showFullContent = false
 +++
 
+> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/android-notifications-overview-and-pitfalls-517d1118ec83)
+
 # Introduction
 
 Notifications are widely used in Android applications. Though API is pretty straightforward, there are some key things that one should know and understand. This article will try to be first step into understanding Notifications API.

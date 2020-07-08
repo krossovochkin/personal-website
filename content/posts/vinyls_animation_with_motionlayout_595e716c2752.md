@@ -12,6 +12,8 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/Jm9P0mDPo6A)](https://images.unsplash.com/photo-1539375665275-f9de415ef9ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/Jm9P0mDPo6A)*
 
+> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/vinyls-animation-with-motionlayout-595e716c2752)
+
 ## Introduction
 
 Being professional Android developer for many years, things which were always difficult to me are animations, colors and dimensions — basically all the UI/UX stuff. I can’t describe or easily understand what good colors can be used, how to implement this or that animation and so on.

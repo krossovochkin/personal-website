@@ -12,6 +12,9 @@ showFullContent = false
 
 Source: https://github.com/ReactiveX
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/operator-fusion-in-rxjava-2-dcd6612cffae)
+[![](https://img.shields.io/badge/androidweekly-386-blue)](https://androidweekly.net/issues/issue-386)
+
 ## Introduction
 
 RxJava is a very powerful library, though it has some issues as well. Specifically performance and memory issues, which come from problems library tries to solve and how the solution is designed from technical perspective.

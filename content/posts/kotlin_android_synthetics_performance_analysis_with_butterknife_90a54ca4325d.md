@@ -10,6 +10,8 @@ description = ""
 showFullContent = false
 +++
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/kotlin-android-synthetics-performance-analysis-with-butterknife-90a54ca4325d)
+
 # Introduction
 
 After comment that [synthetic is no longer recommended practice](https://android-review.googlesource.com/c/platform/frameworks/support/+/882241) and [some arguments](https://proandroiddev.com/the-argument-over-kotlin-synthetics-735305dd4ed0) I decided to go deeper into issue with performance of *kotlin-android-synthetics* by analyzing generated Java and byte code and comparing to other approaches (such as vanilla-*findViewById *and *ButterKnife*).

@@ -10,6 +10,8 @@ description = ""
 showFullContent = false
 +++
 
+> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/dynamic-mobile-client-development-problem-and-concept-df509891061)
+
 Data and interfaces — are two of the most important things in development.
 
 Data usually comes from/to server and tells application what should be used (and therefore shown to the user on UI)

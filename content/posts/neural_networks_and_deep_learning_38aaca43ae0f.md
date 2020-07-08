@@ -10,6 +10,8 @@ description = ""
 showFullContent = false
 +++
 
+> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/neural-networks-and-deep-learning-38aaca43ae0f)
+
 # Disclaimer
 
 It is brief synopsis of [Neural Networks and Deep learning](https://www.coursera.org/learn/neural-networks-deep-learning/home/welcome) course on Coursera.

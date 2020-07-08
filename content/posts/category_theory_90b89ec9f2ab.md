@@ -12,6 +12,8 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/5mZ_M06Fc9g)](https://images.unsplash.com/photo-1453733190371-0a9bedd82893?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/5mZ_M06Fc9g)*
 
+> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/category-theory-90b89ec9f2ab)
+
 ## Disclaimer
 
 This is short synopsis of great [set of lectures](https://www.youtube.com/playlist?list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_). What is written here is by no means true, one should refer to original lectures or some books etc. This is written mostly for myself in case I wanted to revisit the topic in the future.

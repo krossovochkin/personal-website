@@ -12,6 +12,9 @@ showFullContent = false
 
 Source: https://github.com/ReactiveX
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/rxjava-observable-to-single-49c2a14da625)
+[![](https://img.shields.io/badge/androidweekly-364-blue)](https://androidweekly.net/issues/issue-364)
+
 Transforming Single to Observable is simple, as Single satisfies Observable’s contract. Just call single.toObservable() and you’re good. But transforming Observable to Single is not that simple: if it happens that Observable emits exactly one value and completes (or terminates with error without emitting values) then it is pretty straightforward, otherwise one need to set up some additional rules.
 
 In RxJava there are a number of operators for transforming Observable to Single:

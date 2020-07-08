@@ -10,6 +10,8 @@ description = ""
 showFullContent = false
 +++
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/simmmmplllledateformat-6bd326d17012)
+
 ## Introduction
 
 Using SimpleDateFormat to format dates and times is a common thing (as Java 8 Time API is not that available on Android yet). Usually it looks like:

@@ -12,6 +12,9 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/5MvL55-rSvI)](https://images.unsplash.com/photo-1501721709601-744e5bf3440d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/5MvL55-rSvI)*
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/diving-deep-into-android-dex-bytecode-48db82b170c8)
+[![](https://img.shields.io/badge/proandroiddevdigest-15-green)](https://proandroiddev.com/proandroiddev-digest-15-b467005869ce)
+
 ## Introduction
 
 Modern Android development is based on Kotlin, which is interoperable with Java. Whenever we use some cool feature from Kotlin (say High-order functions) under the hood (when running on JVM) the feature is implemented in terms of Java bytecode. This might lead to some overheads in memory and performance if used without caution (for example excessive usage of lambdas with parameters without inlining might produce a lot of anonymous classes and put additional pressure on GC).

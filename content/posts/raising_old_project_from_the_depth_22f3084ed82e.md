@@ -10,6 +10,8 @@ description = "Story about the first commercial project I took part in and how I
 showFullContent = false
 +++
 
+> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/raising-old-project-from-the-depth-22f3084ed82e)
+
 ## Introduction
 
 I am an Android Developer from the beginning of my professional career. Straight from the University, I’ve jumped into Android development, and to this day continue my journey. During that time I’ve worked in different areas: enterprise, product business applications, SDK development. But all that started with mobile game development.

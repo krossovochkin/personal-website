@@ -12,6 +12,8 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/IiEFmIXZWSw)](https://images.unsplash.com/photo-1547637589-f54c34f5d7a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/IiEFmIXZWSw)*
 
+> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/better-programming/unit-testing-best-practices-9bceeafe6edf)
+
 **Disclaimer**: This is a set of things I consider very useful when writing unit tests. I call them *best practices* because they allow me to write good, quality tests that are easier to read, more maintainable, and better describe business needs.
 
 These points might be subjective, you might have other opinions or have more items. That’s fine. Do not hesitate to put your opinions in the comments.

@@ -10,6 +10,9 @@ description = ""
 showFullContent = false
 +++
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/sqlite-triggers-android-room-2e7120bb3e3a)
+[![](https://img.shields.io/badge/androidweekly-397-blue)](https://androidweekly.net/issues/issue-397)
+
 ## Introduction
 
 SQLite is one of the [most used](https://www.sqlite.org/mostdeployed.html) database. This is because it is used on almost all mobile devices in the world. As SQLite is very similar to SQL everyone already knows the basic concepts like querying, inserting, updating, deleting data; databases and tables; joining tables etc.

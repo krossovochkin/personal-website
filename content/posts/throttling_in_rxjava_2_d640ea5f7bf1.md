@@ -12,6 +12,8 @@ showFullContent = false
 
 Source: https://github.com/ReactiveX
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/throttling-in-rxjava-2-d640ea5f7bf1)
+
 ## Introduction
 
 I don’t know for what reason but I see from time to time same misunderstanding on different throttle operators in RxJava. Usually nobody says about throttle, instead by default everyone says that debounce can be used. Especially using debounce to avoid multiple clicks on buttons is commonly suggested, which I believe is a bad UX (some examples [here](https://www.aanandshekharroy.com/articles/2018-01/rxjava-flowables) and [here](https://stackoverflow.com/a/48168316/1533933)). Let’s finally look at available options in RxJava and find out when it is better to use what.

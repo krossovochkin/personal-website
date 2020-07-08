@@ -10,6 +10,8 @@ description = ""
 showFullContent = false
 +++
 
+> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/3x3x3-rubiks-cube-world-gif-alert-613d016d2ae7)
+
 # Introduction
 
 I find Rubik’s cube an awesome puzzle. It has simple design, but quite difficult to solve (if you don’t know how to do that). At the same time it is possible to learn how to solve cube — there are a lot of algorithms for solving (for example [Fridrich method](https://ruwix.com/the-rubiks-cube/advanced-cfop-fridrich/orient-the-last-layer-oll/) describes quite a lot of them). These optimized algorithms made popular speedcubing — solving cube on time — with world record of [less than 4 seconds](https://ruwix.com/blog/yusheng-du-record-347/).

@@ -13,6 +13,8 @@ showFullContent = false
 ![[Source](https://unsplash.com/photos/aYNyC6fIH84)](https://images.unsplash.com/photo-1580357991342-89ec1672c98a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/aYNyC6fIH84)*
 > This post is part of series of comparing RxJava to Kotlin Flow. Previous articles were about [Threading ](https://proandroiddev.com/from-rxjava-2-to-kotlin-flow-threading-8618867e1955)and [Backpressure](https://proandroiddev.com/from-rxjava-to-kotlin-flow-backpressure-d1fb91e6dea8).
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/from-rxjava-to-kotlin-flow-error-handling-da1f6a4f2708)
+
 ## Introduction
 
 Error handling is fundamental in reactive programming. Reactive streams might fail with exception and propagate it as an event downstream notifying consumers on the error that happened.

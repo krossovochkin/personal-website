@@ -10,6 +10,8 @@ description = ""
 showFullContent = false
 +++
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/android-version-code-tricks-f63421285ee7)
+
 ## Introduction
 
 Version code is a special integer value which works as an internal version number. It is not visible to end users. Android system uses this number to protect against application downgrades — it is not possible to install new application with version code lower than in currently installed application.

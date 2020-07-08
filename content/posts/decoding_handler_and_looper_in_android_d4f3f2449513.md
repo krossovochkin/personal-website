@@ -10,6 +10,8 @@ description = ""
 showFullContent = false
 +++
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/decoding-handler-and-looper-in-android-d4f3f2449513)
+
 ## Introduction
 
 Handler and Looper are one of the main low-level Android OS things, which almost nobody uses directly (at least nowadays). But they are at the core, so many other high-level solutions are based on them. Therefore one should know what Handler and Looper are, what and how they are doing.

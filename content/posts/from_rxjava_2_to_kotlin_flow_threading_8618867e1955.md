@@ -12,6 +12,10 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/vyyVbUOYNPc)](https://images.unsplash.com/photo-1552034412-443022194b52?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/vyyVbUOYNPc)*
 
+> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/from-rxjava-2-to-kotlin-flow-threading-8618867e1955)
+[![](https://img.shields.io/badge/androidweekly-398-blue)](https://androidweekly.net/issues/issue-398)
+[![](https://img.shields.io/badge/proandroiddevdigest-14-green)](https://proandroiddev.com/proandroiddev-digest-14-b7247f25292f)
+
 ## Introduction
 
 For a long time RxJava was undisputed leader for reactive solutions on Android, though with Kotlin expansion and introducing cold streams (Flow) seems situation might be rapidly changing in the coming years.
