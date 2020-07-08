@@ -29,11 +29,87 @@ Sample consists of:
 
 * Setting dynamically few properties on *TextView *afterwards
 
-<iframe src="https://medium.com/media/a7ef6d913574027b6a278010498ffa1e" frameborder=0></iframe>
+{{< highlight kotlin >}}
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var textView: TextView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        textView = findViewById(R.id.textView)
+
+        update()
+    }
+
+    private fun update() {
+        textView.text = "Text"
+        textView.setTextColor(Color.RED)
+        textView.textSize = 14.0f
+    }
+}
+{{< / highlight >}}
 
 Here is what we’ll get if we try to look at generated java code:
 
-<iframe src="https://medium.com/media/d56def1a17f877978c5c7536da3c5ee7" frameborder=0></iframe>
+{{< highlight java >}}
+public final class MainActivity extends AppCompatActivity {
+   private TextView textView;
+   private HashMap _$_findViewCache;
+
+   protected void onCreate(@Nullable Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      this.setContentView(-1300009);
+      View var10001 = this.findViewById(-1000050);
+      Intrinsics.checkExpressionValueIsNotNull(var10001, "findViewById(R.id.textView)");
+      this.textView = (TextView)var10001;
+      this.update();
+   }
+
+   private final void update() {
+      TextView var10000 = this.textView;
+      if (this.textView == null) {
+         Intrinsics.throwUninitializedPropertyAccessException("textView");
+      }
+
+      var10000.setText((CharSequence)"Text");
+      var10000 = this.textView;
+      if (this.textView == null) {
+         Intrinsics.throwUninitializedPropertyAccessException("textView");
+      }
+
+      var10000.setTextColor(-65536);
+      var10000 = this.textView;
+      if (this.textView == null) {
+         Intrinsics.throwUninitializedPropertyAccessException("textView");
+      }
+
+      var10000.setTextSize(14.0F);
+   }
+
+   public View _$_findCachedViewById(int var1) {
+      if (this._$_findViewCache == null) {
+         this._$_findViewCache = new HashMap();
+      }
+
+      View var2 = (View)this._$_findViewCache.get(var1);
+      if (var2 == null) {
+         var2 = this.findViewById(var1);
+         this._$_findViewCache.put(var1, var2);
+      }
+
+      return var2;
+   }
+
+   public void _$_clearFindViewByIdCache() {
+      if (this._$_findViewCache != null) {
+         this._$_findViewCache.clear();
+      }
+
+   }
+}
+{{< / highlight >}}
 
 We immediately have a number of questions:
 
@@ -67,27 +143,31 @@ But it is something we know, not the compiler.
 
 One could look at generated Java code and decide to do little trick with *.apply* function:
 
-    private fun update() {
-        textView.*apply ***{
-            ***text *= "Text"
-            setTextColor(Color.*RED*)
-            *textSize *= 14.0f
-        **}
-    **}
+{{< highlight kotlin >}}
+private fun update() {
+    textView.apply {
+        text = "Text"
+        setTextColor(Color.*RED*)
+        textSize = 14.0f
+    }
+}
+{{< / highlight >}}
 
 So the resulting Java code will be:
 
-    private final void update() {
-       TextView var10000 = this.textView;
-       if (this.textView == null) {
-          Intrinsics.*throwUninitializedPropertyAccessException*("textView");
-       }
-    
-       TextView var1 = var10000;
-       var1.setText((CharSequence)"Text");
-       var1.setTextColor(-65536);
-       var1.setTextSize(14.0F);
-    }
+{{< highlight java >}}
+private final void update() {
+   TextView var10000 = this.textView;
+   if (this.textView == null) {
+      Intrinsics.*throwUninitializedPropertyAccessException*("textView");
+   }
+
+   TextView var1 = var10000;
+   var1.setText((CharSequence)"Text");
+   var1.setTextColor(-65536);
+   var1.setTextSize(14.0F);
+}
+{{< / highlight >}}
 
 So we have only one check and then update all properties on local property. Neat.
 
@@ -102,9 +182,11 @@ Seems *SparseArray *is better option because we’ll have primitive integers as 
 
 Actually there is a way to generate code with *SparseArray*. For that it is needed to add to *build.gradle*:
 
-    androidExtensions {
-        defaultCacheImplementation = "SPARSE_ARRAY"
-    }
+{{< highlight groovy >}}
+androidExtensions {
+    defaultCacheImplementation = "SPARSE_ARRAY"
+}
+{{< / highlight >}}
 
 After that we’ll have *SparseArray* as cache for views.
 
@@ -121,16 +203,111 @@ To conclude, evaluation of vanilla approach:
 
 Let’s look at the same example with ButterKnife:
 
-<iframe src="https://medium.com/media/34f91d3706d0a6a7d580c4a7f64fb456" frameborder=0></iframe>
+{{< highlight kotlin >}}
+class ButterKnifeAcivity : AppCompatActivity() {
+
+    @BindView(R.id.textView)
+    lateinit var textView: TextView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        ButterKnife.bind(this)
+
+        update()
+    }
+
+    private fun update() {
+        textView.text = "Text"
+        textView.setTextColor(Color.RED)
+        textView.textSize = 14.0f
+    }
+}
+{{< / highlight >}}
 
 Generated Java code (synthetics part is removed):
 
-<iframe src="https://medium.com/media/2356f4eaa2fc28ededfe40d05573cc07" frameborder=0></iframe>
+{{< highlight java >}}
+public final class ButterKnifeAcivity extends AppCompatActivity {
+   @BindView(-1000050)
+   @NotNull
+   public TextView textView;
+
+   @NotNull
+   public final TextView getTextView() {
+      TextView var10000 = this.textView;
+      if (this.textView == null) {
+         Intrinsics.throwUninitializedPropertyAccessException("textView");
+      }
+
+      return var10000;
+   }
+
+   public final void setTextView(@NotNull TextView var1) {
+      Intrinsics.checkParameterIsNotNull(var1, "<set-?>");
+      this.textView = var1;
+   }
+
+   protected void onCreate(@Nullable Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      this.setContentView(-1300009);
+      ButterKnife.bind((Activity)this);
+      this.update();
+   }
+
+   private final void update() {
+      TextView var10000 = this.textView;
+      if (this.textView == null) {
+         Intrinsics.throwUninitializedPropertyAccessException("textView");
+      }
+
+      var10000.setText((CharSequence)"Text");
+      var10000 = this.textView;
+      if (this.textView == null) {
+         Intrinsics.throwUninitializedPropertyAccessException("textView");
+      }
+
+      var10000.setTextColor(-65536);
+      var10000 = this.textView;
+      if (this.textView == null) {
+         Intrinsics.throwUninitializedPropertyAccessException("textView");
+      }
+
+      var10000.setTextSize(14.0F);
+   }
+}
+{{< / highlight >}}
 
 So, basically everything is the same. The difference is only that additional getter and setter for our *TextView *was generated.
 It is actually redundant (and will be removed by *ProGuard*), because *ButterKnife *injector will work directly on field:
 
-<iframe src="https://medium.com/media/f8b1562e6a98bdc8366d99c479e3505a" frameborder=0></iframe>
+{{< highlight kotlin >}}
+public final class ButterKnifeAcivity_ViewBinding implements Unbinder {
+  private ButterKnifeAcivity target;
+
+  @UiThread
+  public ButterKnifeAcivity_ViewBinding(ButterKnifeAcivity target) {
+    this(target, target.getWindow().getDecorView());
+  }
+
+  @UiThread
+  public ButterKnifeAcivity_ViewBinding(ButterKnifeAcivity target, View source) {
+    this.target = target;
+
+    target.textView = Utils.findRequiredViewAsType(source, R.id.textView, "field 'textView'", TextView.class);
+  }
+
+  @Override
+  public void unbind() {
+    ButterKnifeAcivity target = this.target;
+    if (target == null) throw new IllegalStateException("Bindings already cleared.");
+    this.target = null;
+
+    target.textView = null;
+  }
+}
+{{< / highlight >}}
 
 So, basically using *ButterKnife* is similar to vanilla approach. The only difference is that we don’t have to write a lot of *findViewById *calls (though we still need to write one line per property — *Binds *annotation — but it is anyway better as we have actual property and view id near to each other).
 
@@ -147,11 +324,70 @@ To conclude, evaluation of *ButterKnife *approach:
 
 Same sample using synthetics:
 
-<iframe src="https://medium.com/media/ee45e245a9678ab1a1fc10c44db0189f" frameborder=0></iframe>
+{{< highlight kotlin >}}
+import kotlinx.android.synthetic.main.activity_main.*
+
+class ExtensionsActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        update()
+    }
+
+    private fun update() {
+        textView.text = "Text"
+        textView.setTextColor(Color.RED)
+        textView.textSize = 14.0f
+    }
+}
+{{< / highlight >}}
 
 Generated Java code:
 
-<iframe src="https://medium.com/media/1e69c57813c0debcb2ad8dcea92cd6e1" frameborder=0></iframe>
+{{< highlight java >}}
+public final class ExtensionsActivity extends AppCompatActivity {
+   private SparseArray _$_findViewCache;
+
+   protected void onCreate(@Nullable Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      this.setContentView(-1300009);
+      this.update();
+   }
+
+   private final void update() {
+      TextView var10000 = (TextView)this._$_findCachedViewById(id.textView);
+      Intrinsics.checkExpressionValueIsNotNull(var10000, "textView");
+      var10000.setText((CharSequence)"Text");
+      ((TextView)this._$_findCachedViewById(id.textView)).setTextColor(-65536);
+      var10000 = (TextView)this._$_findCachedViewById(id.textView);
+      Intrinsics.checkExpressionValueIsNotNull(var10000, "textView");
+      var10000.setTextSize(14.0F);
+   }
+
+   public View _$_findCachedViewById(int var1) {
+      if (this._$_findViewCache == null) {
+         this._$_findViewCache = new SparseArray();
+      }
+
+      View var2 = (View)this._$_findViewCache.get(var1);
+      if (var2 == null) {
+         var2 = this.findViewById(var1);
+         this._$_findViewCache.put(var1, var2);
+      }
+
+      return var2;
+   }
+
+   public void _$_clearFindViewByIdCache() {
+      if (this._$_findViewCache != null) {
+         this._$_findViewCache.clear();
+      }
+
+   }
+}
+{{< / highlight >}}
 
 Here we have version with *SparseArray *to not have, as discussed above, useless autoboxing of integer keys.
 
@@ -159,12 +395,14 @@ The main issue with generated code is that even as we call three methods on same
 
 Again, we can work-around this by using *.apply*, as we did in vanilla approach. Then generated code will be like:
 
-    private final void update() {
-       TextView var1 = (TextView)this._$_findCachedViewById(id.textView);
-       var1.setText((CharSequence)"Text");
-       var1.setTextColor(-65536);
-       var1.setTextSize(14.0F);
-    }
+{{< highlight java >}}
+private final void update() {
+   TextView var1 = (TextView)this._$_findCachedViewById(id.textView);
+   var1.setText((CharSequence)"Text");
+   var1.setTextColor(-65536);
+   var1.setTextSize(14.0F);
+}
+{{< / highlight >}}
 
 Looks like we’ve improved our code a bit, as now we’ll call cache only once (and if HashMap is used, then we’ll not have two additional boxing of integer primitive).
 That actually looks pretty good.
@@ -174,11 +412,219 @@ Below are two listings, first one is byte-code from decompiled release APK of or
 
 **Original**:
 
-<iframe src="https://medium.com/media/06ffe5cfb630933f852aa0a72e39777e" frameborder=0></iframe>
+{{< highlight kotlin >}}
+.class public final Lcom/krossovochkin/butterknifetest/ExtensionsActivity;
+.super Landroidx/appcompat/app/c;
 
-**With .*apply *“optimization”:**
 
-<iframe src="https://medium.com/media/4b8d866921e94575276ad354eabf5fca" frameborder=0></iframe>
+# instance fields
+.field private j:Ljava/util/HashMap;
+
+
+# direct methods
+.method public constructor <init>()V
+    .registers 1
+
+    invoke-direct {p0}, Landroidx/appcompat/app/c;-><init>()V
+
+    return-void
+.end method
+
+.method private a(I)Landroid/view/View;
+    .registers 4
+
+    iget-object v0, p0, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->j:Ljava/util/HashMap;
+
+    if-nez v0, :cond_b
+
+    new-instance v0, Ljava/util/HashMap;
+
+    invoke-direct {v0}, Ljava/util/HashMap;-><init>()V
+
+    iput-object v0, p0, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->j:Ljava/util/HashMap;
+
+    :cond_b
+    iget-object v0, p0, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->j:Ljava/util/HashMap;
+
+    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/view/View;
+
+    if-nez v0, :cond_26
+
+    invoke-virtual {p0, p1}, Landroidx/fragment/app/d;->findViewById(I)Landroid/view/View;
+
+    move-result-object v0
+
+    iget-object v1, p0, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->j:Ljava/util/HashMap;
+
+    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object p1
+
+    invoke-virtual {v1, p1, v0}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    :cond_26
+    return-object v0
+.end method
+
+
+# virtual methods
+.method public final onCreate(Landroid/os/Bundle;)V
+    .registers 3
+
+    invoke-super {p0, p1}, Landroidx/appcompat/app/c;->onCreate(Landroid/os/Bundle;)V
+
+    const p1, 0x7f0a001e
+
+    invoke-virtual {p0, p1}, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->setContentView(I)V
+
+    sget p1, Lcom/krossovochkin/butterknifetest/a$a;->textView:I
+
+    invoke-direct {p0, p1}, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->a(I)Landroid/view/View;
+
+    move-result-object p1
+
+    check-cast p1, Landroid/widget/TextView;
+
+    const-string v0, "textView"
+
+    invoke-static {p1, v0}, La/a/a/a;->a(Ljava/lang/Object;Ljava/lang/String;)V
+
+    const-string v0, "Text"
+
+    check-cast v0, Ljava/lang/CharSequence;
+
+    invoke-virtual {p1, v0}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    sget p1, Lcom/krossovochkin/butterknifetest/a$a;->textView:I
+
+    invoke-direct {p0, p1}, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->a(I)Landroid/view/View;
+
+    move-result-object p1
+
+    check-cast p1, Landroid/widget/TextView;
+
+    const/high16 v0, -0x10000
+
+    invoke-virtual {p1, v0}, Landroid/widget/TextView;->setTextColor(I)V
+
+    sget p1, Lcom/krossovochkin/butterknifetest/a$a;->textView:I
+
+    invoke-direct {p0, p1}, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->a(I)Landroid/view/View;
+
+    move-result-object p1
+
+    check-cast p1, Landroid/widget/TextView;
+
+    const-string v0, "textView"
+
+    invoke-static {p1, v0}, La/a/a/a;->a(Ljava/lang/Object;Ljava/lang/String;)V
+
+    const/high16 v0, 0x41600000    # 14.0f
+
+    invoke-virtual {p1, v0}, Landroid/widget/TextView;->setTextSize(F)V
+
+    return-void
+.end method
+{{< / highlight >}}
+
+**With .*apply* “optimization”:**
+
+{{< highlight kotlin >}}
+.class public final Lcom/krossovochkin/butterknifetest/ExtensionsActivity;
+.super Landroidx/appcompat/app/c;
+
+
+# instance fields
+.field private j:Ljava/util/HashMap;
+
+
+# direct methods
+.method public constructor <init>()V
+    .registers 1
+
+    invoke-direct {p0}, Landroidx/appcompat/app/c;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public final onCreate(Landroid/os/Bundle;)V
+    .registers 4
+
+    invoke-super {p0, p1}, Landroidx/appcompat/app/c;->onCreate(Landroid/os/Bundle;)V
+
+    const p1, 0x7f0a001e
+
+    invoke-virtual {p0, p1}, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->setContentView(I)V
+
+    sget p1, Lcom/krossovochkin/butterknifetest/a$a;->textView:I
+
+    iget-object v0, p0, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->j:Ljava/util/HashMap;
+
+    if-nez v0, :cond_16
+
+    new-instance v0, Ljava/util/HashMap;
+
+    invoke-direct {v0}, Ljava/util/HashMap;-><init>()V
+
+    iput-object v0, p0, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->j:Ljava/util/HashMap;
+
+    :cond_16
+    iget-object v0, p0, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->j:Ljava/util/HashMap;
+
+    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/view/View;
+
+    if-nez v0, :cond_31
+
+    invoke-virtual {p0, p1}, Landroidx/fragment/app/d;->findViewById(I)Landroid/view/View;
+
+    move-result-object v0
+
+    iget-object v1, p0, Lcom/krossovochkin/butterknifetest/ExtensionsActivity;->j:Ljava/util/HashMap;
+
+    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object p1
+
+    invoke-virtual {v1, p1, v0}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    :cond_31
+    check-cast v0, Landroid/widget/TextView;
+
+    const-string p1, "Text"
+
+    check-cast p1, Ljava/lang/CharSequence;
+
+    invoke-virtual {v0, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+
+    const/high16 p1, -0x10000
+
+    invoke-virtual {v0, p1}, Landroid/widget/TextView;->setTextColor(I)V
+
+    const/high16 p1, 0x41600000    # 14.0f
+
+    invoke-virtual {v0, p1}, Landroid/widget/TextView;->setTextSize(F)V
+
+    return-void
+.end method
+{{< / highlight >}}
 
 Again, few questions and observations:
 

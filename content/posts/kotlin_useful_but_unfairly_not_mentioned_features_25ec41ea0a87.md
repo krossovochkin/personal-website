@@ -27,7 +27,19 @@ But also there are some differences between Kotlin and Java, which are not that 
 In Java references of parameters of a method are mutable by default.
 That means that one can “replace” object on a given reference. To make it immutable one needs to add final keyword. It is a good practice to not replace such references, because it adds complexity to the code. That means that one should consider to always add final keyword to all parameters, which is definitely not that satisfying.
 
-<iframe src="https://medium.com/media/dd85a1c81b81e8681258fc1937ca7306" frameborder=0></iframe>
+{{< highlight kotlin >}}
+public class A {
+
+    void foo(String param) {
+        param = "hello";
+        System.out.println(param);
+    }
+
+    void fooFinal(final String param) {
+        param = "hello"; // Cannot assign a value to final variable 'param'
+    }
+}
+{{< / highlight >}}
 
 For example, as shown in a snippet, we get compilation error only if we add final keyword.
 
@@ -35,7 +47,14 @@ For example, as shown in a snippet, we get compilation error only if we add fina
 
 Unlike Java, in Kotlin all the params are by default immutable. And there is no way to make them mutable. This follows general Kotlin idiom of restricting all the access unless explicitly declared (so instead of putting final one usually add open where needed). In this particular case, there is no way to make this parameter neither var nor open. And anyway there is no need for that.
 
-<iframe src="https://medium.com/media/92c53cc085df1c9f86ab78b73eaa8930" frameborder=0></iframe>
+{{< highlight kotlin >}}
+class A {
+
+    fun foo(param: String) {
+       param = "hello" // Val cannot be reassigned
+    }
+}
+{{< / highlight >}}
 
 ## Package private vs protected
 
@@ -59,11 +78,31 @@ Important thing here is to note that protected is accessible from the same packa
 
 So, if we, for example, we have a class with two methods: one protected and another package-private:
 
-<iframe src="https://medium.com/media/8712b2bb67ab904caa658e0d9cc5b28b" frameborder=0></iframe>
+{{< highlight kotlin >}}
+public class B {
+
+    void packagePrivateMethod() {
+        System.out.println("package private method called");
+    }
+
+    protected void protectedMethod() {
+        System.out.println("protected method called");
+    }
+}
+{{< / highlight >}}
 
 And we had class A in the same package, then that class A will be able to access both methods from class B:
 
-<iframe src="https://medium.com/media/5fcb5d1b1fb3d8d8b870649063e7e0e1" frameborder=0></iframe>
+{{< highlight kotlin >}}
+public class A {
+
+    void foo() {
+        final B b = new B();
+        b.packagePrivateMethod();
+        b.protectedMethod();
+    }
+}
+{{< / highlight >}}
 
 ### Kotlin
 
@@ -79,17 +118,53 @@ In Kotlin there are different visibility modifiers: public (default, can be omit
 
 So, if we had a class similar to the previous example:
 
-<iframe src="https://medium.com/media/58b24b15de561cef063810bb7cc46b87" frameborder=0></iframe>
+{{< highlight kotlin >}}
+open class B {
+
+    protected open fun protectedMethod() {
+        println("protected method called")
+    }
+
+    internal open fun internalMethod() {
+        println("internal method called")
+    }
+}
+{{< / highlight >}}
 
 Then class A, while being in the same package, would not be able to access protected method:
 
-<iframe src="https://medium.com/media/70fb552768b9b2c0b3c94db2cd948ae4" frameborder=0></iframe>
+{{< highlight kotlin >}}
+class A {
+
+    fun foo() {
+        val b = B()
+
+        b.internalMethod()
+        b.protectedMethod() // Cannot access 'protectedMethod': it is protected in 'B'
+    }
+}
+{{< / highlight >}}
 
 And I personally found that really useful. Package-private thing is clunky and feels somewhat outdated. Having protected to be accessible from the same package feels like encapsulation hole. Glad that Kotlin has a more strict approach for protected keyword.
 
 But what if we would like to have something similar to package-private in Kotlin? In this case, we can consider putting two classes into same file with marking classes we’d like to hide as private. All the methods can remain public as class won’t be accessible from outside anyway:
 
-<iframe src="https://medium.com/media/4c98ee906877f9642c539d2a6d5cec9b" frameborder=0></iframe>
+{{< highlight kotlin >}}
+class C : B() {
+
+    fun fooC() {
+        val d = D()
+        d.fooD()
+    }
+}
+
+private class D {
+
+    fun fooD() {
+        println("fooD called")
+    }
+}
+{{< / highlight >}}
 
 One can read more on visibility modifiers in Kotlin [here](https://kotlinlang.org/docs/reference/visibility-modifiers.html).
 
@@ -98,10 +173,3 @@ One can read more on visibility modifiers in Kotlin [here](https://kotlinlang.or
 And that’s it for now. Hope this was interesting and useful. Kotlin is a great language and has a lot of cool features. But we can also look around and find also something else, not that impressive at first. Maybe there are some other features in Kotlin which are not highlighted that often in articles? Some features which save you time, make solutions clearer? Feel free to add your favorite features in comments.
 
 Happy coding!
-
-*Thanks for reading!
-If you enjoyed this article you can like it by **clicking on the👏 button** (up to 50 times!), also you can **share **this article to help others.*
-
-*Have you any feedback, feel free to reach me on [twitter](https://twitter.com/krossovochkin), [facebook](https://www.facebook.com/vasya.drobushkov)*
-[**Vasya Drobushkov**
-*The latest Tweets from Vasya Drobushkov (@krossovochkin). Android developer You want to see a miracle, son? Be the…*twitter.com](https://twitter.com/krossovochkin)

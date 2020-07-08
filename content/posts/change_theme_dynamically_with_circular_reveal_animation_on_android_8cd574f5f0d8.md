@@ -59,7 +59,45 @@ Let’s dive into how this can be implemented
 
 We’ll start from describing our test layout:
 
-<iframe src="https://medium.com/media/228c4c5378a59f8e943f2533ac7090e2" frameborder=0></iframe>
+{{< highlight xml >}}
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="HardcodedText">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:text="Hello world!"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+{{< / highlight >}}
 
 Here we’ll have our hidden ImageView and container (LinearLayout containing out test TextView and Button which we’ll use in our test).
 
@@ -67,7 +105,36 @@ Here we’ll have our hidden ImageView and container (LinearLayout containing ou
 
 Here is our code which is responsible to change theme with animation:
 
-<iframe src="https://medium.com/media/83b3128bd81c3bd1e58a93c58020335f" frameborder=0></iframe>
+{{< highlight kotlin >}}
+    private fun setTheme(theme: Theme) {
+        if (imageView.isVisible) {
+            return
+        }
+
+        val w = container.measuredWidth
+        val h = container.measuredHeight
+
+        val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        container.draw(canvas)
+
+        imageView.setImageBitmap(bitmap)
+        imageView.isVisible = true
+
+        val finalRadius = hypot(w.toFloat(), h.toFloat())
+
+        TODO("Change theme over all views")
+
+        val anim = ViewAnimationUtils.createCircularReveal(container, w / 2, h / 2, 0f, finalRadius)
+        anim.duration = 400L
+        anim.doOnEnd {
+            imageView.setImageDrawable(null)
+            imageView.isVisible = false
+        }
+        anim.start()
+    }
+}
+{{< / highlight >}}
 
 Let’s look in details what we do here:
 
@@ -88,65 +155,91 @@ Theme will contain different sub-Themes for each design component — TextView, 
 
 For example for TextView we can create the following Theme description:
 
-    data class TextViewTheme(
-        @ColorRes
-        val textColor: Int
-    )
+{{< highlight kotlin >}}
+data class TextViewTheme(
+    @ColorRes
+    val textColor: Int
+)
+{{< / highlight >}}
 
 Similarly for container (e.g. LinearLayout) we can create:
 
-    data class ViewGroupTheme(
-        @ColorRes
-        val backgroundColor: Int
-    )
+{{< highlight kotlin >}}
+data class ViewGroupTheme(
+    @ColorRes
+    val backgroundColor: Int
+)
+{{< / highlight >}}
 
 And the Theme itself will be enum containing different combinations mapped over some finite number of themes — for example LIGHT and DARK:
 
-    enum class Theme(
-        val buttonTheme: ButtonTheme,
-        val textViewTheme: TextViewTheme,
-        val viewGroupTheme: ViewGroupTheme
-    ) {
-        DARK(
-            buttonTheme = ButtonTheme(
-                backgroundTint = android.R.color.holo_green_dark,
-                textColor = android.R.color.white
-            ),
-            textViewTheme = TextViewTheme(
-                textColor = android.R.color.white
-            ),
-            viewGroupTheme = ViewGroupTheme(
-                backgroundColor = android.R.color.background_dark
-            )
+{{< highlight kotlin >}}
+enum class Theme(
+    val buttonTheme: ButtonTheme,
+    val textViewTheme: TextViewTheme,
+    val viewGroupTheme: ViewGroupTheme
+) {
+    DARK(
+        buttonTheme = ButtonTheme(
+            backgroundTint = android.R.color.holo_green_dark,
+            textColor = android.R.color.white
         ),
-        LIGHT(
-            buttonTheme = ButtonTheme(
-                backgroundTint = android.R.color.holo_green_light,
-                textColor = android.R.color.black
-            ),
-            textViewTheme = TextViewTheme(
-                textColor = android.R.color.black
-            ),
-            viewGroupTheme = ViewGroupTheme(
-                backgroundColor = android.R.color.background_light
-            )
+        textViewTheme = TextViewTheme(
+            textColor = android.R.color.white
+        ),
+        viewGroupTheme = ViewGroupTheme(
+            backgroundColor = android.R.color.background_dark
         )
-    }
+    ),
+    LIGHT(
+        buttonTheme = ButtonTheme(
+            backgroundTint = android.R.color.holo_green_light,
+            textColor = android.R.color.black
+        ),
+        textViewTheme = TextViewTheme(
+            textColor = android.R.color.black
+        ),
+        viewGroupTheme = ViewGroupTheme(
+            backgroundColor = android.R.color.background_light
+        )
+    )
+}
+{{< / highlight >}}
 
 And our ThemeManager will just provide single instance of current theme:
 
-    object ThemeManager {
-        
-        var theme = Theme.LIGHT
+{{< highlight kotlin >}}
+object ThemeManager {
+    
+    var theme = Theme.LIGHT
 
-    }
+}
+{{< / highlight >}}
 
 ### Custom Views
 
 Next we need to create our own wrappers for views to support changes of dynamic theme changing.
 Let’s make our own custom TextView as example:
 
-<iframe src="https://medium.com/media/db16d17665b21037263da50e22f0b17a" frameborder=0></iframe>
+{{< highlight kotlin >}}
+class MyTextView
+@JvmOverloads
+constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : AppCompatTextView(context, attrs, defStyleAttr) {
+
+    fun setTheme(theme: ThemeManager.Theme) {
+        setTextColor(
+            ContextCompat.getColor(
+                context,
+                theme.textViewTheme.textColor
+            )
+        )
+    }
+}
+{{< / highlight >}}
 
 We just create our view with setTheme method, where we apply all the required fields to be styled.
 
@@ -158,7 +251,32 @@ Such approach would work, but the issue is that it doesn’t scale and it requir
 Instead of explicitly setting themes on each view it would be better if views subscribed to theme changes and reactively updated by themselves.
 For this we’ll add a bit more functionality into ThemeManager — we’ll add ability to add listeners. Yes, listeners in 2020 :) One can use RxJava or kotlin Flow, it actually doesn’t matter. Listeners will be enough, so, we’ll use them.
 
-<iframe src="https://medium.com/media/3fe9dd1cc45e9d6c64011c3386db372c" frameborder=0></iframe>
+{{< highlight kotlin >}}
+object ThemeManager {
+
+    private val listeners = mutableSetOf<ThemeChangedListener>()
+    var theme = Theme.LIGHT
+        set(value) {
+            field = value
+            listeners.forEach { listener -> listener.onThemeChanged(value) }
+        }
+        
+    interface ThemeChangedListener {
+
+        fun onThemeChanged(theme: Theme)
+    }
+    
+    fun addListener(listener: ThemeChangedListener) {
+        listeners.add(listener)
+    }
+
+    fun removeListener(listener: ThemeChangedListener) {
+        listeners.remove(listener)
+    }
+  
+  // ...
+}
+{{< / highlight >}}
 
 Nothing really interesting, just added listeners, ability to add and remove them and we update listeners on each change of theme.
 
@@ -166,7 +284,41 @@ Nothing really interesting, just added listeners, ability to add and remove them
 
 Using these listeners we update our MyTextView to trigger update on theme changed:
 
-<iframe src="https://medium.com/media/8c3dde3745671c4205d00cc6b1c5fe13" frameborder=0></iframe>
+{{< highlight kotlin >}}
+class MyTextView
+@JvmOverloads
+constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : AppCompatTextView(context, attrs, defStyleAttr),
+    ThemeManager.ThemeChangedListener {
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        setTextColor(
+            ContextCompat.getColor(
+                context,
+                theme.textViewTheme.textColor
+            )
+        )
+    }
+}
+{{< / highlight >}}
 
 Instead of setTheme method we now have onThemeChanged. And in different callbacks of View lifecycle we subscribe and unsubscribe from ThemeManager.
 
@@ -176,13 +328,49 @@ In order to not change our layouts we can use custom layout inflater factories. 
 
 Basic implementation of the LayoutInflater.Factory2 looks like this:
 
-<iframe src="https://medium.com/media/65234c05f91277c9e5c3c776daaa6371" frameborder=0></iframe>
+{{< highlight kotlin >}}
+class MyLayoutInflater(
+    private val delegate: AppCompatDelegate
+) : LayoutInflater.Factory2 {
+
+    override fun onCreateView(
+        parent: View?,
+        name: String,
+        context: Context,
+        attrs: AttributeSet
+    ): View? {
+        return when (name) {
+            "TextView" -> MyTextView(context, attrs)
+            "LinearLayout" -> MyLinearLayout(context, attrs)
+            "Button" -> MyButton(context, attrs, R.attr.buttonStyle)
+            else -> delegate.createView(parent, name, context, attrs)
+        }
+    }
+
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        return onCreateView(null, name, context, attrs)
+    }
+}
+{{< / highlight >}}
 
 We intercept in onCreateView some views which support our dynamic theme changes and other views we ask for AppCompatDelegate to create.
 
 But there is one trick with setting this factory — it should be done before super.onCreate(...):
 
-<iframe src="https://medium.com/media/cac6656b9731c698a8e566b6878a0c3e" frameborder=0></iframe>
+{{< highlight kotlin >}}
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        LayoutInflaterCompat.setFactory2(
+            LayoutInflater.from(this),
+            MyLayoutInflater(delegate)
+        )
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+}
+{{< / highlight >}}
 
 ### Finally
 
@@ -192,7 +380,40 @@ And we’re good! Let’s look at the results *(sorry, for artifacts in gif, unf
 
 Also if we change our setTheme method we can implement another version:
 
-<iframe src="https://medium.com/media/2d2f34f59619ecdf5f27ee3bda92e91f" frameborder=0></iframe>
+{{< highlight kotlin >}}
+private fun setTheme(theme: ThemeManager.Theme, animate: Boolean = true) {
+    if (!animate) {
+        ThemeManager.theme = theme
+        return
+    }
+
+    if (imageView.isVisible) {
+        return
+    }
+
+    val w = container.measuredWidth
+    val h = container.measuredHeight
+
+    val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap)
+    container.draw(canvas)
+
+    imageView.setImageBitmap(bitmap)
+    imageView.isVisible = true
+
+    val finalRadius = hypot(w.toFloat(), h.toFloat())
+
+    ThemeManager.theme = theme
+
+    val anim = ViewAnimationUtils.createCircularReveal(imageView, w / 2, h / 2, finalRadius, 0f)
+    anim.duration = 400L
+    anim.doOnEnd {
+        imageView.setImageDrawable(null)
+        imageView.isVisible = false
+    }
+    anim.start()
+}
+{{< / highlight >}}
 
 ![](../../img/1_BdwF64uCz_vNlva9BXO9Ww.gif)
 
@@ -213,10 +434,3 @@ I hope you found this article useful and maybe some ideas will help you to imple
 Don’t forget to try new things, read code written by others, add animations to your app for better UX.
 
 Happy coding!
-
-*Thanks for reading! 
-If you enjoyed this article you can like it by **clicking on the👏 button** (up to 50 times!), also you can **share **this article to help others.*
-
-*Have you any feedback, feel free to reach me on [twitter](https://twitter.com/krossovochkin), [facebook](https://www.facebook.com/vasya.drobushkov)*
-[**К**
-*The latest Tweets from К (@krossovochkin). You want to see a miracle, son? Be the miracle. Minsk, Belarus*twitter.com](https://twitter.com/krossovochkin)

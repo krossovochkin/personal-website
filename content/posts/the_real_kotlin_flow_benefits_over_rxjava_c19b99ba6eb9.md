@@ -15,8 +15,7 @@ showFullContent = false
 ## Introduction
 
 Recently the article about Kotlin Flow benefits over RxJava was published by [Antoni Castejón García](undefined):
-[**Kotlin Flow benefits over RxJava**
-*Lately I’ve been implementing a new project using Kotlin Asynchronous Flows instead of RxJava as I was used to. Why? I…*proandroiddev.com](https://proandroiddev.com/kotlin-flow-benefits-over-rxjava-b220658f1a92)
+[**Kotlin Flow benefits over RxJava**](https://proandroiddev.com/kotlin-flow-benefits-over-rxjava-b220658f1a92)
 
 Though Antoni made a good work and many thanks to him for providing his feedback and experience (we need to share our thoughts, this improves community acknowledgment in various areas) — I found few places in the article with which I don’t fully or partially agree. Some points, in my opinion, were missing. So, I decided to make a follow-up feedback post on what I consider the real benefits of Kotlin Flow over RxJava. Feedback is also a good thing as it helps us to drive forward and maybe look at the same things from a different angle.
 
@@ -82,11 +81,39 @@ In Kotlin there is only one stream type: Flow. Instead of Single etc. there are 
 
 The issue with having map to accept suspending functions is that now we can do something like this:
 
-<iframe src="https://medium.com/media/dccaf2f325f4efb01fa55c39cf1a42e5" frameborder=0></iframe>
+{{< highlight kotlin >}}
+suspend fun hiThere(): Int {
+    return withContext(Dispatchers.Default) {
+        delay(1000)
+        40
+    }
+}
+@Test
+fun test() {
+    CoroutineScope(Job()).launch {
+        flowOf(1)
+            .map { hiThere() }
+            .flowOn(Dispatchers.IO)
+            .collect { println(it) }
+    }
+}
+{{< / highlight >}}
 
 In RxJava we would do something like:
 
-<iframe src="https://medium.com/media/01d78e11d3278c52702c686697c0be14" frameborder=0></iframe>
+{{< highlight kotlin >}}
+fun hiThere(): Single<Int> {
+    return Completable.timer(1, TimeUnit.SECONDS)
+        .andThen(Single.just(40))
+        .subscribeOn(computation())
+}
+fun test() {
+    Observable.just(1)
+        .flatMapSingle { hiThere() }
+        .subscribeOn(io())
+        .subscribe { println(it) }
+}
+{{< / highlight >}}
 
 One might say that RxJava is too verbose. Maybe, but not that is important. In RxJava we have clearly defined that our function hiThere provides a new stream. And like any other stream, it might be subscribed on some different scheduler. This is huge knowledge because from the usage I already know what function can do.
 If there would be map — then I’ll understand that there will be just transformation of values (which will be done on the particular scheduler in the chain).
@@ -98,8 +125,7 @@ Probably if we had map for content transformation and flatMapSuspend or somethin
 But yes “it is too verbose” :)
 
 More on stream types in RxJava and Kotlin Flow one can find here:
-[**From RxJava to Kotlin Flow: Stream Types**
-*Comparing Stream Types in RxJava and Kotlin Flow*proandroiddev.com](https://proandroiddev.com/from-rxjava-to-kotlin-flow-stream-types-7916be6cabc2)
+[**From RxJava to Kotlin Flow: Stream Types**](https://proandroiddev.com/from-rxjava-to-kotlin-flow-stream-types-7916be6cabc2)
 > You can end up having the same behavior as an Rx operator just **composing suspend methods**. For instance, *interval* is an Rx operator that emits a *Long* every X time ( *Observable.interval(1, TimeUnit.Seconds)* ), you can implement it by composing:
 
 🚨 You’ve created your implementation of the interval operator. The issue is that on many projects there might be different implementations of some simple operators and one will have to dig into each implementation to check how it works. Behavior won’t be documented. It might contain bugs (if one think that it is so simple to write some operator correctly with coroutines — just check the implementations in the standard lib, for example, for [debounce](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/common/src/flow/operators/Delay.kt#L42-L72), which is relatively simple to [write by yourself with Handler](https://proandroiddev.com/decoding-handler-and-looper-in-android-d4f3f2449513))
@@ -121,21 +147,87 @@ Same time, Kotlin Flow doesn’t have doOnError and one will have to write eithe
 ✅ Good thing is that in Kotlin Flow there is no need to use separate stream type to handle backpressure. Flow by itself supports backpressure.
 In RxJava there are Observable which doesn’t support backpressure and Flowable, which does. This is because Flowable is heavier than Observable as backpressure handling adds overhead.
 More on this in the article:
-[**From RxJava to Kotlin Flow: Backpressure**
-*Quick comparison between backpressure solutions in RxJava and Kotlin Flow*proandroiddev.com](https://proandroiddev.com/from-rxjava-to-kotlin-flow-backpressure-d1fb91e6dea8)
+[**From RxJava to Kotlin Flow: Backpressure**](https://proandroiddev.com/from-rxjava-to-kotlin-flow-backpressure-d1fb91e6dea8)
 > Context preservation
 
 🆗 Nice, but somewhat whatever. Kotlin Flow has just a different approach. I can’t say whether it is better or not for now. I think one can get used to any.
 More info on the threading in the article:
-[**From RxJava 2 to Kotlin Flow: Threading**
-*Comparing threading in RxJava 2 and Kotlin Flow*proandroiddev.com](https://proandroiddev.com/from-rxjava-2-to-kotlin-flow-threading-8618867e1955)
+[**From RxJava 2 to Kotlin Flow: Threading**](https://proandroiddev.com/from-rxjava-2-to-kotlin-flow-threading-8618867e1955)
 > Lifetime
 
 ✅ The fact that coroutines (and therefore Flow) can be launched/collected only in some particular scope — is good, because the compiler won’t allow you to make mistake and launch coroutine without some scope.
 
 🚨 But regarding viewModelScope for coroutines: it is possible to make something similar for RxJava as well. Android Jetpack team just invests time into coroutines support and not RxJava.
 
-<iframe src="https://medium.com/media/3a8ab29e35384265868cb86f25e428d8" frameborder=0></iframe>
+{{< highlight kotlin >}}
+class TestViewModel : MyViewModel() {
+
+    init {
+        scope.launch(
+            Observable.just("10")
+                .subscribe { println("Something") }
+        )
+
+        Observable.just("10")
+            .doOnNext { println("something") }
+            .launchIn(scope)
+
+        // beware, still possible to run without scope
+        Observable.just("10")
+            .subscribe { println("Something") }
+    }
+}
+
+abstract class MyViewModel {
+
+    private val observers = mutableMapOf<String, Closeable>()
+
+    fun onDestroy() {
+        observers.values.forEach(Closeable::close)
+        observers.clear()
+    }
+
+    fun setObserver(key: String, value: Closeable) {
+        observers[key] = value
+    }
+
+    fun getObserver(key: String): Closeable? {
+        return observers[key]
+    }
+}
+
+interface MyScope : Closeable {
+
+    fun launch(job: Disposable)
+}
+
+private const val TAG_SCOPE = "TAG_SCOPE"
+val MyViewModel.scope: MyScope
+    get() {
+        val scope = getObserver(TAG_SCOPE) as? MyScope
+        if (scope != null) {
+            return scope
+        }
+
+        val newScope = object : MyScope {
+            val compositeDisposable = CompositeDisposable()
+
+            override fun launch(job: Disposable) {
+                compositeDisposable.add(job)
+            }
+
+            override fun close() {
+                compositeDisposable.clear()
+            }
+        }
+        this.setObserver(TAG_SCOPE, newScope)
+        return newScope
+    }
+
+fun <T> Observable<T>.launchIn(scope: MyScope) {
+    return scope.launch(this.subscribe())
+}
+{{< / highlight >}}
 
 Of course, this won’t enforce you to add all your subscriptions that way. One might set up custom lint rule for that or so, though it wouldn’t be trivial.
 > According to this [github project](https://github.com/Kotlin/kotlinx.coroutines/tree/master/benchmarks/src/jmh/kotlin/benchmarks/flow/scrabble) Flow is a little bit **faster** than Rx
@@ -190,10 +282,3 @@ Though this article is about advantages, it is required in my opinion to always 
 In my opinion in the coming years we’ll get used to Kotlin Flow and most likely new projects will be written using it not RxJava. Though there is little gain to rewrite existing apps to Kotlin Flow. At least now. But right now is the best time to start learning and trying on your pet projects maybe.
 
 Happy coding!
-
-*Thanks for reading!
-If you enjoyed this article you can like it by **clicking on the👏 button** (up to 50 times!), also you can **share **this article to help others.*
-
-*Have you any feedback, feel free to reach me on [twitter](https://twitter.com/krossovochkin), [facebook](https://www.facebook.com/vasya.drobushkov)*
-[**Vasya Drobushkov**
-*The latest Tweets from Vasya Drobushkov (@krossovochkin). Android developer You want to see a miracle, son? Be the…*twitter.com](https://twitter.com/krossovochkin)

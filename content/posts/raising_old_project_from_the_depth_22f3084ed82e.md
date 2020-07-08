@@ -16,7 +16,7 @@ I am an Android Developer from the beginning of my professional career. Straight
 
 The first project I took part in was called “nICE”. It was a match-3-like game. It was at the time when there was Android Market and not Google Play Store, when we used Eclipse and not Android Studio and, of course, used Java. The game was already available in the Market, but we wanted to develop it more by adding some power-ups to make game experience richer (and gain more from in-app purchases) and introduce some additional game modes (like puzzles).
 
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/xoMFjzNXt0c" frameborder="0" allowfullscreen></iframe></center>
+{{< youtube xoMFjzNXt0c >}}
 
 ![One could click on a penguin to get a hint!](../../img/0_cCNRPDsUFPSgYutl.jpg)*One could click on a penguin to get a hint!*
 
@@ -104,10 +104,3 @@ It is by far exceptional project to me, not only because it was first, but also 
 And I’m happy that now we have at least some sources, which are possible to build and run.
 
 Happy coding!
-
-*Thanks for reading!
-If you enjoyed this article you can like it by **clicking on the👏 button** (up to 50 times!), also you can **share **this article to help others.*
-
-*Have you any feedback, feel free to reach me on [twitter](https://twitter.com/krossovochkin), [facebook](https://www.facebook.com/vasya.drobushkov)*
-[**Vasya Drobushkov**
-*The latest Tweets from Vasya Drobushkov (@krossovochkin). Android developer You want to see a miracle, son? Be the…*twitter.com](https://twitter.com/krossovochkin)
