@@ -355,12 +355,3 @@ Though both RxJava Flowable and Kotlin Flow support backpressure there are still
 While migration from RxJava to Kotlin Flow pay additional attention to the places where you use Flowables and backpressure and test thoroughly to not have some unexpected behavior.
 
 Happy coding.
-
-*Thanks for reading!
-If you enjoyed this article you can like it by **clicking on the👏 button** (up to 50 times!), also you can **share **this article to help others.*
-
-*Have you any feedback, feel free to reach me on [twitter](https://twitter.com/krossovochkin), [facebook](https://www.facebook.com/vasya.drobushkov)*
-
-*Also you can visit [website ](http://krossovochkin.github.io)to read other articles.*
-[**Vasya Drobushkov**
-*The latest Tweets from Vasya Drobushkov (@krossovochkin). Android developer You want to see a miracle, son? Be the…*twitter.com](https://twitter.com/krossovochkin)

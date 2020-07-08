@@ -180,10 +180,3 @@ Following best practices, guidelines and using tools such as “Accessibility Sc
 Additionally, I would like to point out how important it is to craft good requirements. “If the background color is dark then display white text, otherwise use black” is an example of bad requirements. It doesn’t describe what actually “dark” means and it doesn’t say why we want to display exactly white over dark. “Text should be readable and meet accessibility requirements” is better, because it shows intention and clearer describes the problem we’d like to solve. Mentioning accessibility requirements, after all, will guide you to official guidelines and it will make the right decision to not create your implementation of “dart vs. light” based on some experimental thresholds, but instead follow best practices.
 
 Happy coding!
-
-*Thanks for reading!
-If you enjoyed this article you can like it by **clicking on the👏 button** (up to 50 times!), also you can **share **this article to help others.*
-
-*Have you any feedback, feel free to reach me on [twitter](https://twitter.com/krossovochkin), [facebook](https://www.facebook.com/vasya.drobushkov)*
-[**Vasya Drobushkov**
-*The latest Tweets from Vasya Drobushkov (@krossovochkin). Android developer You want to see a miracle, son? Be the…*twitter.com](https://twitter.com/krossovochkin)

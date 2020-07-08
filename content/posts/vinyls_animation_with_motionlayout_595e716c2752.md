@@ -158,12 +158,3 @@ One can take a look at the [Github repository](https://github.com/krossovochkin/
 I should say that it definitely was fun to play with MotionLayout. And implementing some custom animation (with connecting to ViewPager) was simple and straightforward.
 I’d say that API (XML) looks weird and has a lot of duplication (it could be more straightforward to add all the needed animations for given object I think, than define separately constraints and keypoints and inside attributes etc.)
 And for such person as me, who is not that good at animations, colors etc. I think MotionLayout is a good addition.
-
-*Thanks for reading!
-If you enjoyed this article you can like it by **clicking on the👏 button** (up to 50 times!), also you can **share **this article to help others.*
-
-*Have you any feedback, feel free to reach me on [twitter](https://twitter.com/krossovochkin), [facebook](https://www.facebook.com/vasya.drobushkov)*
-
-*Also you can visit [website ](http://krossovochkin.github.io)to read other articles.*
-[**Vasya Drobushkov**
-*The latest Tweets from Vasya Drobushkov (@krossovochkin). Android developer You want to see a miracle, son? Be the…*twitter.com](https://twitter.com/krossovochkin)
