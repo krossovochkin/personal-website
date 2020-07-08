@@ -1,7 +1,7 @@
 baseurl = "https://krossovochkin.github.io/"
 languageCode = "en-us"
 theme = "terminal"
-paginate = 5
+paginate = 10
 staticDir = "static"
 
 [params]
@@ -58,3 +58,7 @@ staticDir = "static"
         identifier = "about"
         name = "About me"
         url = "/about"
+      [[languages.en.menu.main]]
+        identifier = "posts"
+        name = "Posts"
+        url = "/"
