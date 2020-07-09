@@ -33,8 +33,9 @@ This is how it might look like:
 Also there is a way to add tint over images, so action icons in the toolbar can be tinted dynamically as well.
 
 We change the toolbar color with:
-
-    toolbar.setBackgroundColor(bgColor)
+```kotlin
+toolbar.setBackgroundColor(bgColor)
+```
 
 This looks good, but it is just because the background color is light so black text looks good. If we have a dark background color then it won’t look nice:
 
@@ -43,12 +44,13 @@ This looks good, but it is just because the background color is light so black t
 ## Text color
 
 To fix this we need to apply simple logic.
-
-    if (bgColor.isDark) {
-       toolbar.setTitleTextColor(Color.WHITE)
-    } else {
-       toolbar.setTitleTextColor(Color.BLACK)
-    }
+```kotlin
+if (bgColor.isDark) {
+   toolbar.setTitleTextColor(Color.WHITE)
+} else {
+   toolbar.setTitleTextColor(Color.BLACK)
+}
+```
 
 The only thing left is to define how to understand whether bgColor is dark or light.
 
@@ -60,13 +62,18 @@ Here we’re interested in [XYZ](https://en.wikipedia.org/wiki/Color_model#CIE_X
 Y parameter (which is luminance) is exactly the parameter we need to identify whether our color is dark or light. This value is defined in a range [0, 1], where 0 means the darkest color and 1 the lightest one.
 Luckily for us, we don’t need to do the color conversion ourselves, there is a handy utility method in the Android SDK already:
 
-    ColorUtils.calculateLuminance(bgColor)
+```kotlin
+ColorUtils.calculateLuminance(bgColor)
+```
 
 It will return a float value between 0 and 1. The simplest logic of defining whether bgColor is dark or not is to compare with the middle value — 0.5:
 
-    fun isDarkColor(@ColorInt color: Int): Boolean {
-        return ColorUtils.calculateLuminance(color) < *0.5
-    *}
+```kotlin
+fun isDarkColor(@ColorInt color: Int): Boolean {
+    return ColorUtils.calculateLuminance(color) < 0.5
+}
+```
+
 > **NOTE**: this is exactly what [one can find on StackOverflow](https://stackoverflow.com/a/48267387) after searching for dark color checking.
 
 And finally the result:
@@ -83,13 +90,15 @@ Our toolbar looks too bright. And it is because of saturation of the color is to
 What it means that we need to convert our RGB color into HSL or HSV (translated as hue, saturation, value) and reduce the second parameter responsible for saturation. Then convert the color back to RGB and use it as the background of toolbar.
 This time we’ll do some manual work by creating a special method for de-saturation, which under the hood will convert our color to HSV (as there is ready method for that in the Android SDK):
 
-    @ColorInt
-    fun getDesaturatedColor(@ColorInt color: Int): Int {
-        val result = FloatArray(size = 3)
-        Color.colorToHSV(color, result)
-        result[1] *= *0.6
-        *return Color.HSVToColor(result)
-    }
+```kotlin
+@ColorInt
+fun getDesaturatedColor(@ColorInt color: Int): Int {
+    val result = FloatArray(size = 3)
+    Color.colorToHSV(color, result)
+    result[1] *= *0.6
+    *return Color.HSVToColor(result)
+}
+```
 
 We’ll multiply saturation by 0.6. It is just the experimentally taken value.
 > **NOTE:** probably an improvement to the approach could be to not only decrease ther saturation of all colors, but to also add some lower bound limit to not de-saturate already “de-saturated” colors that much
@@ -117,7 +126,9 @@ This refers to [WCAG](https://www.w3.org/TR/WCAG20/), which says that contrast b
 
 But again, we don’t need to calculate them manually, as there is a ready to use method:
 
-    ColorUtils.calculateContrast(foreground, background)
+```kotlin
+ColorUtils.calculateContrast(foreground, background)
+```
 
 Our background color which had an issue is: #7f6fad.
 If we calculate its luminance, we’ll get 0.1889803503770053 which means that this color should be considered as dark.
@@ -137,12 +148,14 @@ Let’s see the difference. It seems black is more readable.
 
 OK, so now we have a new idea on how to choose better color (white or black) — we’ll calculate contrasts between white and background color and black and background color and choose one with the highest value.
 
-    fun getContrastColor(@ColorInt color: Int): Int {
-        val whiteContrast = ColorUtils.calculateContrast(Color.*WHITE*, color)
-        val blackContrast = ColorUtils.calculateContrast(Color.*BLACK*, color)
+```kotlin
+fun getContrastColor(@ColorInt color: Int): Int {
+    val whiteContrast = ColorUtils.calculateContrast(Color.WHITE, color)
+    val blackContrast = ColorUtils.calculateContrast(Color.BLACK, color)
 
-    return if (whiteContrast > blackContrast) Color.*WHITE *else Color.*BLACK
-    *}
+    return if (whiteContrast > blackContrast) Color.WHITE else Color.BLACK
+}
+```
 
 One question which is left is whether it is possible for both white and black colors to not meet contrast requirements of 4.5:1?
 Let’s do some math. We’ll remember the formula from WSAG and check it.
@@ -157,13 +170,17 @@ We’ll have three values of L (relative luminances):
 The contrast is calculated by the formula:(L1 + 0.05) / (L2 + 0.05) (where L1 > L2).
 So we’ll have two equations, and we’d like to check whether they both can hold. First will be for white (L1 will be substituted with Lw, L2 with Lt), second for black (L1 will be Lt, L2 will be Lb):
 
-    1.05 / (Lt + 0.05) < 4.5
-    (Lt + 0.05) / 0.05 < 4.5
+```
+1.05 / (Lt + 0.05) < 4.5
+(Lt + 0.05) / 0.05 < 4.5
+```
 
 After a few manipulations we’ll get this:
 
-    Lt > 0.18(3)
-    Lt < 0.175
+```
+Lt > 0.18(3)
+Lt < 0.175
+```
 
 And both these equations can’t be true at the same time, therefore either black or white text will have good contrast over any background color!
 

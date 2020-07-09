@@ -62,7 +62,7 @@ Let’s dive into how this can be implemented
 
 We’ll start from describing our test layout:
 
-{{< highlight xml >}}
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -100,7 +100,7 @@ We’ll start from describing our test layout:
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-{{< / highlight >}}
+```
 
 Here we’ll have our hidden ImageView and container (LinearLayout containing out test TextView and Button which we’ll use in our test).
 
@@ -108,36 +108,35 @@ Here we’ll have our hidden ImageView and container (LinearLayout containing ou
 
 Here is our code which is responsible to change theme with animation:
 
-{{< highlight kotlin >}}
-    private fun setTheme(theme: Theme) {
-        if (imageView.isVisible) {
-            return
-        }
-
-        val w = container.measuredWidth
-        val h = container.measuredHeight
-
-        val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        container.draw(canvas)
-
-        imageView.setImageBitmap(bitmap)
-        imageView.isVisible = true
-
-        val finalRadius = hypot(w.toFloat(), h.toFloat())
-
-        TODO("Change theme over all views")
-
-        val anim = ViewAnimationUtils.createCircularReveal(container, w / 2, h / 2, 0f, finalRadius)
-        anim.duration = 400L
-        anim.doOnEnd {
-            imageView.setImageDrawable(null)
-            imageView.isVisible = false
-        }
-        anim.start()
+```kotlin
+private fun setTheme(theme: Theme) {
+    if (imageView.isVisible) {
+        return
     }
+
+    val w = container.measuredWidth
+    val h = container.measuredHeight
+
+    val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap)
+    container.draw(canvas)
+
+    imageView.setImageBitmap(bitmap)
+    imageView.isVisible = true
+
+    val finalRadius = hypot(w.toFloat(), h.toFloat())
+
+    TODO("Change theme over all views")
+
+    val anim = ViewAnimationUtils.createCircularReveal(container, w / 2, h / 2, 0f, finalRadius)
+    anim.duration = 400L
+    anim.doOnEnd {
+        imageView.setImageDrawable(null)
+        imageView.isVisible = false
+    }
+    anim.start()
 }
-{{< / highlight >}}
+```
 
 Let’s look in details what we do here:
 
@@ -158,25 +157,25 @@ Theme will contain different sub-Themes for each design component — TextView, 
 
 For example for TextView we can create the following Theme description:
 
-{{< highlight kotlin >}}
+```kotlin
 data class TextViewTheme(
     @ColorRes
     val textColor: Int
 )
-{{< / highlight >}}
+```
 
 Similarly for container (e.g. LinearLayout) we can create:
 
-{{< highlight kotlin >}}
+```kotlin
 data class ViewGroupTheme(
     @ColorRes
     val backgroundColor: Int
 )
-{{< / highlight >}}
+```
 
 And the Theme itself will be enum containing different combinations mapped over some finite number of themes — for example LIGHT and DARK:
 
-{{< highlight kotlin >}}
+```kotlin
 enum class Theme(
     val buttonTheme: ButtonTheme,
     val textViewTheme: TextViewTheme,
@@ -207,24 +206,24 @@ enum class Theme(
         )
     )
 }
-{{< / highlight >}}
+```
 
 And our ThemeManager will just provide single instance of current theme:
 
-{{< highlight kotlin >}}
+```kotlin
 object ThemeManager {
     
     var theme = Theme.LIGHT
 
 }
-{{< / highlight >}}
+```
 
 ### Custom Views
 
 Next we need to create our own wrappers for views to support changes of dynamic theme changing.
 Let’s make our own custom TextView as example:
 
-{{< highlight kotlin >}}
+```kotlin
 class MyTextView
 @JvmOverloads
 constructor(
@@ -242,7 +241,7 @@ constructor(
         )
     }
 }
-{{< / highlight >}}
+```
 
 We just create our view with setTheme method, where we apply all the required fields to be styled.
 
@@ -254,7 +253,7 @@ Such approach would work, but the issue is that it doesn’t scale and it requir
 Instead of explicitly setting themes on each view it would be better if views subscribed to theme changes and reactively updated by themselves.
 For this we’ll add a bit more functionality into ThemeManager — we’ll add ability to add listeners. Yes, listeners in 2020 :) One can use RxJava or kotlin Flow, it actually doesn’t matter. Listeners will be enough, so, we’ll use them.
 
-{{< highlight kotlin >}}
+```kotlin
 object ThemeManager {
 
     private val listeners = mutableSetOf<ThemeChangedListener>()
@@ -279,7 +278,7 @@ object ThemeManager {
   
   // ...
 }
-{{< / highlight >}}
+```
 
 Nothing really interesting, just added listeners, ability to add and remove them and we update listeners on each change of theme.
 
@@ -287,7 +286,7 @@ Nothing really interesting, just added listeners, ability to add and remove them
 
 Using these listeners we update our MyTextView to trigger update on theme changed:
 
-{{< highlight kotlin >}}
+```kotlin
 class MyTextView
 @JvmOverloads
 constructor(
@@ -321,7 +320,7 @@ constructor(
         )
     }
 }
-{{< / highlight >}}
+```
 
 Instead of setTheme method we now have onThemeChanged. And in different callbacks of View lifecycle we subscribe and unsubscribe from ThemeManager.
 
@@ -331,7 +330,7 @@ In order to not change our layouts we can use custom layout inflater factories. 
 
 Basic implementation of the LayoutInflater.Factory2 looks like this:
 
-{{< highlight kotlin >}}
+```kotlin
 class MyLayoutInflater(
     private val delegate: AppCompatDelegate
 ) : LayoutInflater.Factory2 {
@@ -354,13 +353,13 @@ class MyLayoutInflater(
         return onCreateView(null, name, context, attrs)
     }
 }
-{{< / highlight >}}
+```
 
 We intercept in onCreateView some views which support our dynamic theme changes and other views we ask for AppCompatDelegate to create.
 
 But there is one trick with setting this factory — it should be done before super.onCreate(...):
 
-{{< highlight kotlin >}}
+```kotlin
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -373,7 +372,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 }
-{{< / highlight >}}
+```
 
 ### Finally
 
@@ -383,7 +382,7 @@ And we’re good! Let’s look at the results *(sorry, for artifacts in gif, unf
 
 Also if we change our setTheme method we can implement another version:
 
-{{< highlight kotlin >}}
+```kotlin
 private fun setTheme(theme: ThemeManager.Theme, animate: Boolean = true) {
     if (!animate) {
         ThemeManager.theme = theme
@@ -416,7 +415,7 @@ private fun setTheme(theme: ThemeManager.Theme, animate: Boolean = true) {
     }
     anim.start()
 }
-{{< / highlight >}}
+```
 
 ![](../../img/1_BdwF64uCz_vNlva9BXO9Ww.gif)
 

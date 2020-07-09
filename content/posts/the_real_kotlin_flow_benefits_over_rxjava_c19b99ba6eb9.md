@@ -50,11 +50,15 @@ So, yes, now you will face fewer ExperimentalCoroutinesApi methods, but still ma
 
 🚨 Let’s be honest. Kotlin Flow also has flowOf(...), which is essentially same as just in RxJava and might be misused in the same way:
 
-    flowOf(makeNetworkRequest())
+```kotlin
+flowOf(makeNetworkRequest())
+```
 
 🆗 Other than that I agree that writing custom flows (and flow builder is basically the same as using create in RxJava) is simple. But at the same time I think that RxJava version, being probably a bit more verbose, is the same:
 
-    create { it.onNext("whatever") }
+```kotlin
+create { it.onNext("whatever") }
+```
 
 Wait, but could one spot the difference? RxJava’s version will remain not completed when Kotlin Flow version will complete at the end.
 Everything is simple when you know the details
@@ -69,7 +73,9 @@ Everything is simple when you know the details
 
 The most interesting thing is that in opposite it is possible to always use flatMap and not use map, because:
 
-    map(f: (A) -> B) = flatMap { a -> just(f(a)) }
+```kotlin
+map(f: (A) -> B) = flatMap { a -> just(f(a)) }
+```
 
 Though in reality flatMap implementation provides more overhead, so use whichever operator is needed in your particular situation. If you want to transform content of the stream — use map.
 
@@ -84,7 +90,7 @@ In Kotlin there is only one stream type: Flow. Instead of Single etc. there are 
 
 The issue with having map to accept suspending functions is that now we can do something like this:
 
-{{< highlight kotlin >}}
+```kotlin
 suspend fun hiThere(): Int {
     return withContext(Dispatchers.Default) {
         delay(1000)
@@ -100,11 +106,11 @@ fun test() {
             .collect { println(it) }
     }
 }
-{{< / highlight >}}
+```
 
 In RxJava we would do something like:
 
-{{< highlight kotlin >}}
+```kotlin
 fun hiThere(): Single<Int> {
     return Completable.timer(1, TimeUnit.SECONDS)
         .andThen(Single.just(40))
@@ -116,7 +122,7 @@ fun test() {
         .subscribeOn(io())
         .subscribe { println(it) }
 }
-{{< / highlight >}}
+```
 
 One might say that RxJava is too verbose. Maybe, but not that is important. In RxJava we have clearly defined that our function hiThere provides a new stream. And like any other stream, it might be subscribed on some different scheduler. This is huge knowledge because from the usage I already know what function can do.
 If there would be map — then I’ll understand that there will be just transformation of values (which will be done on the particular scheduler in the chain).
@@ -141,10 +147,13 @@ And talking about custom operators — it is still possible to write operator in
 
 Same time, Kotlin Flow doesn’t have doOnError and one will have to write either own method or do something like:
 
-    .catch { 
-        doSomething(it)
-        throw it
-    }
+```kotlin
+.catch { 
+    doSomething(it)
+    throw it
+}
+```
+
 > Backpressure handling
 
 ✅ Good thing is that in Kotlin Flow there is no need to use separate stream type to handle backpressure. Flow by itself supports backpressure.
@@ -162,7 +171,7 @@ More info on the threading in the article:
 
 🚨 But regarding viewModelScope for coroutines: it is possible to make something similar for RxJava as well. Android Jetpack team just invests time into coroutines support and not RxJava.
 
-{{< highlight kotlin >}}
+```kotlin
 class TestViewModel : MyViewModel() {
 
     init {
@@ -230,7 +239,7 @@ val MyViewModel.scope: MyScope
 fun <T> Observable<T>.launchIn(scope: MyScope) {
     return scope.launch(this.subscribe())
 }
-{{< / highlight >}}
+```
 
 Of course, this won’t enforce you to add all your subscriptions that way. One might set up custom lint rule for that or so, though it wouldn’t be trivial.
 > According to this [github project](https://github.com/Kotlin/kotlinx.coroutines/tree/master/benchmarks/src/jmh/kotlin/benchmarks/flow/scrabble) Flow is a little bit **faster** than Rx

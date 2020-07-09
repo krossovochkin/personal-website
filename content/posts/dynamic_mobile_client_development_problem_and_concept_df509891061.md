@@ -38,28 +38,32 @@ Suppose we have screen in the app, where we have Profile information, such as fi
 
 We query this data from server and the response could look like:
 
-    {
-        "firstName": "John",
-        "lastName": "Doe",
-        "birthDate": "2000-01-01"
-    }
+```json
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "birthDate": "2000-01-01"
+}
+```
 
 We convert this DTO to some Profile domain model, then to View model, which is pushed to View:
 
-    // ViewModel
-    data class ProfileViewModel(
-        val firstName: String,
-        val lastName: String,
-        val birthDate: String
-    )
+```kotlin
+// ViewModel
+data class ProfileViewModel(
+    val firstName: String,
+    val lastName: String,
+    val birthDate: String
+)
 
-    // Presenter
-    view.bindViewModel(profileViewModel)
+// Presenter
+view.bindViewModel(profileViewModel)
 
-    // View
-    firstNameTextView.text = profileViewModel.firstName
-    lastNameTextView.text = profileViewModel.lastName
-    birthDateTextView.text = profileViewModel.birthDate
+// View
+firstNameTextView.text = profileViewModel.firstName
+lastNameTextView.text = profileViewModel.lastName
+birthDateTextView.text = profileViewModel.birthDate
+```
 
 So far, so good. We have pretty clean interface between presenter and view which contains only one method bindViewModel(viewModel: ProfileViewModel) . But still it is way long to be flexible, because we missed view model’s interface.
 Though view model is just a data class, it still has its public interface which consists of getters (and optionally setters).
@@ -72,22 +76,24 @@ Same will happen if we decide to remove some field (we just remove property from
 Now suppose that we decided to relax our requirements and user might not have birth date. In this case response from server will not contain birth date field. And on UI in such case we should hide birth date section.
 Here is how the changes might look like:
 
-    // ViewModel
-    data class ProfileViewModel(
-        val firstName: String,
-        val lastName: String,
-        val birthDate: String,
-        **val isBirthDateVisible: Boolean**
-    )
+```kotlin
+// ViewModel
+data class ProfileViewModel(
+    val firstName: String,
+    val lastName: String,
+    val birthDate: String,
+    val isBirthDateVisible: Boolean
+)
 
-    // Presenter
-    view.bindViewModel(profileViewModel)
+// Presenter
+view.bindViewModel(profileViewModel)
 
-    // View
-    firstNameTextView.text = profileViewModel.firstName
-    lastNameTextView.text = profileViewModel.lastName
-    birthDateTextView.text = profileViewModel.birthDate
-    **birthDateSection.isVisible = profileViewModel.isBirthDateVisible**
+// View
+firstNameTextView.text = profileViewModel.firstName
+lastNameTextView.text = profileViewModel.lastName
+birthDateTextView.text = profileViewModel.birthDate
+birthDateSection.isVisible = profileViewModel.isBirthDateVisible
+```
 
 Again, not so many changes. Looks like everything is fine. We’re pretty flexible — we can change the screen according to new requirement pretty easy.
 
@@ -109,13 +115,15 @@ We are intelligent, so we want to have our screen as generic as possible. So we 
 
 All the configuration will be provided by the server, and might look like:
 
-    {
-        "image": "https://...",
-        "title": "New version is ready!",
-        "message": "Please update your app",
-        "buttonText": "Update",
-        "link": "https://play.google.com/..."
-    }
+```json
+{
+    "image": "https://...",
+    "title": "New version is ready!",
+    "message": "Please update your app",
+    "buttonText": "Update",
+    "link": "https://play.google.com/..."
+}
+```
 
 Everything seems fine and generic.
 The only issue is that we’ve designed this screen with some assumptions, which might not be correct in the future.
@@ -202,47 +210,51 @@ Some components (e.g. on clicks) will produce actions to navigate to particular 
 So dynamic screen takes form server configuration of the screen and renders it accordingly.
 For example, for Profile screen we might have something like:
 
-    [
-        {
-            "type": "label",
-            "name": "First Name",
-            "value": "John",
-            "style": "body"
-        },
-        {
-            "type": "label",
-            "name": "Last Name",
-            "value": "Doe"
-            "style": "body"
-        }
-    ]
+```json
+[
+    {
+        "type": "label",
+        "name": "First Name",
+        "value": "John",
+        "style": "body"
+    },
+    {
+        "type": "label",
+        "name": "Last Name",
+        "value": "Doe",
+        "style": "body"
+    }
+]
+```
 
 Or for blocking screen we might have:
 
-    [
-        {
-             "type": "image",
-             "url": "https://..."
-        },
-        {
-             "type": "label",
-             "name": "Title",
-             "value": "some title",
-         },
-         {
-             "type": "label",
-             "name": "Message",
-             "value": "some message",
-         },
-         {
-             "type": "button",
-             "name": "action button",
-             "action": {
-                  "type": "open_browser",
-                  "url": "https://..."
-             }
-          }
-    ]
+```json
+[
+    {
+         "type": "image",
+         "url": "https://..."
+    },
+    {
+         "type": "label",
+         "name": "Title",
+         "value": "some title",
+     },
+     {
+         "type": "label",
+         "name": "Message",
+         "value": "some message",
+     },
+     {
+         "type": "button",
+         "name": "action button",
+         "action": {
+              "type": "open_browser",
+              "url": "https://..."
+         }
+      }
+]
+```
 
 Looks more generic and flexible, right?
 

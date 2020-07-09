@@ -21,8 +21,7 @@ Though we’re waiting for MotionLayout for quite long time (and Android Studio 
 
 Instead of trying to come up with some simple animation example, or trying to invent something complex but not useful, I decided to go to dribbble and find something there.
 One animation which took my attention was animated Vinyls music player and especially pager-like animation of covers and vinyl disks on page scroll.
-[**Music Player - Vinyls**
-*Howdy folks, happy weekend. 👋 Worked up this little music concept app to play around with more intuitive and…*dribbble.com](https://dribbble.com/shots/10123436-Music-Player-Vinyls)
+[**Music Player - Vinyls**](https://dribbble.com/shots/10123436-Music-Player-Vinyls)
 
 As mentioned above, I’m not that good at animations, so I tried to make some simplified version without images, not exact animations, but keep the concept.
 
@@ -35,27 +34,29 @@ First of all we need to setup MotionLayout. For this I recommend to complete cod
 We’ll have ViewPager with many fragments inside. Each fragment will contain MotionLayout with two views: cover and disk.
 Xml for fragment will be as simple as:
 
-    <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/motionLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="100dp"
-        app:layoutDescription="@xml/motion_scene">
-    
-        <View
-            android:id="@+id/disk"
-            android:layout_width="@dimen/disk_size"
-            android:layout_height="@dimen/disk_size"
-            android:background="@drawable/disk" />
-    
-        <by.krossovochkin.vinylmotionlayoutsample.CoverView
-            android:id="@+id/cover"
-            android:layout_width="@dimen/cover_size"
-            android:layout_height="@dimen/cover_size" />
-    
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="100dp"
+    app:layoutDescription="@xml/motion_scene">
+
+    <View
+        android:id="@+id/disk"
+        android:layout_width="@dimen/disk_size"
+        android:layout_height="@dimen/disk_size"
+        android:background="@drawable/disk" />
+
+    <by.krossovochkin.vinylmotionlayoutsample.CoverView
+        android:id="@+id/cover"
+        android:layout_width="@dimen/cover_size"
+        android:layout_height="@dimen/cover_size" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
+```
 
 Next when we go to the motion scene we need to define our key points:
 
@@ -67,85 +68,93 @@ Next when we go to the motion scene we need to define our key points:
 
 So, we define start as start constraint set:
 
-    <ConstraintSet android:id="@+id/start">
-    
-        <Constraint
-            android:id="@+id/cover"
-            android:layout_width="@dimen/cover_size"
-            android:layout_height="@dimen/cover_size"
-            android:translationX="@dimen/cover_offset_start"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    
-        <Constraint
-            android:id="@+id/disk"
-            android:layout_width="@dimen/disk_size"
-            android:layout_height="@dimen/disk_size"
-            android:translationX="@dimen/disk_offset_start"
-            app:layout_constraintBottom_toBottomOf="@+id/cover"
-            app:layout_constraintStart_toStartOf="@+id/cover"
-            app:layout_constraintTop_toTopOf="@+id/cover" />
-    
-    </ConstraintSet>
+```xml
+<ConstraintSet android:id="@+id/start">
+
+    <Constraint
+        android:id="@+id/cover"
+        android:layout_width="@dimen/cover_size"
+        android:layout_height="@dimen/cover_size"
+        android:translationX="@dimen/cover_offset_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Constraint
+        android:id="@+id/disk"
+        android:layout_width="@dimen/disk_size"
+        android:layout_height="@dimen/disk_size"
+        android:translationX="@dimen/disk_offset_start"
+        app:layout_constraintBottom_toBottomOf="@+id/cover"
+        app:layout_constraintStart_toStartOf="@+id/cover"
+        app:layout_constraintTop_toTopOf="@+id/cover" />
+
+</ConstraintSet>
+```
 
 For end we’ll define end constraint set:
 
-    <ConstraintSet android:id="@+id/end">
-    
-        <Constraint
-            android:id="@+id/cover"
-            android:layout_width="@dimen/cover_size"
-            android:layout_height="@dimen/cover_size"
-            android:translationX="@dimen/cover_offset_end"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    
-        <Constraint
-            android:id="@+id/disk"
-            android:layout_width="@dimen/disk_size"
-            android:layout_height="@dimen/disk_size"
-            android:translationX="@dimen/disk_offset_end"
-            app:layout_constraintBottom_toBottomOf="@+id/cover"
-            app:layout_constraintStart_toStartOf="@+id/cover"
-            app:layout_constraintTop_toTopOf="@+id/cover" />
-    
-    </ConstraintSet>
+```xml
+<ConstraintSet android:id="@+id/end">
+
+    <Constraint
+        android:id="@+id/cover"
+        android:layout_width="@dimen/cover_size"
+        android:layout_height="@dimen/cover_size"
+        android:translationX="@dimen/cover_offset_end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Constraint
+        android:id="@+id/disk"
+        android:layout_width="@dimen/disk_size"
+        android:layout_height="@dimen/disk_size"
+        android:translationX="@dimen/disk_offset_end"
+        app:layout_constraintBottom_toBottomOf="@+id/cover"
+        app:layout_constraintStart_toStartOf="@+id/cover"
+        app:layout_constraintTop_toTopOf="@+id/cover" />
+
+</ConstraintSet>
+```
 
 And inside Transition we’ll define mid key point:
 
-    <Transition
-        app:constraintSetEnd="@+id/end"
-        app:constraintSetStart="@+id/start"
-        app:duration="1000">
-    
-        <KeyFrameSet>
-    
-            <KeyAttribute
-                android:translationX="@dimen/disk_offset_mid"
-                app:framePosition="20"
-                app:motionTarget="@+id/disk" />
-    
-            <KeyAttribute
-                android:translationX="@dimen/cover_offset_mid"
-                app:framePosition="20"
-                app:motionTarget="@+id/cover" />
-        </KeyFrameSet>
-    
-    </Transition>
+```xml
+<Transition
+    app:constraintSetEnd="@+id/end"
+    app:constraintSetStart="@+id/start"
+    app:duration="1000">
+
+    <KeyFrameSet>
+
+        <KeyAttribute
+            android:translationX="@dimen/disk_offset_mid"
+            app:framePosition="20"
+            app:motionTarget="@+id/disk" />
+
+        <KeyAttribute
+            android:translationX="@dimen/cover_offset_mid"
+            app:framePosition="20"
+            app:motionTarget="@+id/cover" />
+    </KeyFrameSet>
+
+</Transition>
+```
 
 As simple as that. It requires some time to tweak some values to make it look good, but besides that it is pretty simple and straightforward.
 
 Final thing is to connect MotionLayout with ViewPager. It would require some callbacks-magic, but essentially it ends up like:
 
-    override fun onPageScrolled(
-        position: Int,
-        positionOffset: Float,
-        positionOffsetPixels: Int
-    ) {
-        **motionLayout.progress = positionOffset
-    **}
+```kotlin
+override fun onPageScrolled(
+    position: Int,
+    positionOffset: Float,
+    positionOffsetPixels: Int
+) {
+    motionLayout.progress = positionOffset
+}
+```
 
 ## Result
 

@@ -170,20 +170,22 @@ i, j — injections
 
 In programming it can be described as Either:
 
-    class Either<A: Any, B: Any> 
-    private constructor(private val a: A?, private val b: B?) {
+```kotlin
+class Either<A: Any, B: Any> 
+private constructor(private val a: A?, private val b: B?) {
 
-    companion object {
-            
-            fun <A: Any, B: Any> left(a: A): Either<A, B> {
-                return Either(a, null)
-            }
-            
-            fun <A: Any, B: Any> right(b: B): Either<A, B> {
-                return Either(null, b)
-            }
+companion object {
+        
+        fun <A: Any, B: Any> left(a: A): Either<A, B> {
+            return Either(a, null)
+        }
+        
+        fun <A: Any, B: Any> right(b: B): Either<A, B> {
+            return Either(null, b)
         }
     }
+}
+```
 
 ## Algebraic Data Types
 
@@ -289,9 +291,11 @@ Functor can be though as a container.
 
 ### Functor in programming
 
-    interface Functor<A> {
-        fun <B> map(f: (A) -> B): Functor<B>
-    }
+```kotlin
+interface Functor<A> {
+    fun <B> map(f: (A) -> B): Functor<B>
+}
+```
 
 ## BiFunctor
 
@@ -317,14 +321,16 @@ Sum is also a BiFunctor
 
 ### BiFunctor in programming
 
-    interface Bifunctor<A : Any, B: Any> {
-        
-        fun <C : Any> first(f: (A) -> C): Bifunctor<C, B>
-        
-        fun <D : Any> second(f: (B) -> D): Bifunctor<A, D>
-        
-        fun <C : Any, D : Any> bimap(f: (A) -> C, g: (B) -> D): Bifunctor<C, D>
-    }
+```kotlin
+interface Bifunctor<A : Any, B: Any> {
+    
+    fun <C : Any> first(f: (A) -> C): Bifunctor<C, B>
+    
+    fun <D : Any> second(f: (B) -> D): Bifunctor<A, D>
+    
+    fun <C : Any, D : Any> bimap(f: (A) -> C, g: (B) -> D): Bifunctor<C, D>
+}
+```
 
 ## ProFunctor
 
@@ -332,25 +338,31 @@ Sum is also a BiFunctor
 
 Constant Functor
 
-    data class Const<C : Any, A : Any>(val c: C): Functor<A> {
-        
-        override fun <B : Any> fmap(f: (A) -> B): Const<C, B> {
-            return Const<C, B>(c)
-        }
+```kotlin
+data class Const<C : Any, A : Any>(val c: C): Functor<A> {
+    
+    override fun <B : Any> fmap(f: (A) -> B): Const<C, B> {
+        return Const<C, B>(c)
     }
+}
+```
 
 Identity Functor
 
-    data class Just<A : Any>(val a: A) : Functor<A> {
-        
-        override fun <B : Any> fmap(f: (A) -> B): Just<B> {
-            return Just(f(a))
-        }
+```kotlin
+data class Just<A : Any>(val a: A) : Functor<A> {
+    
+    override fun <B : Any> fmap(f: (A) -> B): Just<B> {
+        return Just(f(a))
     }
+}
+```
 
 Maybe via composition
 
-    class Maybe<A> = Either(Const<Unit, A>, Identity<A>)
+```kotlin
+class Maybe<A> = Either(Const<Unit, A>, Identity<A>)
+```
 
 Either is a BiFunctor, Const and Identity are Functors.
 
@@ -360,21 +372,25 @@ ProFunctor — mapping from product of category with its opposite category to th
 
 ![](../../img/1_Dx_0cWCqBxz0fOw0huWfaQ.png)
 
-    interface Contravariant<A : Any> {
-        
-        fun <B : Any> contramap(f: (B) -> A): Contravariant<B>
-    }
+```kotlin
+interface Contravariant<A : Any> {
+    
+    fun <B : Any> contramap(f: (B) -> A): Contravariant<B>
+}
+```
 
 ### ProFunctor in programming
 
-    interface Profunctor<A : Any, B : Any> {
-        
-        fun <C : Any> lmap(f: (C) -> A): Profunctor<C, B>
-        
-        fun <D : Any> rmap(f: (B) -> D): Profunctor<A, D>
-        
-        fun <C : Any, D : Any> dimap(f: (C) -> A, g: (B) -> D): Profunctor<C, D>
-    }
+```kotlin
+interface Profunctor<A : Any, B : Any> {
+    
+    fun <C : Any> lmap(f: (C) -> A): Profunctor<C, B>
+    
+    fun <D : Any> rmap(f: (B) -> D): Profunctor<A, D>
+    
+    fun <C : Any, D : Any> dimap(f: (C) -> A, g: (B) -> D): Profunctor<C, D>
+}
+```
 
 ## Functions/exponentials
 
@@ -384,8 +400,10 @@ ProFunctor — mapping from product of category with its opposite category to th
 
 ![](../../img/1_bMFEOWT0euDcq8PRCWUUdA.png)
 
-    fun <A, B, C> curry(f: (Pair<A, B>) -> C): (A) -> ((B) -> C)
-    fun <A, B, C> uncurry(f: (A) -> ((B) -> C)): (Pair<A, B>) -> C
+```kotlin
+fun <A, B, C> curry(f: (Pair<A, B>) -> C): (A) -> ((B) -> C)
+fun <A, B, C> uncurry(f: (A) -> ((B) -> C)): (Pair<A, B>) -> C
+```
 
 ### Cartesian Closed Category (CCC)
 
@@ -431,11 +449,13 @@ NT in programming is polymorphic function.
 
 ### Example
 
-    fun <A> List<A>.head(): Option<A> {
-        return if (this.isEmpty()) None else Just(this.first())
-    } 
+```kotlin
+fun <A> List<A>.head(): Option<A> {
+    return if (this.isEmpty()) None else Just(this.first())
+} 
 
-    // list.fmap().head() == list.head().fmap()
+// list.fmap().head() == list.head().fmap()
+```
 
 Reversing order of function application can be used in optimizations.
 

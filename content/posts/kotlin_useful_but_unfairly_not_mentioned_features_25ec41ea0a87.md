@@ -30,7 +30,7 @@ But also there are some differences between Kotlin and Java, which are not that 
 In Java references of parameters of a method are mutable by default.
 That means that one can “replace” object on a given reference. To make it immutable one needs to add final keyword. It is a good practice to not replace such references, because it adds complexity to the code. That means that one should consider to always add final keyword to all parameters, which is definitely not that satisfying.
 
-{{< highlight kotlin >}}
+```kotlin
 public class A {
 
     void foo(String param) {
@@ -42,7 +42,7 @@ public class A {
         param = "hello"; // Cannot assign a value to final variable 'param'
     }
 }
-{{< / highlight >}}
+```
 
 For example, as shown in a snippet, we get compilation error only if we add final keyword.
 
@@ -50,14 +50,14 @@ For example, as shown in a snippet, we get compilation error only if we add fina
 
 Unlike Java, in Kotlin all the params are by default immutable. And there is no way to make them mutable. This follows general Kotlin idiom of restricting all the access unless explicitly declared (so instead of putting final one usually add open where needed). In this particular case, there is no way to make this parameter neither var nor open. And anyway there is no need for that.
 
-{{< highlight kotlin >}}
+```kotlin
 class A {
 
     fun foo(param: String) {
        param = "hello" // Val cannot be reassigned
     }
 }
-{{< / highlight >}}
+```
 
 ## Package private vs protected
 
@@ -69,19 +69,19 @@ In Java there are four visibility modifiers: public, protected, package-private 
 
 The rules are straightforward:
 
-* *private *is accessible from within a class
+* *private* is accessible from within a class
 
 * *package-private* is accessible as private (withing a class) plus within a package
 
-* *protected *is accessible as package-private plus for all child classes
+* *protected* is accessible as package-private plus for all child classes
 
-* *public *is accessible from everywhere
+* *public* is accessible from everywhere
 
 Important thing here is to note that protected is accessible from the same package, not only by child classes.
 
 So, if we, for example, we have a class with two methods: one protected and another package-private:
 
-{{< highlight kotlin >}}
+```kotlin
 public class B {
 
     void packagePrivateMethod() {
@@ -92,11 +92,11 @@ public class B {
         System.out.println("protected method called");
     }
 }
-{{< / highlight >}}
+```
 
 And we had class A in the same package, then that class A will be able to access both methods from class B:
 
-{{< highlight kotlin >}}
+```kotlin
 public class A {
 
     void foo() {
@@ -105,23 +105,23 @@ public class A {
         b.protectedMethod();
     }
 }
-{{< / highlight >}}
+```
 
 ### Kotlin
 
 In Kotlin there are different visibility modifiers: public (default, can be omitted), protected, internal, private.
 
-* *public *is accessible from everywhere
+* *public* is accessible from everywhere
 
-* *protected *is accessible from child classes only
+* *protected* is accessible from child classes only
 
-* *internal *is accessible from all the module (not only package, this is effectively “public in a module”)
+* *internal* is accessible from all the module (not only package, this is effectively “public in a module”)
 
-* *private *is accessible from within a file/class
+* *private* is accessible from within a file/class
 
 So, if we had a class similar to the previous example:
 
-{{< highlight kotlin >}}
+```kotlin
 open class B {
 
     protected open fun protectedMethod() {
@@ -132,11 +132,11 @@ open class B {
         println("internal method called")
     }
 }
-{{< / highlight >}}
+```
 
 Then class A, while being in the same package, would not be able to access protected method:
 
-{{< highlight kotlin >}}
+```kotlin
 class A {
 
     fun foo() {
@@ -146,13 +146,13 @@ class A {
         b.protectedMethod() // Cannot access 'protectedMethod': it is protected in 'B'
     }
 }
-{{< / highlight >}}
+```
 
 And I personally found that really useful. Package-private thing is clunky and feels somewhat outdated. Having protected to be accessible from the same package feels like encapsulation hole. Glad that Kotlin has a more strict approach for protected keyword.
 
 But what if we would like to have something similar to package-private in Kotlin? In this case, we can consider putting two classes into same file with marking classes we’d like to hide as private. All the methods can remain public as class won’t be accessible from outside anyway:
 
-{{< highlight kotlin >}}
+```kotlin
 class C : B() {
 
     fun fooC() {
@@ -167,7 +167,7 @@ private class D {
         println("fooD called")
     }
 }
-{{< / highlight >}}
+```
 
 One can read more on visibility modifiers in Kotlin [here](https://kotlinlang.org/docs/reference/visibility-modifiers.html).
 

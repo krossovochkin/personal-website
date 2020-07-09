@@ -352,9 +352,7 @@ The reason is that these optimizations are applied to some critical places and c
 So, don’t think that under the hood RxJava does everything effectively and now you can write long Rx-chains. Benchmark your code, profile important chains and try to find out how to optimize each separately.
 
 Further reading:
-[**Operator-fusion (Part 1)**
-*Operator-fusion, one of the cutting-edge research topics in the reactive programming world, is the aim to have two of…*akarnokd.blogspot.com](https://akarnokd.blogspot.com/2016/03/operator-fusion-part-1.html)
-[**Operator fusion (part 2 - final)**
-*In the previous part, I've introduced the concepts around operator fusion. In this post, I'll detail the API and…*akarnokd.blogspot.com](https://akarnokd.blogspot.com/2016/04/operator-fusion-part-2-final.html)
+[**Operator-fusion (Part 1)**](https://akarnokd.blogspot.com/2016/03/operator-fusion-part-1.html)
+[**Operator fusion (part 2 - final)**](https://akarnokd.blogspot.com/2016/04/operator-fusion-part-2-final.html)
 
 Happy coding

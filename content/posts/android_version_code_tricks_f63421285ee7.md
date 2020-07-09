@@ -22,15 +22,19 @@ Also it is possible to access version code from generated BuildConfig.VERSION_CO
 
 When using CI it is also common that version code is provided from outside via gradle parameter:
 
-    ./gradlew assembleRelease -PversionCode=12
+```bash
+./gradlew assembleRelease -PversionCode=12
+```
 
 Though it might happen that one would like to add some custom version code logic inside build.gradle. The naive way is to do something like:
 
-    defaultConfig {
-        ...
-        versionCode calculateVersionCode()
-        ...
-    }
+```groovy
+defaultConfig {
+    ...
+    versionCode calculateVersionCode()
+    ...
+}
+```
 
 But this version has limitation that this config is default and we don’t have any information on what was the actual assemble variant (i.e. we can’t say that for debug build we want to have one value and for release — another one, as variants are not yet available there).
 
@@ -38,7 +42,9 @@ But this version has limitation that this config is default and we don’t have 
 
 Inside *android* section we have access to application variants:
 
-    android.applicationVariants
+```groovy
+android.applicationVariants
+```
 
 If we look inside Variant implementation we’ll see that in variant’s output there is method called setVersionCodeOverride:
 

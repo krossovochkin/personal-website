@@ -44,10 +44,12 @@ Let’s analyze this line by line:
 
 So, if we’d like to create trigger, we can execute such query:
 
-    CREATE TRIGGER update_value INSTEAD OF UPDATE ON persons
-    BEGIN
-    UPDATE persons(age) values(21)
-    END;
+```sql
+CREATE TRIGGER update_value INSTEAD OF UPDATE ON persons
+BEGIN
+UPDATE persons(age) values(21)
+END;
+```
 
 In such example whenever any update on persons table happen instead of actual update for all affected rows, value of column age will be set to 21.
 
@@ -61,7 +63,9 @@ However one of the cases where triggers might be not bad is logging over table c
 
 Let’s imagine that we have some data which can be structured in one table (we’ll call it data) with such structure:
 
-    order_id | timestamp | price
+```
+order_id | timestamp | price
+```
 
 Table contains three columns:
 
@@ -74,7 +78,9 @@ Table contains three columns:
 And for example we’d like to be able to log all the information on when and what was inserted into that database.
 We’ll store that information in the log table. It has the following structure:
 
-    _id | timestamp | payload
+```
+_id | timestamp | payload
+```
 
 Where:
 
@@ -91,25 +97,32 @@ Let’s solve this problem using triggers.
 First of all we’ll download SQLite command line tool for our platform following instructions [here](https://www.sqlite.org/download.html).
 Then we run sqlite3 in terminal providing database name and we’re ready:
 
-    % sqlite testdb
+```bash
+% sqlite testdb
+```
 
 ### Create tables
 
 Then let’s create our tables:
 
-    sqlite > create table data(order_id integer primary key, timestamp integer, price real);
+```bash
+sqlite > create table data(order_id integer primary key, timestamp integer, price real);
 
-    sqlite > create table log(_id integer primary key, timestamp text, payload text); 
+sqlite > create table log(_id integer primary key, timestamp text, payload text); 
+```
+
 > If you stuck with syntax you always can check [documentation ](https://sqlite.org/cli.html)on command-line-interface of SQLite
 
 ### Create trigger
 
 Now let’s create trigger:
 
-    create trigger order_added after insert on data
-    begin
-    insert into log(timestamp, payload) values(datetime(), new.order_id || ' ' || new.timestamp || ' ' || new.price);
-    end;
+```bash
+create trigger order_added after insert on data
+begin
+insert into log(timestamp, payload) values(datetime(), new.order_id || ' ' || new.timestamp || ' ' || new.price);
+end;
+```
 
 Here we:
 
@@ -124,16 +137,20 @@ Here we:
 
 So now we’re ready to activate our trigger by inserting something into data table:
 
-    sqlite > insert into data(timestamp, price) values(1568069843, 12.2);
-    sqlite > insert into data(timestamp, price) values(1568069862, 15.2);
+```bash
+sqlite > insert into data(timestamp, price) values(1568069843, 12.2);
+sqlite > insert into data(timestamp, price) values(1568069862, 15.2);
+```
 
 ### Check result
 
 To check the result let’s query what is inside log table:
 
-    sqlite > select * from log;
-    1|2020-01-03 06:46:52|1 1568069843 12.2
-    2|2020-01-03 06:46:56|2 1568069862 15.2
+```bash
+sqlite > select * from log;
+1|2020-01-03 06:46:52|1 1568069843 12.2
+2|2020-01-03 06:46:56|2 1568069862 15.2
+```
 
 And we see that we have exactly two records in our log table. Timestamp column has date-time of when data was inserted and payload column has all the information on the data that was inserted.
 
@@ -148,117 +165,130 @@ Therefore in order to work with triggers on Android we have to return to the bas
 
 In Room during database creation we can add callback where we can get access to the SQLiteDatabase. On that database we can call execSQL method, which is basically executing SQL command:
 
-    db.execSQL(
-        """
-        create trigger order_added after insert on data
-        begin
-        insert into log(timestamp, payload) values(datetime(), new.order_id || ' ' || new.timestamp || ' ' || new.price);
-        end;
-        """.*trimIndent*()
-    )
+```kotlin
+db.execSQL(
+    """
+    create trigger order_added after insert on data
+    begin
+    insert into log(timestamp, payload) values(datetime(), new.order_id || ' ' || new.timestamp || ' ' || new.price);
+    end;
+    """.trimIndent()
+)
+```
 
 And that’s it.
 > It is worth noting that (considering that triggers can be abused and lead to some issues if handled without care) SQLite command written in execSQL is not validated at compile time (unlike commands one can write in Room’s @Query annotation). So here one should be twice as more attentive.
 
 But to test that it works let’s add a bit of a code. We’ll start from describing our entities:
 
-    @Entity(tableName = "data")
-    data class Order(
-        @PrimaryKey
-        @ColumnInfo(name = "order_id")
-        val orderId: Int,
+```kotlin
+@Entity(tableName = "data")
+data class Order(
+    @PrimaryKey
+    @ColumnInfo(name = "order_id")
+    val orderId: Int,
 
-        @ColumnInfo(name = "timestamp")
-        val timestamp: Int,
+    @ColumnInfo(name = "timestamp")
+    val timestamp: Int,
 
-        @ColumnInfo(name = "price")
-        val price: Double
-    )
+    @ColumnInfo(name = "price")
+    val price: Double
+)
 
-    @Entity(tableName = "log")
-    data class OrderInsertedLog(
-        @PrimaryKey
-        @ColumnInfo(name = "_id")
-        val id: Int,
+@Entity(tableName = "log")
+data class OrderInsertedLog(
+    @PrimaryKey
+    @ColumnInfo(name = "_id")
+    val id: Int,
 
-        @ColumnInfo(name = "timestamp")
-        val timestamp: String,
+    @ColumnInfo(name = "timestamp")
+    val timestamp: String,
 
-        @ColumnInfo(name = "payload")
-        val payload: String
-    )
+    @ColumnInfo(name = "payload")
+    val payload: String
+)
+```
 
 Next create DAOs:
 
-    @Dao
-    interface OrderDao {
-        @Insert
-        suspend fun insert(order: Order)
+```kotlin
+@Dao
+interface OrderDao {
+    @Insert
+    suspend fun insert(order: Order)
 
-        @Query("select * from data")
-        suspend fun read(): List<Order>
-    }
+    @Query("select * from data")
+    suspend fun read(): List<Order>
+}
 
-    @Dao
-    interface LogDao {
-        @Query("select * from log")
-        suspend fun read(): List<OrderInsertedLog>
-    }
+@Dao
+interface LogDao {
+    @Query("select * from log")
+    suspend fun read(): List<OrderInsertedLog>
+}
+```
 
 And finally we’ll create a database we’ll work with:
 
-    @Database(entities = [Order::class, OrderInsertedLog::class], version = 1)
-    abstract class AppDb : RoomDatabase() {
+```kotlin
+@Database(entities = [Order::class, OrderInsertedLog::class], version = 1)
+abstract class AppDb : RoomDatabase() {
 
-        abstract fun orderDao(): OrderDao
-        
-        abstract fun logDao(): LogDao
-        
-        companion object {
+    abstract fun orderDao(): OrderDao
+    
+    abstract fun logDao(): LogDao
+    
+    companion object {
 
-            private var INSTANCE: AppDb? = null
+        private var INSTANCE: AppDb? = null
 
-            fun getDatabase(context: Context): AppDb {
+        fun getDatabase(context: Context): AppDb {
 
-                return INSTANCE ?: Room
-                    .databaseBuilder(
-                        context.*applicationContext*,
-                        AppDb::class.*java*,
-                        "appdb"
-                    )
-                    .addCallback(DB_CALLBACK)
-                    .build()
-                    .*also *{ INSTANCE = it }
-            }
-          
-            private val DB_CALLBACK = object : RoomDatabase.Callback() {
-                override fun onCreate(db: SupportSQLiteDatabase) {
-                    super.onCreate(db)
-                    db.execSQL(...)
-                }
+            return INSTANCE ?: Room
+                .databaseBuilder(
+                    context.applicationContext,
+                    AppDb::class.java,
+                    "appdb"
+                )
+                .addCallback(DB_CALLBACK)
+                .build()
+                .also { INSTANCE = it }
+        }
+      
+        private val DB_CALLBACK = object : RoomDatabase.Callback() {
+            override fun onCreate(db: SupportSQLiteDatabase) {
+                super.onCreate(db)
+                db.execSQL(...)
             }
         }
     }
+}
+```
+
 > If you have issues with setting up Room you can refer to the [documentation](https://developer.android.com/training/data-storage/room)
 
 And in ViewModel we’ll actually use this database to verify that our trigger worked:
 
-    viewModelScope.launch {
-        db.orderDao().*apply *{
-            insert(Order(1, 1568069843, 12.2))
-            insert(Order(2, 1568069862, 15.2))
-        }
-
-        db.logDao().read()
-            .*forEach *{
-                Log.e("TEST_DB", "log: $it")
-            }
+```kotlin
+viewModelScope.launch {
+    db.orderDao().*apply *{
+        insert(Order(1, 1568069843, 12.2))
+        insert(Order(2, 1568069862, 15.2))
     }
+
+    db.logDao().read()
+        .*forEach *{
+            Log.e("TEST_DB", "log: $it")
+        }
+}
+```
 
 The results printed in logs will be:
 
-    E/TEST_DB: log: OrderInsertedLog(id=1, timestamp=2020-01-03 08:20:01, payload=1 1568069843 12.2)
-    E/TEST_DB: log: OrderInsertedLog(id=2, timestamp=2020-01-03 08:20:01, payload=2 1568069862 15.2)
+```
+E/TEST_DB: log: OrderInsertedLog(id=1, timestamp=2020-01-03 08:20:01, payload=1 1568069843 12.2)
+E/TEST_DB: log: OrderInsertedLog(id=2, timestamp=2020-01-03 08:20:01, payload=2 1568069862 15.2)
+```
 
 And that means that our trigger worked great!
 
@@ -268,20 +298,24 @@ Having SQLite triggers might be fun, but in usual work we are most interested in
 
 First or all we’ll change the DAO for our log table to return instead of list of items in the table — Flow of these lists to get actual values when they appear in table:
 
-    @Dao
-    interface LogDao {
-        @Query("select * from log")
-        fun read(): **Flow<**List<OrderInsertedLog>**>**
-    }
+```kotlin
+@Dao
+interface LogDao {
+    @Query("select * from log")
+    fun read(): Flow<List<OrderInsertedLog>>
+}
+```
 
 And we replace usage of our LogDao to instead collect data from Flow:
 
-    db.logDao().read()
-        .*collect *{ data ->
-            data.*forEach *{
-                Log.e("TEST_DB", "log: $it")
-            }
+```kotlin
+db.logDao().read()
+    .collect { data ->
+        data.forEach {
+            Log.e("TEST_DB", "log: $it")
         }
+    }
+```
 
 After we execute the program, we’ll see that nothing will be changed so far. First, our program inserts values into data table, then our trigger writes into log, after that we start the Flow from log table and receive new values.
 
@@ -289,28 +323,30 @@ Let’s look at how inside all this is implemented.
 When we look at the implementation of the LogDao#read we see that it uses CoroutinesRoom.createFlow method ([source code](https://android.googlesource.com/platform/frameworks/support/+/refs/heads/androidx-master-dev/room/ktx/src/main/java/androidx/room/CoroutinesRoom.kt)).
 Here is short snippet of how this method looks like:
 
-    [@JvmStatic](http://twitter.com/JvmStatic)
-    fun <R> createFlow(
-        db: RoomDatabase,
-        inTransaction: Boolean,
-        tableNames: Array<String>,
-        callable: Callable<R>
-    ): Flow<[@JvmSuppressWildcards](http://twitter.com/JvmSuppressWildcards) R> = flow {
-        val observerChannel = Channel<Unit>(Channel.CONFLATED)
-        val observer = object : **InvalidationTracker.Observer**(tableNames) {
-            override fun onInvalidated(tables: MutableSet<String>) {
-                observerChannel.offer(Unit)
-            }
-        }
-        observerChannel.offer(Unit) // Initial signal to perform first query.
-        
-        **db.invalidationTracker.addObserver(observer)**
-
-        for (signal in observerChannel) {
-            val result = callable.call()
-            **emit(result)**
+```kotlin
+@JvmStatic
+fun <R> createFlow(
+    db: RoomDatabase,
+    inTransaction: Boolean,
+    tableNames: Array<String>,
+    callable: Callable<R>
+): Flow<@JvmSuppressWildcards) R> = flow {
+    val observerChannel = Channel<Unit>(Channel.CONFLATED)
+    val observer = object : InvalidationTracker.Observer(tableNames) {
+        override fun onInvalidated(tables: MutableSet<String>) {
+            observerChannel.offer(Unit)
         }
     }
+    observerChannel.offer(Unit) // Initial signal to perform first query.
+    
+    db.invalidationTracker.addObserver(observer)
+
+    for (signal in observerChannel) {
+        val result = callable.call()
+        emit(result)
+    }
+}
+```
 
 So what important this function does:
 
@@ -327,55 +363,63 @@ If we go to InvalidationTracker [sources ](https://android.googlesource.com/plat
 
 First thing is that tracker creates its own utility temp table in database for writing there all the changes made in tables:
 
-    private static final String CREATE_TRACKING_TABLE_SQL = 
-        "CREATE TEMP TABLE " + UPDATE_TABLE_NAME + "(" 
-        + TABLE_ID_COLUMN_NAME + " INTEGER PRIMARY KEY, " 
-        + INVALIDATED_COLUMN_NAME + " INTEGER NOT NULL DEFAULT 0)";
+```java
+private static final String CREATE_TRACKING_TABLE_SQL = 
+    "CREATE TEMP TABLE " + UPDATE_TABLE_NAME + "(" 
+    + TABLE_ID_COLUMN_NAME + " INTEGER PRIMARY KEY, " 
+    + INVALIDATED_COLUMN_NAME + " INTEGER NOT NULL DEFAULT 0)";
+```
 
 Then there is a method to start tracking some table in database for changes:
 
-    private void startTrackingTable(SupportSQLiteDatabase writableDb, int tableId) {
-        writableDb.execSQL(
-                "INSERT OR IGNORE INTO " + UPDATE_TABLE_NAME + " VALUES(" + tableId + ", 0)");
-        final String tableName = mTableNames[tableId];
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String trigger : TRIGGERS) {
-            stringBuilder.setLength(0);
-            stringBuilder.append("CREATE TEMP TRIGGER IF NOT EXISTS ");
-            appendTriggerName(stringBuilder, tableName, trigger);
-            stringBuilder.append(" AFTER ")
-                    .append(trigger)
-                    .append(" ON `")
-                    .append(tableName)
-                    .append("` BEGIN UPDATE ")
-                    .append(UPDATE_TABLE_NAME)
-                    .append(" SET ").append(INVALIDATED_COLUMN_NAME).append(" = 1")
-                    .append(" WHERE ").append(TABLE_ID_COLUMN_NAME).append(" = ").append(tableId)
-                    .append(" AND ").append(INVALIDATED_COLUMN_NAME).append(" = 0")
-                    .append("; END");
-            writableDb.execSQL(stringBuilder.toString());
-        }
+```java
+private void startTrackingTable(SupportSQLiteDatabase writableDb, int tableId) {
+    writableDb.execSQL(
+            "INSERT OR IGNORE INTO " + UPDATE_TABLE_NAME + " VALUES(" + tableId + ", 0)");
+    final String tableName = mTableNames[tableId];
+    StringBuilder stringBuilder = new StringBuilder();
+    for (String trigger : TRIGGERS) {
+        stringBuilder.setLength(0);
+        stringBuilder.append("CREATE TEMP TRIGGER IF NOT EXISTS ");
+        appendTriggerName(stringBuilder, tableName, trigger);
+        stringBuilder.append(" AFTER ")
+                .append(trigger)
+                .append(" ON `")
+                .append(tableName)
+                .append("` BEGIN UPDATE ")
+                .append(UPDATE_TABLE_NAME)
+                .append(" SET ").append(INVALIDATED_COLUMN_NAME).append(" = 1")
+                .append(" WHERE ").append(TABLE_ID_COLUMN_NAME).append(" = ").append(tableId)
+                .append(" AND ").append(INVALIDATED_COLUMN_NAME).append(" = 0")
+                .append("; END");
+        writableDb.execSQL(stringBuilder.toString());
     }
+}
+```
 
 And whoa! Tracker creates trigger for any update, insert or delete for a given table with copying table name and column to the tracking table. Sounds familiar!
 
 This method is called in:
 
-    void syncTriggers(SupportSQLiteDatabase database)
+```java
+void syncTriggers(SupportSQLiteDatabase database)
+```
 
 This method in short checks all the registered observers and based on that either creates triggers or removes them.
 
 Also tracker has:
 
-    Runnable mRefreshRunnable = new Runnable() {
-       ...
-         synchronized (mObserverMap) {                    
-            for (entry : mObserverMap) {               
-                entry.getValue()
-                    .notifyByTableInvalidStatus(invalidatedTableIds);  
-            }
-    ...
-    }
+```java
+Runnable mRefreshRunnable = new Runnable() {
+   ...
+     synchronized (mObserverMap) {                    
+        for (entry : mObserverMap) {               
+            entry.getValue()
+                .notifyByTableInvalidStatus(invalidatedTableIds);  
+        }
+...
+}
+```
 
 In which actual checks on what was updated are made and where all the registered observers are notified.
 > Cases in which all these methods (such as syncTriggers, or running refresh runnable) called are out of scope of this article. It is better to check the source code directly
@@ -389,23 +433,25 @@ Now we can make an educated guess that as we’ve created SQLite trigger and Roo
 
 For our test the only thing that we’ll change comparing to the previous test is order in which we subscribe for changes to log table and insert into data table.
 
-    viewModelScope.launch {
-        db.logDao().read()
-            .*onEach *{ data ->
-                if (data.isEmpty()) {
-                    Log.e("TEST_DB", "log empty")
-                }
-                data.*forEach *{
-                    Log.e("TEST_DB", "log: $it")
-                }
+```kotlin
+viewModelScope.launch {
+    db.logDao().read()
+        .*onEach *{ data ->
+            if (data.isEmpty()) {
+                Log.e("TEST_DB", "log empty")
             }
-            .launchIn(this)
-
-        db.orderDao().*apply *{
-            insert(Order(1, 1568069843, 12.2))
-            insert(Order(2, 1568069862, 15.2))
+            data.*forEach *{
+                Log.e("TEST_DB", "log: $it")
+            }
         }
+        .launchIn(this)
+
+    db.orderDao().*apply *{
+        insert(Order(1, 1568069843, 12.2))
+        insert(Order(2, 1568069862, 15.2))
     }
+}
+```
 
 What we’d expect after code execution?
 Probably that we’ll get three emits in log flow:
@@ -418,8 +464,10 @@ Probably that we’ll get three emits in log flow:
 
 In reality we’ll see the following:
 
-    E/TEST_DB: log empty
-    E/TEST_DB: log: OrderInsertedLog(id=1, timestamp=2020-01-03 08:53:12, payload=1 1568069843 12.2)E/TEST_DB: log: OrderInsertedLog(id=2, timestamp=2020-01-03 08:53:12, payload=2 1568069862 15.2)
+```
+E/TEST_DB: log empty
+E/TEST_DB: log: OrderInsertedLog(id=1, timestamp=2020-01-03 08:53:12, payload=1 1568069843 12.2)E/TEST_DB: log: OrderInsertedLog(id=2, timestamp=2020-01-03 08:53:12, payload=2 1568069862 15.2)
+```
 
 We’ve got only two emits (empty list and list with two orders).
 The reason behind that is that our code runs concurrently, our inserts are pretty close and implementation makes its best to deliver results.

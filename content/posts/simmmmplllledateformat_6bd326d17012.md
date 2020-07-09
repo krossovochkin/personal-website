@@ -16,8 +16,10 @@ showFullContent = false
 
 Using SimpleDateFormat to format dates and times is a common thing (as Java 8 Time API is not that available on Android yet). Usually it looks like:
 
-    val formatter = SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH)
-    formatter.format(date)
+```kotlin
+val formatter = SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH)
+formatter.format(date)
+```
 
 We can use different formats and locales with not only providing correct translations, but also some additional locale-specific formatting rules.
 
@@ -31,83 +33,91 @@ As it is stated in documentation M means “context sensitive” and L — “st
 
 In this article we’ll use this list of formats:
 
-    final String[] formats = {
-        "MMMM",
-        "LLLL",
-                
-        "dd MMMM",
-        "dd LLLL",
-                
-        "MMMM yyyy",
-        "LLLL yyyy",
-                
-        "dd MMMM yyyy",
-        "dd LLLL yyyy",
-                
-        "dd MMM",
-        "dd LLL"
-    };
+```kotlin
+final String[] formats = {
+    "MMMM",
+    "LLLL",
+            
+    "dd MMMM",
+    "dd LLLL",
+            
+    "MMMM yyyy",
+    "LLLL yyyy",
+            
+    "dd MMMM yyyy",
+    "dd LLLL yyyy",
+            
+    "dd MMM",
+    "dd LLL"
+};
+```
 
 If we check Locale.ENGLISH for these formats we’ll get the following results:
 
-    locale: en
-    ==================
-    MMMM        : July
-    LLLL        : July
+```
+locale: en
+==================
+MMMM        : July
+LLLL        : July
 
-    dd MMMM     : 20 July
-    dd LLLL     : 20 July
+dd MMMM     : 20 July
+dd LLLL     : 20 July
 
-    MMMM yyyy   : July 2019
-    LLLL yyyy   : July 2019
+MMMM yyyy   : July 2019
+LLLL yyyy   : July 2019
 
-    dd MMMM yyyy: 20 July 2019
-    dd LLLL yyyy: 20 July 2019
+dd MMMM yyyy: 20 July 2019
+dd LLLL yyyy: 20 July 2019
 
-    dd MMM      : 20 Jul
-    dd LLL      : 20 Jul
+dd MMM      : 20 Jul
+dd LLL      : 20 Jul
+```
 
 No difference between M and L!
 
 If we check another locale, for example, Locale.GERMAN we again won’t see any difference:
 
-    locale: de
-    ==================
-    MMMM        : Juli
-    LLLL        : Juli
+```
+locale: de
+==================
+MMMM        : Juli
+LLLL        : Juli
 
-    dd MMMM     : 20 Juli
-    dd LLLL     : 20 Juli
+dd MMMM     : 20 Juli
+dd LLLL     : 20 Juli
 
-    MMMM yyyy   : Juli 2019
-    LLLL yyyy   : Juli 2019
+MMMM yyyy   : Juli 2019
+LLLL yyyy   : Juli 2019
 
-    dd MMMM yyyy: 20 Juli 2019
-    dd LLLL yyyy: 20 Juli 2019
+dd MMMM yyyy: 20 Juli 2019
+dd LLLL yyyy: 20 Juli 2019
 
-    dd MMM      : 20 Jul
-    dd LLL      : 20 Jul
+dd MMM      : 20 Jul
+dd LLL      : 20 Jul
+```
 
 Does it mean that we can use M and L in formats interchangeably?
 
 Not really. It just happens so that on English and German we get same results. Let’s check other locales from different language groups, for example Russian:
 
-    locale: ru
-    ==================
-    MMMM        : Июль
-    LLLL        : Июль
+```
+locale: ru
+==================
+MMMM        : Июль
+LLLL        : Июль
 
-    dd MMMM     : 20 июля
-    dd LLLL     : 20 Июль
+dd MMMM     : 20 июля
+dd LLLL     : 20 Июль
 
-    MMMM yyyy   : июля 2019
-    LLLL yyyy   : Июль 2019
+MMMM yyyy   : июля 2019
+LLLL yyyy   : Июль 2019
 
-    dd MMMM yyyy: 20 июля 2019
-    dd LLLL yyyy: 20 Июль 2019
+dd MMMM yyyy: 20 июля 2019
+dd LLLL yyyy: 20 Июль 2019
 
-    dd MMM      : 20 июл
-    dd LLL      : 20 Июль
+dd MMM      : 20 июл
+dd LLL      : 20 Июль
+```
 
 And we now see different results, though they are in Russian and we need some additional explanation on what we’ve got. Let’s check examples one by one.
 
@@ -125,22 +135,24 @@ In contrary LLLL yyyy : Июль 2019 is month name followed by year July 2019 a
 
 So if we look at examples and add ticks to correctly formatted dates, we’ll figure out the idea:
 
-    locale: ru
-    ==================
-    MMMM        : Июль **(+)**
-    LLLL        : Июль **(+)**
+```
+locale: ru
+==================
+MMMM        : Июль (+)
+LLLL        : Июль (+)
 
-    dd MMMM     : 20 июля **(+)**
-    dd LLLL     : 20 Июль
+dd MMMM     : 20 июля (+)
+dd LLLL     : 20 Июль
 
-    MMMM yyyy   : июля 2019
-    LLLL yyyy   : Июль 2019 **(+)**
+MMMM yyyy   : июля 2019
+LLLL yyyy   : Июль 2019 (+)
 
-    dd MMMM yyyy: 20 июля 2019 **(+)**
-    dd LLLL yyyy: 20 Июль 2019
+dd MMMM yyyy: 20 июля 2019 (+)
+dd LLLL yyyy: 20 Июль 2019
 
-    dd MMM      : 20 июл **(+)**
-    dd LLL      : 20 Июль
+dd MMM      : 20 июл (+)
+dd LLL      : 20 Июль
+```
 
 The rule is basically the following:
 

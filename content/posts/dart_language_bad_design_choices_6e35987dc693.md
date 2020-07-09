@@ -141,32 +141,34 @@ In any object-oriented programming language there is a basic type. In Java it is
 The difference is that in Java/Kotlin base type has limited number of supported methods (and if you would like to call some method which is not part of base type interface you have to make a downcast first), but in Dart on dynamic type one can call any property/function by name.
 That means that code like this is purely valid (for true/false value passed to a function):
 
-    void main() {
-      dynamic c = get(false);
-      print(c.a());
-    }
+```dart
+void main() {
+  dynamic c = get(false);
+  print(c.a());
+}
 
-    dynamic get(bool flag) {
-      if (flag) {
-        return A();
-      } else {
-        return B();
-      }
-    }
+dynamic get(bool flag) {
+  if (flag) {
+    return A();
+  } else {
+    return B();
+  }
+}
 
-    class A {
-      
-      dynamic a() {
-        return "a";
-      }
-    }
+class A {
+  
+  dynamic a() {
+    return "a";
+  }
+}
 
-    class B {
-      
-      dynamic a() {
-        return "b";
-      }
-    }
+class B {
+  
+  dynamic a() {
+    return "b";
+  }
+}
+```
 
 This means that Dart is more like JavaScript and is less like Java.
 
@@ -190,16 +192,18 @@ Dart’s type system, like the type systems in Java and C#, is sound.
 
 Let’s create simple test:
 
-    void main() {
-      String s = null;
-      if (s is String) {
-        print("string");
-      } else if (s is Null) {
-        print("null");
-      } else {
-        print ("none");
-      }
-    }
+```dart
+void main() {
+  String s = null;
+  if (s is String) {
+    print("string");
+  } else if (s is Null) {
+    print("null");
+  } else {
+    print ("none");
+  }
+}
+```
 
 We assign null (which is instance of Null class: [Reference](https://api.dartlang.org/stable/2.2.0/dart-core/Null-class.html)) to a String variable.
 As stated in documentation each expression can return only value of expected static type.

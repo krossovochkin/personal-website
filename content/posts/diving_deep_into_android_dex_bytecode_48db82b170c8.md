@@ -61,22 +61,30 @@ These are the commands which we’ll use throughout the article.
 
 Compile all the kotlin files in the current directory:
 
-    kotlinc *.kt
+```bash
+kotlinc *.kt
+```
 
 Package all the .class files into dex file (with r8 optimizations):
 
-    java -jar r8.jar --lib $ANDROID_HOME/platforms/android-29/android.jar --release --output . --pg-conf rules.txt *.class
+```bash
+java -jar r8.jar --lib $ANDROID_HOME/platforms/android-29/android.jar --release --output . --pg-conf rules.txt *.class
+```
 
 Provided --pg-conf is a proguard rules file, in which we’ll add to keep main function and skip obfuscation (for our readability):
 
-    -keepclasseswithmembers class * {
-        public static void main(java.lang.String[]);
-    }
-    -dontobfuscate
+```
+-keepclasseswithmembers class * {
+    public static void main(java.lang.String[]);
+}
+-dontobfuscate
+```
 
 Dump content of .dex file to see its contents.
 
-    $ANDROID_HOME/build-tools/29.0.2/dexdump -d classes.dex
+```
+$ANDROID_HOME/build-tools/29.0.2/dexdump -d classes.dex
+```
 
 ## Verify setup
 
@@ -86,53 +94,57 @@ In order to verify your setup works, you can go through [this article](https://j
 
 In first our example let’s look at following program:
 
-    fun main() {
-        print(Runner().run(5))
+```kotlin
+fun main() {
+    print(Runner().run(5))
+}
+
+private class Runner {
+
+    fun run(x: Int): Int {
+        return x + 1
     }
-    
-    private class Runner {
-    
-        fun run(x: Int): Int {
-            return x + 1
-        }
-    }
+}
+```
 
 Here we basically provide input and print incremented value of it.
 > **NOTE**: this is a template which we’ll use. We’ll have main function and some Runner class in which there will be some logic we’ll try to test.
 
 We then run our kotlin compiler, run r8 over compiled .class files and then run dexdump and get following result:
 
-    Processing 'classes.dex'...
-    Opened 'classes.dex', DEX version '035'
-    Class #0            -
-      Class descriptor  : 'LMainKt;'
-      Access flags      : 0x0011 (PUBLIC FINAL)
-      Superclass        : 'Ljava/lang/Object;'
-      Interfaces        -
-      Static fields     -
-      Instance fields   -
-      Direct methods    -
-        #0              : (in LMainKt;)
-          name          : 'main'
-          type          : '([Ljava/lang/String;)V'
-          access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
-          code          -
-          registers     : 2
-          ins           : 1
-          outs          : 2
-          insns size    : 7 16-bit code units
-    000114:                                        |[000114] MainKt.main:([Ljava/lang/String;)V
-    000124: 1261                                   |0000: const/4 v1, #int 6 // #6
-    000126: 6200 0000                              |0001: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
-    00012a: 6e20 0100 1000                         |0003: invoke-virtual {v0, v1}, Ljava/io/PrintStream;.print:(I)V // method@0001
-    000130: 0e00                                   |0006: return-void
-          catches       : (none)
-          positions     : 
-            0x0001 line=1
-          locals        :
+```
+Processing 'classes.dex'...
+Opened 'classes.dex', DEX version '035'
+Class #0            -
+  Class descriptor  : 'LMainKt;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+  Direct methods    -
+    #0              : (in LMainKt;)
+      name          : 'main'
+      type          : '([Ljava/lang/String;)V'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 7 16-bit code units
+000114:                                        |[000114] MainKt.main:([Ljava/lang/String;)V
+000124: 1261                                   |0000: const/4 v1, #int 6 // #6
+000126: 6200 0000                              |0001: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
+00012a: 6e20 0100 1000                         |0003: invoke-virtual {v0, v1}, Ljava/io/PrintStream;.print:(I)V // method@0001
+000130: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     : 
+        0x0001 line=1
+      locals        :
 
-    Virtual methods   -
-      source_file_idx   : 0 ()
+Virtual methods   -
+  source_file_idx   : 0 ()
+```
 
 It is not very long file (later we won’t paste whole listing as it might be too long).
 Here we have two interesting things:
@@ -144,11 +156,13 @@ Here we have two interesting things:
 While first is pretty easy to see (we just don’t have Runner mentioned), second we’ll try to investigate deeper.
 For this let’s look at the content of the main function:
 
-    [000114] MainKt.main:([Ljava/lang/String;)V
-    0000: const/4 v1, #int 6 // #6
-    0001: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
-    0003: invoke-virtual {v0, v1}, Ljava/io/PrintStream;.print:(I)V // method@0001
-    0006: return-void
+```
+[000114] MainKt.main:([Ljava/lang/String;)V
+0000: const/4 v1, #int 6 // #6
+0001: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
+0003: invoke-virtual {v0, v1}, Ljava/io/PrintStream;.print:(I)V // method@0001
+0006: return-void
+```
 
 Looking at bytecode one by one:
 
@@ -168,57 +182,68 @@ Not that difficult right? Next let’s look at some other examples.
 
 Next example looks the following way:
 
-    fun main() {
-        println("Hello world".calculate())
-    }
-    
-    fun String.calculate(): Int {
-        return this.length * 2
-    }
+```kotlin
+fun main() {
+    println("Hello world".calculate())
+}
+
+fun String.calculate(): Int {
+    return this.length * 2
+}
+```
 
 We have extension function on String, which we call on some “Hello World” and print result.
 
 During r8 work we’ll see the warning:
 
-    Warning in MainKt.class:
+```
+Warning in MainKt.class:
 
-    Type `kotlin.jvm.internal.Intrinsics` was not found, it is required for default or static interface methods desugaring of `int MainKt.calculate(java.lang.String)`
+Type `kotlin.jvm.internal.Intrinsics` was not found, it is required for default or static interface methods desugaring of `int MainKt.calculate(java.lang.String)`
+```
 
 And in resulting dex file we’ll see that our extension function is still in the bytecode:
 
-    ...
-    [00017c] MainKt.calculate:(Ljava/lang/String;)I
-    0000: const-string v0, "$this$calculate" // string@0001
-    0002: invoke-static {v1, v0}, Lkotlin/jvm/internal/Intrinsics;.checkParameterIsNotNull:(Ljava/lang/Object;Ljava/lang/String;)V // method@0004
-    0005: invoke-virtual {v1}, Ljava/lang/String;.length:()I // method@0003
-    0008: move-result v1
-    0009: mul-int/lit8 v1, v1, #int 2 // #02
-    000b: return v1
-    ...
-    [0001a4] MainKt.main:([Ljava/lang/String;)V
-    0000: const-string v1, "Hello world" // string@0002
-    0002: invoke-static {v1}, LMainKt;.calculate:(Ljava/lang/String;)I // method@0000
-    0005: move-result v1
-    0006: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
-    0008: invoke-virtual {v0, v1}, Ljava/io/PrintStream;.println:(I)V // method@0002
-    000b: return-void
-    ...
+```
+...
+[00017c] MainKt.calculate:(Ljava/lang/String;)I
+0000: const-string v0, "$this$calculate" // string@0001
+0002: invoke-static {v1, v0}, Lkotlin/jvm/internal/Intrinsics;.checkParameterIsNotNull:(Ljava/lang/Object;Ljava/lang/String;)V // method@0004
+0005: invoke-virtual {v1}, Ljava/lang/String;.length:()I // method@0003
+0008: move-result v1
+0009: mul-int/lit8 v1, v1, #int 2 // #02
+000b: return v1
+...
+[0001a4] MainKt.main:([Ljava/lang/String;)V
+0000: const-string v1, "Hello world" // string@0002
+0002: invoke-static {v1}, LMainKt;.calculate:(Ljava/lang/String;)I // method@0000
+0005: move-result v1
+0006: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
+0008: invoke-virtual {v0, v1}, Ljava/io/PrintStream;.println:(I)V // method@0002
+000b: return-void
+...
+```
 
 First we see that there is our calculate method and inside main function that method is called with invoke-static.
 That happens because kotlin adds Intrinsics checks (to verify that params are not null) and because implementation of Intrinsics wasn’t found by r8 it won’t be able to optimize this code.
 
 If we provided Intrinsics implementation, then there will be some optimization. But instead of doing that (as it will require some additional mangling of our setup) we’ll ask kotlin to not generate Intrinsics code by running:
 
-    kotlinc *.kt -Xno-param-assertions
+```bash
+kotlinc *.kt -Xno-param-assertions
+```
+
 > **NOTE**: think carefully before doing same in production
 
 After that we’ll see the following bytecode:
 
-    [000114] MainKt.main:([Ljava/lang/String;)V
-    0000: const/16 v1, #int 22 // #16
-    0002: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
-    0004: invoke-virtual {v0, v1}, Ljava/io/PrintStream;.println:(I)V // method@0001
-    0007: return-void
+```
+[000114] MainKt.main:([Ljava/lang/String;)V
+0000: const/16 v1, #int 22 // #16
+0002: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
+0004: invoke-virtual {v0, v1}, Ljava/io/PrintStream;.println:(I)V // method@0001
+0007: return-void
+```
 
 Again we have everything optimized and final value is calculated at compile time.
 
@@ -226,52 +251,60 @@ Again we have everything optimized and final value is calculated at compile time
 
 Next program is the following:
 
-    fun main() {
-        println(Runner().run(5))
+```kotlin
+fun main() {
+    println(Runner().run(5))
+}
+
+private class Runner {
+    fun run(x: Int): Int {
+        return (0..x).sum()
     }
-    
-    private class Runner {
-        fun run(x: Int): Int {
-            return (0..x).sum()
-        }
-    }
+}
+```
 
 Basically we’d like to calculate sum of arithmetic progression from 0 and step 1.
 
 When we run R8 we’ll see the following warning:
 
-    Warning in Runner.class:
+```
+Warning in Runner.class:
 
-    Type `kotlin.collections.CollectionsKt` was not found, it is required for default or static interface methods desugaring of `int Runner.run(int)`
+Type `kotlin.collections.CollectionsKt` was not found, it is required for default or static interface methods desugaring of `int Runner.run(int)`
+```
 
 This time as we’ve used sum function which is part of kotlin stdlib in order to have r8 work correctly we’ll need to add kotlin stdlib to classpath.
 
 Download latest kotlin stdlib jar version from [maven](https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib/1.3.61).
 And add it to classpath when r8 works:
 
-    $ java -jar r8/build/libs/r8.jar --lib $ANDROID_HOME/platforms/android-29/android.jar **--lib kotlin-stdlib-1.3.61.jar** --release --output . --pg-conf rules.txt *.class
+```bash
+$ java -jar r8/build/libs/r8.jar --lib $ANDROID_HOME/platforms/android-29/android.jar **--lib kotlin-stdlib-1.3.61.jar** --release --output . --pg-conf rules.txt *.class
+```
 
 Then after compilation we’ll see no warnings. Let’s find our what will be inside our bytecode. Unfortunately the result won’t be that great:
 
-    ...
-    [0001c4] MainKt.main:([Ljava/lang/String;)V
-    0000: new-instance v1, LRunner; // type@0002
-    0002: invoke-direct {v1}, LRunner;.<init>:()V // method@0001
-    0005: const/4 v0, #int 5 // #5
-    0006: invoke-virtual {v1, v0}, LRunner;.run:(I)I // method@0002
-    0009: move-result v1
-    000a: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
-    000c: invoke-virtual {v0, v1}, Ljava/io/PrintStream;.println:(I)V // method@0003
-    000f: return-void
-    ...
-    [0001f4] Runner.run:(I)I
-    0000: new-instance v0, Lkotlin/ranges/IntRange; // type@0008
-    0002: const/4 v1, #int 0 // #0
-    0003: invoke-direct {v0, v1, v3}, Lkotlin/ranges/IntRange;.<init>:(II)V // method@0006
-    0006: invoke-static {v0}, Lkotlin/collections/CollectionsKt;.sumOfInt:(Ljava/lang/Iterable;)I // method@0005
-    0009: move-result v3
-    000a: return v3
-    ...
+```
+...
+[0001c4] MainKt.main:([Ljava/lang/String;)V
+0000: new-instance v1, LRunner; // type@0002
+0002: invoke-direct {v1}, LRunner;.<init>:()V // method@0001
+0005: const/4 v0, #int 5 // #5
+0006: invoke-virtual {v1, v0}, LRunner;.run:(I)I // method@0002
+0009: move-result v1
+000a: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
+000c: invoke-virtual {v0, v1}, Ljava/io/PrintStream;.println:(I)V // method@0003
+000f: return-void
+...
+[0001f4] Runner.run:(I)I
+0000: new-instance v0, Lkotlin/ranges/IntRange; // type@0008
+0002: const/4 v1, #int 0 // #0
+0003: invoke-direct {v0, v1, v3}, Lkotlin/ranges/IntRange;.<init>:(II)V // method@0006
+0006: invoke-static {v0}, Lkotlin/collections/CollectionsKt;.sumOfInt:(Ljava/lang/Iterable;)I // method@0005
+0009: move-result v3
+000a: return v3
+...
+```
 
 We see that we still have our Runner instantiated, inside we create separate IntRange instance, on which we invoke static method CollectionsKt.sumOfInt.
 So in this example we didn’t get precalculated result inlined.
@@ -281,35 +314,39 @@ So in this example we didn’t get precalculated result inlined.
 
 As we’ve analyzed particular use case in Example 3 and see that there is some room for improvements, let’s try to utilize this:
 
-    fun main() {
-        println(Runner().run(5))
-    }
-    
-    private class Runner {
-        fun run(x: Int): Int {
-            var result = 0
-            for (i in 0..x) {
-                result += i
-            }
-            return result
+```kotlin
+fun main() {
+    println(Runner().run(5))
+}
+
+private class Runner {
+    fun run(x: Int): Int {
+        var result = 0
+        for (i in 0..x) {
+            result += i
         }
+        return result
     }
+}
+```
 
 This is equivalent code to calculate arithmetic sum as in Example 3. Note, that here we also use range inside for-loop.
 
 And here is the result:
 
-    [000114] MainKt.main:([Ljava/lang/String;)V
-    0000: const/4 v2, #int 0 // #0
-    0001: const/4 v0, #int 0 // #0
-    0002: add-int/2addr v2, v0
-    0003: const/4 v1, #int 5 // #5
-    0004: if-eq v0, v1, 0009 // +0005
-    0006: add-int/lit8 v0, v0, #int 1 // #01
-    0008: goto 0002 // -0006
-    0009: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
-    000b: invoke-virtual {v0, v2}, Ljava/io/PrintStream;.println:(I)V // method@0001
-    000e: return-void
+```
+[000114] MainKt.main:([Ljava/lang/String;)V
+0000: const/4 v2, #int 0 // #0
+0001: const/4 v0, #int 0 // #0
+0002: add-int/2addr v2, v0
+0003: const/4 v1, #int 5 // #5
+0004: if-eq v0, v1, 0009 // +0005
+0006: add-int/lit8 v0, v0, #int 1 // #01
+0008: goto 0002 // -0006
+0009: sget-object v0, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@0000
+000b: invoke-virtual {v0, v2}, Ljava/io/PrintStream;.println:(I)V // method@0001
+000e: return-void
+```
 
 What we see is that:
 

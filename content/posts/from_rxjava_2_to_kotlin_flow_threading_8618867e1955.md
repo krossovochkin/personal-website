@@ -179,14 +179,16 @@ In the code we’ve added onEach call with information on the thread on which ex
 
 In this example the output would be:
 
-    inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#4
-    inner: pool-2-thread-3 [@coroutine](http://twitter.com/coroutine)#5
-    inner: pool-2-thread-3 [@coroutine](http://twitter.com/coroutine)#5
-    inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#4
-    collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
+```
+inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#4
+inner: pool-2-thread-3 [@coroutine](http://twitter.com/coroutine)#5
+inner: pool-2-thread-3 [@coroutine](http://twitter.com/coroutine)#5
+inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#4
+collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
+```
 
 So, we see that unlike RxJava even when we’ve put flowOn outside (below) the inner flatMapMerge,flowOn anyway affected the inner code by running it in parallel on multiple threads.
 
@@ -196,14 +198,16 @@ If we put flowOn inside flatMapMerge:
 
 we’ll see the following result:
 
-    inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#6
-    inner: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#7
-    inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#6
-    inner: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#7
-    collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
+```
+inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#6
+inner: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#7
+inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#6
+inner: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#7
+collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
+```
 
 Again each inner flow runs on its own thread from second pool. Therefore there seems no difference where we put flowOn.
 
@@ -213,16 +217,18 @@ But there is a difference and let’s see what it is by adding onEach below firs
 
 The result will be:
 
-    outer: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#3
-    outer: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#3
-    inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#4
-    inner: pool-2-thread-3 [@coroutine](http://twitter.com/coroutine)#5
-    inner: pool-2-thread-3 [@coroutine](http://twitter.com/coroutine)#5
-    inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#4
-    collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
+```
+outer: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#3
+outer: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#3
+inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#4
+inner: pool-2-thread-3 [@coroutine](http://twitter.com/coroutine)#5
+inner: pool-2-thread-3 [@coroutine](http://twitter.com/coroutine)#5
+inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#4
+collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#2
+```
 
 That means that everything above flowOn is run on the second pool. Outer is on the first thread and each inner flow on its own (second and third):
 
@@ -236,16 +242,18 @@ Now let’s see what would be if we put flowOn inside flatMapMerge:
 
 The output will be:
 
-    outer: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#3
-    outer: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#3
-    inner: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#6
-    inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#7
-    inner: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#6
-    inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#7
-    collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
-    collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
+```
+outer: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#3
+outer: pool-1-thread-2 [@coroutine](http://twitter.com/coroutine)#3
+inner: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#6
+inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#7
+inner: pool-2-thread-1 [@coroutine](http://twitter.com/coroutine)#6
+inner: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#7
+collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
+collect: pool-1-thread-3 [@coroutine](http://twitter.com/coroutine)#2
+```
 
 We see that outer now runs on the d1 and therefore not affected by flowOn:
 
@@ -299,48 +307,50 @@ Here we have stream of three items, which is started on s1, then we switch execu
 
 After we run the program we’ll see such an output:
 
-    1: pool-1-thread-1
-    1: pool-1-thread-1
-    1: pool-1-thread-1
-    2: pool-3-thread-1
-    2: pool-3-thread-1
-    2: pool-3-thread-1
-    inner 1: pool-4-thread-1
-    inner 1: pool-4-thread-2
-    inner 1: pool-4-thread-1
-    inner 1: pool-4-thread-1
-    inner 1: pool-4-thread-2
-    inner 1: pool-4-thread-2
-    inner 1: pool-4-thread-3
-    inner 2: pool-5-thread-1
-    inner 2: pool-5-thread-2
-    3: pool-5-thread-1
-    inner 2: pool-5-thread-2
-    inner 1: pool-4-thread-3
-    inner 2: pool-5-thread-2
-    inner 2: pool-5-thread-3
-    3: pool-5-thread-1
-    3: pool-5-thread-1
-    3: pool-5-thread-1
-    end: pool-6-thread-1
-    end: pool-6-thread-1
-    inner 1: pool-4-thread-3
-    end: pool-6-thread-1
-    3: pool-5-thread-1
-    inner 2: pool-5-thread-1
-    3: pool-5-thread-1
-    inner 2: pool-5-thread-3
-    inner 2: pool-5-thread-1
-    end: pool-6-thread-1
-    3: pool-5-thread-3
-    3: pool-5-thread-3
-    end: pool-6-thread-1
-    inner 2: pool-5-thread-3
-    3: pool-5-thread-3
-    end: pool-6-thread-1
-    end: pool-6-thread-1
-    end: pool-6-thread-1
-    end: pool-6-thread-1
+```
+1: pool-1-thread-1
+1: pool-1-thread-1
+1: pool-1-thread-1
+2: pool-3-thread-1
+2: pool-3-thread-1
+2: pool-3-thread-1
+inner 1: pool-4-thread-1
+inner 1: pool-4-thread-2
+inner 1: pool-4-thread-1
+inner 1: pool-4-thread-1
+inner 1: pool-4-thread-2
+inner 1: pool-4-thread-2
+inner 1: pool-4-thread-3
+inner 2: pool-5-thread-1
+inner 2: pool-5-thread-2
+3: pool-5-thread-1
+inner 2: pool-5-thread-2
+inner 1: pool-4-thread-3
+inner 2: pool-5-thread-2
+inner 2: pool-5-thread-3
+3: pool-5-thread-1
+3: pool-5-thread-1
+3: pool-5-thread-1
+end: pool-6-thread-1
+end: pool-6-thread-1
+inner 1: pool-4-thread-3
+end: pool-6-thread-1
+3: pool-5-thread-1
+inner 2: pool-5-thread-1
+3: pool-5-thread-1
+inner 2: pool-5-thread-3
+inner 2: pool-5-thread-1
+end: pool-6-thread-1
+3: pool-5-thread-3
+3: pool-5-thread-3
+end: pool-6-thread-1
+inner 2: pool-5-thread-3
+3: pool-5-thread-3
+end: pool-6-thread-1
+end: pool-6-thread-1
+end: pool-6-thread-1
+end: pool-6-thread-1
+```
 
 It is pretty long, but should match our assumptions written before.
 Let’s visualize this:
@@ -357,48 +367,50 @@ Now we’ll switch to the Kotlin Flow version:
 From the very beginning we fix the main thread as being our end thread. Then we start from the bottom and add flowOn where needed. First we add d4 and note that “inner 2” should also run on it. Then we switch to d3 and so on up to the very top of the chain.
 And here is the result:
 
-    1: pool-1-thread-1 [@coroutine](http://twitter.com/coroutine)#6
-    1: pool-1-thread-1 [@coroutine](http://twitter.com/coroutine)#6
-    1: pool-1-thread-1 [@coroutine](http://twitter.com/coroutine)#6
-    2: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#5
-    2: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#5
-    2: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#5
-    inner 1: pool-3-thread-1 [@coroutine](http://twitter.com/coroutine)#10
-    inner 1: pool-3-thread-2 [@coroutine](http://twitter.com/coroutine)#11
-    inner 1: pool-3-thread-3 [@coroutine](http://twitter.com/coroutine)#12
-    inner 1: pool-3-thread-2 [@coroutine](http://twitter.com/coroutine)#11
-    inner 1: pool-3-thread-3 [@coroutine](http://twitter.com/coroutine)#12
-    inner 2: pool-4-thread-3 [@coroutine](http://twitter.com/coroutine)#9
-    inner 1: pool-3-thread-1 [@coroutine](http://twitter.com/coroutine)#10
-    inner 1: pool-3-thread-3 [@coroutine](http://twitter.com/coroutine)#12
-    inner 1: pool-3-thread-2 [@coroutine](http://twitter.com/coroutine)#11
-    inner 2: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#7
-    inner 2: pool-4-thread-2 [@coroutine](http://twitter.com/coroutine)#8
-    inner 2: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#7
-    inner 2: pool-4-thread-3 [@coroutine](http://twitter.com/coroutine)#9
-    inner 1: pool-3-thread-1 [@coroutine](http://twitter.com/coroutine)#10
-    3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
-    inner 2: pool-4-thread-3 [@coroutine](http://twitter.com/coroutine)#9
-    inner 2: pool-4-thread-2 [@coroutine](http://twitter.com/coroutine)#8
-    end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
-    3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
-    inner 2: pool-4-thread-2 [@coroutine](http://twitter.com/coroutine)#8
-    3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
-    end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
-    3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
-    end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
-    end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
-    3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
-    3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
-    end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
-    end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
-    3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
-    3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
-    end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
-    end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
-    inner 2: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#7
-    3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
-    end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
+```
+1: pool-1-thread-1 [@coroutine](http://twitter.com/coroutine)#6
+1: pool-1-thread-1 [@coroutine](http://twitter.com/coroutine)#6
+1: pool-1-thread-1 [@coroutine](http://twitter.com/coroutine)#6
+2: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#5
+2: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#5
+2: pool-2-thread-2 [@coroutine](http://twitter.com/coroutine)#5
+inner 1: pool-3-thread-1 [@coroutine](http://twitter.com/coroutine)#10
+inner 1: pool-3-thread-2 [@coroutine](http://twitter.com/coroutine)#11
+inner 1: pool-3-thread-3 [@coroutine](http://twitter.com/coroutine)#12
+inner 1: pool-3-thread-2 [@coroutine](http://twitter.com/coroutine)#11
+inner 1: pool-3-thread-3 [@coroutine](http://twitter.com/coroutine)#12
+inner 2: pool-4-thread-3 [@coroutine](http://twitter.com/coroutine)#9
+inner 1: pool-3-thread-1 [@coroutine](http://twitter.com/coroutine)#10
+inner 1: pool-3-thread-3 [@coroutine](http://twitter.com/coroutine)#12
+inner 1: pool-3-thread-2 [@coroutine](http://twitter.com/coroutine)#11
+inner 2: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#7
+inner 2: pool-4-thread-2 [@coroutine](http://twitter.com/coroutine)#8
+inner 2: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#7
+inner 2: pool-4-thread-3 [@coroutine](http://twitter.com/coroutine)#9
+inner 1: pool-3-thread-1 [@coroutine](http://twitter.com/coroutine)#10
+3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
+inner 2: pool-4-thread-3 [@coroutine](http://twitter.com/coroutine)#9
+inner 2: pool-4-thread-2 [@coroutine](http://twitter.com/coroutine)#8
+end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
+3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
+inner 2: pool-4-thread-2 [@coroutine](http://twitter.com/coroutine)#8
+3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
+end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
+3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
+end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
+end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
+3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
+3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
+end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
+end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
+3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
+3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
+end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
+end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
+inner 2: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#7
+3: pool-4-thread-1 [@coroutine](http://twitter.com/coroutine)#3
+end: pool-5-thread-1 [@coroutine](http://twitter.com/coroutine)#2
+```
 
 Besides logs look differently (because RxJava is not the same as coroutines) we still can see that all the logic still applies and we haven’t broken parallel execution.
 

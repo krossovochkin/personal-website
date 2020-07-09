@@ -31,7 +31,8 @@ Sample consists of:
 
 * Setting dynamically few properties on *TextView *afterwards
 
-{{< highlight kotlin >}}
+
+```kotlin
 class MainActivity : AppCompatActivity() {
 
     private lateinit var textView: TextView
@@ -51,11 +52,11 @@ class MainActivity : AppCompatActivity() {
         textView.textSize = 14.0f
     }
 }
-{{< / highlight >}}
+```
 
 Here is what we’ll get if we try to look at generated java code:
 
-{{< highlight java >}}
+```java
 public final class MainActivity extends AppCompatActivity {
    private TextView textView;
    private HashMap _$_findViewCache;
@@ -111,7 +112,7 @@ public final class MainActivity extends AppCompatActivity {
 
    }
 }
-{{< / highlight >}}
+```
 
 We immediately have a number of questions:
 
@@ -145,7 +146,7 @@ But it is something we know, not the compiler.
 
 One could look at generated Java code and decide to do little trick with *.apply* function:
 
-{{< highlight kotlin >}}
+```kotlin
 private fun update() {
     textView.apply {
         text = "Text"
@@ -153,11 +154,11 @@ private fun update() {
         textSize = 14.0f
     }
 }
-{{< / highlight >}}
+```
 
 So the resulting Java code will be:
 
-{{< highlight java >}}
+```java
 private final void update() {
    TextView var10000 = this.textView;
    if (this.textView == null) {
@@ -169,7 +170,7 @@ private final void update() {
    var1.setTextColor(-65536);
    var1.setTextSize(14.0F);
 }
-{{< / highlight >}}
+```
 
 So we have only one check and then update all properties on local property. Neat.
 
@@ -184,11 +185,11 @@ Seems *SparseArray *is better option because we’ll have primitive integers as 
 
 Actually there is a way to generate code with *SparseArray*. For that it is needed to add to *build.gradle*:
 
-{{< highlight groovy >}}
+```groovy
 androidExtensions {
     defaultCacheImplementation = "SPARSE_ARRAY"
 }
-{{< / highlight >}}
+```
 
 After that we’ll have *SparseArray* as cache for views.
 
@@ -205,7 +206,7 @@ To conclude, evaluation of vanilla approach:
 
 Let’s look at the same example with ButterKnife:
 
-{{< highlight kotlin >}}
+```kotlin
 class ButterKnifeAcivity : AppCompatActivity() {
 
     @BindView(R.id.textView)
@@ -226,11 +227,11 @@ class ButterKnifeAcivity : AppCompatActivity() {
         textView.textSize = 14.0f
     }
 }
-{{< / highlight >}}
+```
 
 Generated Java code (synthetics part is removed):
 
-{{< highlight java >}}
+```java
 public final class ButterKnifeAcivity extends AppCompatActivity {
    @BindView(-1000050)
    @NotNull
@@ -279,12 +280,12 @@ public final class ButterKnifeAcivity extends AppCompatActivity {
       var10000.setTextSize(14.0F);
    }
 }
-{{< / highlight >}}
+```
 
 So, basically everything is the same. The difference is only that additional getter and setter for our *TextView *was generated.
 It is actually redundant (and will be removed by *ProGuard*), because *ButterKnife *injector will work directly on field:
 
-{{< highlight kotlin >}}
+```java
 public final class ButterKnifeAcivity_ViewBinding implements Unbinder {
   private ButterKnifeAcivity target;
 
@@ -309,7 +310,7 @@ public final class ButterKnifeAcivity_ViewBinding implements Unbinder {
     target.textView = null;
   }
 }
-{{< / highlight >}}
+```
 
 So, basically using *ButterKnife* is similar to vanilla approach. The only difference is that we don’t have to write a lot of *findViewById *calls (though we still need to write one line per property — *Binds *annotation — but it is anyway better as we have actual property and view id near to each other).
 
@@ -326,7 +327,7 @@ To conclude, evaluation of *ButterKnife *approach:
 
 Same sample using synthetics:
 
-{{< highlight kotlin >}}
+```kotlin
 import kotlinx.android.synthetic.main.activity_main.*
 
 class ExtensionsActivity : AppCompatActivity() {
@@ -344,11 +345,11 @@ class ExtensionsActivity : AppCompatActivity() {
         textView.textSize = 14.0f
     }
 }
-{{< / highlight >}}
+```
 
 Generated Java code:
 
-{{< highlight java >}}
+```java
 public final class ExtensionsActivity extends AppCompatActivity {
    private SparseArray _$_findViewCache;
 
@@ -389,7 +390,7 @@ public final class ExtensionsActivity extends AppCompatActivity {
 
    }
 }
-{{< / highlight >}}
+```
 
 Here we have version with *SparseArray *to not have, as discussed above, useless autoboxing of integer keys.
 
@@ -397,14 +398,14 @@ The main issue with generated code is that even as we call three methods on same
 
 Again, we can work-around this by using *.apply*, as we did in vanilla approach. Then generated code will be like:
 
-{{< highlight java >}}
+```java
 private final void update() {
    TextView var1 = (TextView)this._$_findCachedViewById(id.textView);
    var1.setText((CharSequence)"Text");
    var1.setTextColor(-65536);
    var1.setTextSize(14.0F);
 }
-{{< / highlight >}}
+```
 
 Looks like we’ve improved our code a bit, as now we’ll call cache only once (and if HashMap is used, then we’ll not have two additional boxing of integer primitive).
 That actually looks pretty good.
@@ -414,7 +415,7 @@ Below are two listings, first one is byte-code from decompiled release APK of or
 
 **Original**:
 
-{{< highlight kotlin >}}
+```
 .class public final Lcom/krossovochkin/butterknifetest/ExtensionsActivity;
 .super Landroidx/appcompat/app/c;
 
@@ -535,11 +536,11 @@ Below are two listings, first one is byte-code from decompiled release APK of or
 
     return-void
 .end method
-{{< / highlight >}}
+```
 
 **With .*apply* “optimization”:**
 
-{{< highlight kotlin >}}
+```
 .class public final Lcom/krossovochkin/butterknifetest/ExtensionsActivity;
 .super Landroidx/appcompat/app/c;
 
@@ -626,7 +627,7 @@ Below are two listings, first one is byte-code from decompiled release APK of or
 
     return-void
 .end method
-{{< / highlight >}}
+```
 
 Again, few questions and observations:
 

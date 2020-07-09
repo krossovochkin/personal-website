@@ -161,14 +161,18 @@ What this image shows is that if between events (on the top) there is enough tim
 
 In code before adding debounce it might look the following way:
 
-    textInput.onTextChanged { text -> process(text) }
+```kotlin
+textInput.onTextChanged { text -> process(text) }
+```
 
 We just trigger processing on each character typed. With adding debounce it might look somewhat like:
 
-    val debouncer = Debouncer(200, TimeUnit.MILLISECONDS) { text ->
-        process(text)
-    }
-    textInput.onTextChanged { text -> debouncer.process(text) }
+```kotlin
+val debouncer = Debouncer(200, TimeUnit.MILLISECONDS) { text ->
+    process(text)
+}
+textInput.onTextChanged { text -> debouncer.process(text) }
+```
 
 So, we just redirect all the text changes to debouncer and then it sends us events on some given rate (basically filtering our stream of events).
 But how this is related to Handlers and Loopers?
@@ -183,31 +187,33 @@ The answer is that from diagram we can see that what debouncer is doing is:
 
 We see that it looks exactly like something Handler can help us with, we just need to write Debouncer implementation.
 
-    class Debouncer(
-        private val timeout: Long,
-        private val unit: TimeUnit,
-        private val callback: (String) -> Unit
-    ) {
+```kotlin
+class Debouncer(
+    private val timeout: Long,
+    private val unit: TimeUnit,
+    private val callback: (String) -> Unit
+) {
 
-        private val handler = Handler(Looper.getMainLooper()) { 
-            message ->
-            if (message.what != MESSAGE_WHAT) {
-                return@Handler false
-            }
-
-            callback(message.obj as String)
-
-            true
+    private val handler = Handler(Looper.getMainLooper()) { 
+        message ->
+        if (message.what != MESSAGE_WHAT) {
+            return@Handler false
         }
 
-        fun process(text: String) {
-            handler.removeMessages(MESSAGE_WHAT)
+        callback(message.obj as String)
 
-            val message = handler.obtainMessage(MESSAGE_WHAT, text)
-
-            handler.sendMessageDelayed(message, unit.toMillis(timeout))
-        }
+        true
     }
+
+    fun process(text: String) {
+        handler.removeMessages(MESSAGE_WHAT)
+
+        val message = handler.obtainMessage(MESSAGE_WHAT, text)
+
+        handler.sendMessageDelayed(message, unit.toMillis(timeout))
+    }
+}
+```
 
 First, we create Handler for main looper inside our Debouncer. That means that we’ll use event loop from main thread instead of running some background thread.
 Inside process method we do exactly what we wrote above: first we remove any pending message, then we create new message to be post in the future and then we send that message with delay.
@@ -221,35 +227,41 @@ Throttler again will reduce our stream with events, but instead of sending us la
 
 It might be useful in cases when we have a button, which we’d like to not be clicked twice in a short period of time. So without throttler our code would look like:
 
-    button.setOnClickListener { doAction() }
+```kotlin
+button.setOnClickListener { doAction() }
+```
 
 With throttler our code would look like:
 
-    val throttler = Throttler(100, TimeUnit.MILLISECONDS) {
-        doAction()
-    }
-    button.setOnClickListener { throttler.onAction() }
+```kotlin
+val throttler = Throttler(100, TimeUnit.MILLISECONDS) {
+    doAction()
+}
+button.setOnClickListener { throttler.onAction() }
+```
 
 Let’s look at Throttler implementation:
 
-    class Throttler(
-        private val timeout: Long,
-        private val unit: TimeUnit,
-        private val callback: () -> Unit
-    ) {
-        private val handler = Handler(Looper.getMainLooper())
+```kotlin
+class Throttler(
+    private val timeout: Long,
+    private val unit: TimeUnit,
+    private val callback: () -> Unit
+) {
+    private val handler = Handler(Looper.getMainLooper())
 
-        fun onAction() {
-            if (handler.hasMessages(MESSAGE_WHAT)) {
-                return
-            }
-
-            val message = handler.obtainMessage(MESSAGE_WHAT)
-            handler.sendMessageDelayed(message, unit.toMillis(timeout))
-
-            callback()
+    fun onAction() {
+        if (handler.hasMessages(MESSAGE_WHAT)) {
+            return
         }
+
+        val message = handler.obtainMessage(MESSAGE_WHAT)
+        handler.sendMessageDelayed(message, unit.toMillis(timeout))
+
+        callback()
     }
+}
+```
 
 One can see that it is similar to what we had with Debouncer. The first difference is that in Handler we don’t need callback any more, because we’ll trigger client’s callback directly as soon as action happened. If handler has some messages in a queue — then that means that action should not pass through. If there are no messages in a queue — then we just trigger click and send delayed message to skip any other action in such interval.
 > Yes, throttling to avoid double-click on button could be done without Handler. We could just store current timestamp into variable and onAction compare current timestamp with timestamp from previous action occurrence. So, consider this just as a training example.
@@ -265,31 +277,33 @@ But let’s go one step back and look at the example of handling sequential netw
 
 We’ll just create HandlerThread and new Handler. Using that Handler we’ll post new network requests to queue and then retrieve results using Callback.
 
-    val messageWhat = 9898
-    val uiHandler = Handler(Looper.getMainLooper()) { message ->
-        if (message.what == messageWhat) {
-            println("Result: ${message.obj}")
-            true
-        } else {
-            false
-        }
+```kotlin
+val messageWhat = 9898
+val uiHandler = Handler(Looper.getMainLooper()) { message ->
+    if (message.what == messageWhat) {
+        println("Result: ${message.obj}")
+        true
+    } else {
+        false
     }
+}
 
-    val workerThread = HandlerThread("network").apply { start() }
-    val workerHandler = Handler(workerThread.looper)
-    workerHandler.post {
-        URL("[https://google.com](https://google.com)").openStream().use {
-            uiHandler.sendMessage(
-                uiHandler.obtainMessage(
-                    messageWhat, "data ${it.read()}"
-                )
+val workerThread = HandlerThread("network").apply { start() }
+val workerHandler = Handler(workerThread.looper)
+workerHandler.post {
+    URL("[https://google.com](https://google.com)").openStream().use {
+        uiHandler.sendMessage(
+            uiHandler.obtainMessage(
+                messageWhat, "data ${it.read()}"
             )
-        }
-
-        workerThread.quitSafely()
+        )
     }
 
-    workerThread.join()
+    workerThread.quitSafely()
+}
+
+workerThread.join()
+```
 
 Here we create first Handler uiHandler as a receiver and workerHandler as producer of some message. Then in workerHandler we post runnable to send some network request and on success we send message back to uiHandler.
 And that’s it.
@@ -315,40 +329,44 @@ Important note that IMessenger is serializable, so we can send it to other proce
 
 Let’s look at the code of how it is implemented. First we’ll start from AndroidManifest.xml, where we register all components our app has. Here we’ll have MainActivity — our UI which will receive messages, and MyService — background worker which will post some messages from background to UI. Pay attention that for our service we’ve added explicitly note that it should run in a separate process:
 
-    <service
-        android:name=".MyService"
-        android:enabled="true"
-        android:exported="false"
-        **android:process=":second"** />
+```xml
+<service
+    android:name=".MyService"
+    android:enabled="true"
+    android:exported="false"
+    android:process=":second" />
 
-    <activity android:name=".MainActivity">
-        <intent-filter>
-            <category android:name="android.intent.category.LAUNCHER" />
+<activity android:name=".MainActivity">
+    <intent-filter>
+        <category android:name="android.intent.category.LAUNCHER" />
 
-            <action android:name="android.intent.action.MAIN" />
-        </intent-filter>
-    </activity>
+        <action android:name="android.intent.action.MAIN" />
+    </intent-filter>
+</activity>
+```
 
 Next let’s look at MainActivity:
 
-    class MainActivity : AppCompatActivity() {
+```kotlin
+class MainActivity : AppCompatActivity() {
 
-        private val handler = Handler(Looper.getMainLooper()) {
-            Log.e("TAG", "Value received: ${it.arg1}")
-            true
-        }
-        private val messenger = Messenger(handler)
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_main)
-            Log.e("TAG", "Activity: ${android.os.Process.myPid()}")
-
-            startService(Intent(this, MyService::class.java).apply {
-                putExtra("KEY_MESSENGER", messenger)
-            })
-        }
+    private val handler = Handler(Looper.getMainLooper()) {
+        Log.e("TAG", "Value received: ${it.arg1}")
+        true
     }
+    private val messenger = Messenger(handler)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        Log.e("TAG", "Activity: ${android.os.Process.myPid()}")
+
+        startService(Intent(this, MyService::class.java).apply {
+            putExtra("KEY_MESSENGER", messenger)
+        })
+    }
+}
+```
 
 Let’s look in details what we have here:
 
@@ -362,40 +380,42 @@ So, basically we were able to wrap our Handler into parcelable Messenger, which 
 
 Now let’s look at MyService:
 
-    class MyService : Service() {
+```kotlin
+class MyService : Service() {
 
-        override fun onStartCommand(
-            intent: Intent?, 
-            flags: Int, 
-            startId: Int
-        ): Int {
-            Log.e("TAG", "Service: ${android.os.Process.myPid()}")
-            intent?.getParcelableExtra<Messenger>("KEY_MESSENGER")
-                ?.let { messenger ->
-                    Thread {
-                        for (i in 1..10) {
-                            messenger.send(createMessage(i))
-                            Thread.sleep(2000)
-                        }
-                    }.apply {
-                        start()
-                        join()
+    override fun onStartCommand(
+        intent: Intent?, 
+        flags: Int, 
+        startId: Int
+    ): Int {
+        Log.e("TAG", "Service: ${android.os.Process.myPid()}")
+        intent?.getParcelableExtra<Messenger>("KEY_MESSENGER")
+            ?.let { messenger ->
+                Thread {
+                    for (i in 1..10) {
+                        messenger.send(createMessage(i))
+                        Thread.sleep(2000)
                     }
+                }.apply {
+                    start()
+                    join()
                 }
-
-            return START_NOT_STICKY
-        }
-
-        private fun createMessage(value: Int): Message {
-            return Message.obtain().apply {
-                what = 1
-                arg1 = value
-                arg2 = value
             }
-        }
 
-        override fun onBind(intent: Intent): IBinder? = null
+        return START_NOT_STICKY
     }
+
+    private fun createMessage(value: Int): Message {
+        return Message.obtain().apply {
+            what = 1
+            arg1 = value
+            arg2 = value
+        }
+    }
+
+    override fun onBind(intent: Intent): IBinder? = null
+}
+```
 
 Here in onStartCommand we extract Messenger instance from intent, create new Thread and inside it start sending messages to our MainActivity.
 When we run our program, we’ll see that messages are successfully delivered from background process to our MainActivity.
@@ -407,9 +427,7 @@ Hopefully after that article one can get an idea of some low-level OS tools for 
 It doesn’t mean that you should start using such tools directly, but still it is important to know what happens inside the platform and what possibilities it has.
 
 Don’t forget to read documentation on Handler and Looper, on working in background and on inter-process communication.
-[**Background Tasks | Android Developers**
-*Create multiple APKs for different screen sizes*developer.android.com](https://developer.android.com/training/best-background)
-[**Android Interface Definition Language (AIDL) | Android Developers**
-*The Android Interface Definition Language (AIDL) is similar to other IDLs you might have worked with. It allows you to…*developer.android.com](https://developer.android.com/guide/components/aidl)
+[**Background Tasks | Android Developers**](https://developer.android.com/training/best-background)
+[**Android Interface Definition Language (AIDL) | Android Developers**](https://developer.android.com/guide/components/aidl)
 
 Happy coding.

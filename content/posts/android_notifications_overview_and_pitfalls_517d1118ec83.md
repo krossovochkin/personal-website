@@ -18,13 +18,15 @@ Notifications are widely used in Android applications. Though API is pretty stra
 
 ## Sending Single Notification
 
-    Notification singleNotification = new NotificationCompat.Builder(this)
-            .setContentTitle("Title")
-            .setContentText("Text")
-            .setSmallIcon(R.drawable.ic_notification)
-            .build();
-    NotificationManagerCompat notificationManager = NotificationManagerCompat.*from*(context);
-    notificationManager.notify(notificationId, singleNotification);
+```java
+Notification singleNotification = new NotificationCompat.Builder(this)
+        .setContentTitle("Title")
+        .setContentText("Text")
+        .setSmallIcon(R.drawable.ic_notification)
+        .build();
+NotificationManagerCompat notificationManager = NotificationManagerCompat.*from*(context);
+notificationManager.notify(notificationId, singleNotification);
+```
 
 ![](../../img/1_i_FZ2R1UInhmPkXVB1sC9Q.png)
 
@@ -46,11 +48,13 @@ To update notification (that is already showing — **active**) one should just 
 
 To handle clicking on notification one should set content intent.
 
-    Intent intent = new Intent(context, Activity.class);
-    intent.putExtra(...); // add some extras here
+```java
+Intent intent = new Intent(context, Activity.class);
+intent.putExtra(...); // add some extras here
 
-    PendingIntent pendingIntent = PendingIntent.getActivity(context, requestCode, intent, flags);
-    builder.setContentIntent(pendingIntent);
+PendingIntent pendingIntent = PendingIntent.getActivity(context, requestCode, intent, flags);
+builder.setContentIntent(pendingIntent);
+```
 
 **Key things here:**
 
@@ -76,22 +80,26 @@ Example to illustrate common mistake with PendingIntents lifecycle and updating.
 Consider we have MainActivity that prints text from intent extra with key "KEY_TEXT".
 And we send notifications like following:
 
-    public void sendNotification(int notificationId, int requestCode, String text) {
-        Intent intent = new Intent(context, MainActivity);
-        intent.putExtra("KEY_TEXT", text);
+```java
+public void sendNotification(int notificationId, int requestCode, String text) {
+    Intent intent = new Intent(context, MainActivity);
+    intent.putExtra("KEY_TEXT", text);
 
-        PendingIntent pendingIntent = getActivity(context, requestCode, intent, FLAG_UPDATE_CURRENT);
+    PendingIntent pendingIntent = getActivity(context, requestCode, intent, FLAG_UPDATE_CURRENT);
 
-        Notification notification = ... // create notification as shown above
-        .setContentIntent(pendingIntent);
+    Notification notification = ... // create notification as shown above
+    .setContentIntent(pendingIntent);
 
-        notificationManager.notify(notificationId, pendingIntent);
-    }
+    notificationManager.notify(notificationId, pendingIntent);
+}
+```
 
 And let’s send two notifications:
 
-    sendNotification(1, 0, "Text 1");
-    sendNotification(2, 0, "Text 2");
+```java
+sendNotification(1, 0, "Text 1");
+sendNotification(2, 0, "Text 2");
+```
 
 As a result clicking on any of the notification will end up with opening MainActivity and showing "Text 2". Why?
 Because request codes for PendingIntents are the same, and FLAG_UPDATE_CURRENT updated PendingIntent when new notification is sent.
@@ -101,13 +109,17 @@ One way to avoid this is to use different request codes (e.g. use notificationId
 
 Another way is to set different actions, e.g. like this:
 
-    intent.setAction(Long.toString(System.currentTimeMillis()))
+```java
+intent.setAction(Long.toString(System.currentTimeMillis()))
+```
 
 ## Handling dismissing notification
 
 Handling dismissing notification is the same as handling clicking notifications. But different method in builder is used:
 
-    builder.setDeleteIntent(pendingIntent);
+```java
+builder.setDeleteIntent(pendingIntent);
+```
 
 Delete intent will be sent when user manually dismisses notification or when user clicks on “Clear all notifications” button in notification tray.
 
@@ -117,16 +129,19 @@ Clicking on notification itself dismisses notification, but delete intent will n
 
 Each notification can be assigned to a group with some GROUP_KEY.
 
-    builder.setGroup(GROUP_KEY);
-
+```java
+builder.setGroup(GROUP_KEY);
+```
 Specifying group on some notification does **nothing**, but only marks that notification now is a part of a group.
 If you mark two notifications with the same group, these notifications will **not **be grouped automatically.
 
 There is special notification called “Summary notification”.
 To make notification “Summary notification” one should call:
 
-    builder.setGroup(GROUP_KEY);
-    builder.setGroupSummary(true);
+```java
+builder.setGroup(GROUP_KEY);
+builder.setGroupSummary(true);
+```
 
 In this case following will happen:
 
@@ -147,10 +162,13 @@ For example, if we have Summary notification then we might want to show number o
 
 Unfortunately, there is no way to do that prior to API 23. Since API 23 there is method:
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        NotificationManager notificationManager = context.getSystemService(NOTIFICATION_MANAGER);
-        StatusBarNotification[] notifications = notificationManager.getActiveNotifications();
-    }
+```java
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    NotificationManager notificationManager = context.getSystemService(NOTIFICATION_MANAGER);
+    StatusBarNotification[] notifications = notificationManager.getActiveNotifications();
+}
+```
+
 > **Important**: here we need NotificationManager and not NotificationManagerCompat.
 
 **Note**: When only summary notification is currently visible to user in notification tray, getActiveNotifications returns whole list of notifications (including ones that grouped in summary and not visible on phone in notification tray).
@@ -173,68 +191,70 @@ Snippet below does the following:
 
 Call sendNotification multiple times with the same group key, and see what happens.
 
-    private void sendNotification(Context context, String groupKey, String message) {
-        NotificationManager notificationManager = (NotificationManager) getSystemService(*NOTIFICATION_SERVICE*);
+```java
+private void sendNotification(Context context, String groupKey, String message) {
+    NotificationManager notificationManager = (NotificationManager) getSystemService(*NOTIFICATION_SERVICE*);
+
+    boolean shouldShowGroupNotification = false;
+    List<CharSequence> currentNotificationMessages = new ArrayList<>();
+    currentNotificationMessages.add(message);
     
-        boolean shouldShowGroupNotification = false;
-        List<CharSequence> currentNotificationMessages = new ArrayList<>();
-        currentNotificationMessages.add(message);
-        
-        if (Build.VERSION.*SDK_INT *>= Build.VERSION_CODES.*M*) {
-            for (StatusBarNotification sbn : notificationManager.getActiveNotifications()) {
-                if (sbn.getId() != *GROUP_ID *&& groupKey.equalsIgnoreCase(sbn.getNotification().getGroup())) {
-                    CharSequence text = sbn.getNotification().extras.getCharSequence(*EXTRA_TEXT*);
-                    currentNotificationMessages.add(text);
-                    shouldShowGroupNotification = true;
-                    break;
-                }
+    if (Build.VERSION.*SDK_INT *>= Build.VERSION_CODES.*M*) {
+        for (StatusBarNotification sbn : notificationManager.getActiveNotifications()) {
+            if (sbn.getId() != *GROUP_ID *&& groupKey.equalsIgnoreCase(sbn.getNotification().getGroup())) {
+                CharSequence text = sbn.getNotification().extras.getCharSequence(*EXTRA_TEXT*);
+                currentNotificationMessages.add(text);
+                shouldShowGroupNotification = true;
+                break;
             }
         }
-    
-        showSingleNotification(context, groupKey, message);
-        if (shouldShowGroupNotification) {
-            showGroupNotification(context, groupKey, currentNotificationMessages);
-        }
     }
-    
-    private void showSingleNotification(Context context, String groupKey, String message) {
-        int notificationId = (int) (System.*currentTimeMillis*() / 1000);
-        
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.*getActivity*(context, notificationId, intent, PendingIntent.*FLAG_UPDATE_CURRENT*);
-    
-        Notification singleNotification = new NotificationCompat.Builder(context)
-                .setContentTitle("Title")
-                .setContentText(message)
-                .setGroup(groupKey)
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentIntent(pendingIntent)
-                .build();
-    
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.*from*(context);
-        notificationManager.notify(notificationId, singleNotification);
+
+    showSingleNotification(context, groupKey, message);
+    if (shouldShowGroupNotification) {
+        showGroupNotification(context, groupKey, currentNotificationMessages);
     }
+}
+
+private void showSingleNotification(Context context, String groupKey, String message) {
+    int notificationId = (int) (System.*currentTimeMillis*() / 1000);
     
-    private void showGroupNotification(Context context, String groupKey, List<CharSequence> previousNotificationsTexts) {
-        NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
-        for (CharSequence text: previousNotificationsTexts) {
-            style.addLine(text);
-        }
-        int groupCount = previousNotificationsTexts.size() + 1;
-        style.setSummaryText(groupCount + " new notifications");
-    
-        Notification groupNotification = new NotificationCompat.Builder(context)
-                .setStyle(style)
-                .setContentTitle("Group Title")
-                .setContentText("Group Text")
-                .setSmallIcon(R.drawable.ic_notification)
-                .setGroup(groupKey)
-                .setGroupSummary(true)
-                .build();
-    
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.*from*(context);
-        notificationManager.notify(*GROUP_ID*, groupNotification);
+    Intent intent = new Intent(this, MainActivity.class);
+    PendingIntent pendingIntent = PendingIntent.*getActivity*(context, notificationId, intent, PendingIntent.*FLAG_UPDATE_CURRENT*);
+
+    Notification singleNotification = new NotificationCompat.Builder(context)
+            .setContentTitle("Title")
+            .setContentText(message)
+            .setGroup(groupKey)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentIntent(pendingIntent)
+            .build();
+
+    NotificationManagerCompat notificationManager = NotificationManagerCompat.*from*(context);
+    notificationManager.notify(notificationId, singleNotification);
+}
+
+private void showGroupNotification(Context context, String groupKey, List<CharSequence> previousNotificationsTexts) {
+    NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
+    for (CharSequence text: previousNotificationsTexts) {
+        style.addLine(text);
     }
+    int groupCount = previousNotificationsTexts.size() + 1;
+    style.setSummaryText(groupCount + " new notifications");
+
+    Notification groupNotification = new NotificationCompat.Builder(context)
+            .setStyle(style)
+            .setContentTitle("Group Title")
+            .setContentText("Group Text")
+            .setSmallIcon(R.drawable.ic_notification)
+            .setGroup(groupKey)
+            .setGroupSummary(true)
+            .build();
+
+    NotificationManagerCompat notificationManager = NotificationManagerCompat.*from*(context);
+    notificationManager.notify(*GROUP_ID*, groupNotification);
+}
+```
 
 ![](../../img/1_fSahpzH6zC7WKVATJUAfCw.png)
 
