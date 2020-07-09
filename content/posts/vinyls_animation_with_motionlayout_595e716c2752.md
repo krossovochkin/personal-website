@@ -28,8 +28,7 @@ As mentioned above, I’m not that good at animations, so I tried to make some s
 ## Implementation
 
 First of all we need to setup MotionLayout. For this I recommend to complete codelab:
-[**Advanced Android in Kotlin 03.2: Animation with MotionLayout**
-*This codelab is part of the Advanced Android in Kotlin course. You'll get the most value out of this course if you work…*codelabs.developers.google.com](https://codelabs.developers.google.com/codelabs/motion-layout/#0)
+[**Advanced Android in Kotlin 03.2: Animation with MotionLayout**](https://codelabs.developers.google.com/codelabs/motion-layout/#0)
 
 We’ll have ViewPager with many fragments inside. Each fragment will contain MotionLayout with two views: cover and disk.
 Xml for fragment will be as simple as:

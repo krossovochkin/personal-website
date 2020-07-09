@@ -96,8 +96,7 @@ As stated in [this issue](https://issuetracker.google.com/issues/37008496) it is
 Be careful if you use setVersionCodeOverride as you might have different version codes in *BuildConfig *and *AndroidManifest*.
 
 Also according to documentation the recommended way to check version code is to access it via *PackageManager*, not via *BuildConfig*:
-[**Version your app | Android Developers**
-*The Android system uses your app's version information to protect against downgrades.The system does not use app…*developer.android.com](https://developer.android.com/studio/publish/versioning)
+[**Version your app | Android Developers**](https://developer.android.com/studio/publish/versioning)
 
 Even better is to have versioning logic outside of *build.gradle* and provide it via gradle parameter by your CI.
 

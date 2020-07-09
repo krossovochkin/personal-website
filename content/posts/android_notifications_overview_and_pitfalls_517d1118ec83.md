@@ -269,9 +269,6 @@ But this is like a union of “Handle clicking/dismissing notification” with �
 Consider this as a homework :)
 
 ## References/Further reading
-[**Notifications | Android Developers**
-*A notification is a message you can display to the user outside of your application&#39;s normal UI. When you tell the…*developer.android.com](https://developer.android.com/guide/topics/ui/notifiers/notifications.html)
-[**Notifying the User | Android Developers**
-*A notification is a user interface element that you display outside your app&#39;s normal UI to indicate that an event…*developer.android.com](https://developer.android.com/training/notify-user/index.html)
-[**Adding Wearable Features to Notifications | Android Developers**
-*When an Android handheld (phone or tablet) and Android wearable are connected, the handheld automatically shares…*developer.android.com](https://developer.android.com/training/wearables/notifications/index.html)
+[**Notifications | Android Developers**](https://developer.android.com/guide/topics/ui/notifiers/notifications.html)
+[**Notifying the User | Android Developers**](https://developer.android.com/training/notify-user/index.html)
+[**Adding Wearable Features to Notifications | Android Developers**](https://developer.android.com/training/wearables/notifications/index.html)

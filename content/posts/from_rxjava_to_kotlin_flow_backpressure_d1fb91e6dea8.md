@@ -278,8 +278,7 @@ fun <T> Flow<T>.onBackpressureDrop(): Flow<T> {
 This is a combination of offer method over channel which drops values if there is suspension, and buffer with capacity of 0, which suspends on each item received.
 
 See answers here:
-[Kotlin Flow onBackpressureDrop RxJava2 analog
-is there a straightforward way to implement something like this Depends on your measure of straightforward. Here is how…stackoverflow.com](https://stackoverflow.com/a/59917873/1533933)
+[Kotlin Flow onBackpressureDrop RxJava2 analog](https://stackoverflow.com/a/59917873/1533933)
 
 With that answer in mind we can write something like:
 
