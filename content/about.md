@@ -1,5 +1,5 @@
-![](https://avatars1.githubusercontent.com/u/1792204?size=200)
-Vasya Drobushkov @krossovochkin
+![](https://avatars1.githubusercontent.com/u/1792204?size=200#circle)
+*Vasya Drobushkov @krossovochkin*
 
 ###### About me
 
