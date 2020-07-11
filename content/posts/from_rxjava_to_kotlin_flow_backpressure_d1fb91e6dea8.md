@@ -10,9 +10,7 @@ description = "Quick comparison between backpressure solutions in RxJava and Kot
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/from-rxjava-to-kotlin-flow-backpressure-d1fb91e6dea8)
-[![](https://img.shields.io/badge/androidweekly-400-blue)](https://androidweekly.net/issues/issue-400)
-[![](https://img.shields.io/badge/proandroiddevdigest-15-green)](https://proandroiddev.com/proandroiddev-digest-15-b467005869ce)
+[![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/from-rxjava-to-kotlin-flow-backpressure-d1fb91e6dea8) [![](https://img.shields.io/badge/androidweekly-400-blue#badge)](https://androidweekly.net/issues/issue-400) [![](https://img.shields.io/badge/proandroiddevdigest-15-green#badge)](https://proandroiddev.com/proandroiddev-digest-15-b467005869ce)
 
 > Disclaimer
 This article unfortunately is not that dive deep (because of complexity of internals of coroutines), but instead trying to compare RxJava and Kotlin Flow mostly as black box with trying to find out differences in behavior and how to migrate from RxJava with its backpressure solution to Kotlin Flow.

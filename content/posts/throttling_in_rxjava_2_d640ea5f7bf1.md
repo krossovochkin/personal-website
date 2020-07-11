@@ -10,9 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-Source: https://github.com/ReactiveX
-
-> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/throttling-in-rxjava-2-d640ea5f7bf1)
+[![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/throttling-in-rxjava-2-d640ea5f7bf1)
 
 ## Introduction
 

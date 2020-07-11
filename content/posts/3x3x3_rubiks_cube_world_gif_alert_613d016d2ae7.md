@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/3x3x3-rubiks-cube-world-gif-alert-613d016d2ae7)
+[![](https://img.shields.io/badge/original-medium-green#badge)](https://medium.com/@krossovochkin/3x3x3-rubiks-cube-world-gif-alert-613d016d2ae7)
 
 # Introduction
 

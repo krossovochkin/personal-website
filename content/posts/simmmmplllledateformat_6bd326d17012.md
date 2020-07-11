@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/simmmmplllledateformat-6bd326d17012)
+[![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/simmmmplllledateformat-6bd326d17012)
 
 ## Introduction
 

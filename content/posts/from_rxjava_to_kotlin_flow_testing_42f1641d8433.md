@@ -13,7 +13,7 @@ showFullContent = false
 ![[Source](https://unsplash.com/photos/9kSTF9PvETM)](https://images.unsplash.com/photo-1574170609519-d1d8d4b71f60?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/9kSTF9PvETM)*
 > This post is part of series of comparing RxJava to Kotlin Flow. Previous articles were about [Threading](https://proandroiddev.com/from-rxjava-2-to-kotlin-flow-threading-8618867e1955), [Backpressure](https://proandroiddev.com/from-rxjava-to-kotlin-flow-backpressure-d1fb91e6dea8), [Error Handling,](https://proandroiddev.com/from-rxjava-to-kotlin-flow-error-handling-da1f6a4f2708) [Stream Types](https://proandroiddev.com/from-rxjava-to-kotlin-flow-stream-types-7916be6cabc2), [Throttling](https://proandroiddev.com/from-rxjava-to-kotlin-flow-throttling-ed1778847619)
 
-> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/from-rxjava-to-kotlin-flow-testing-42f1641d8433)
+[![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/from-rxjava-to-kotlin-flow-testing-42f1641d8433)
 
 ## Introduction
 

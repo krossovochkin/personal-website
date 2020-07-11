@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/neural-networks-and-deep-learning-38aaca43ae0f)
+[![](https://img.shields.io/badge/original-medium-green#badge)](https://medium.com/@krossovochkin/neural-networks-and-deep-learning-38aaca43ae0f)
 
 # Disclaimer
 

@@ -10,7 +10,7 @@ description = "Story about the first commercial project I took part in and how I
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/raising-old-project-from-the-depth-22f3084ed82e)
+[![](https://img.shields.io/badge/original-medium-green#badge)](https://medium.com/@krossovochkin/raising-old-project-from-the-depth-22f3084ed82e)
 
 ## Introduction
 

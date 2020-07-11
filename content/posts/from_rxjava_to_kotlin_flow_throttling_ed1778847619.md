@@ -13,8 +13,7 @@ showFullContent = false
 ![[Source](https://unsplash.com/photos/scUBcasSvbE)](https://images.unsplash.com/photo-1538474705339-e87de81450e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/scUBcasSvbE)*
 > This post is part of series of comparing RxJava to Kotlin Flow. Previous articles were about [Threading](https://proandroiddev.com/from-rxjava-2-to-kotlin-flow-threading-8618867e1955), [Backpressure](https://proandroiddev.com/from-rxjava-to-kotlin-flow-backpressure-d1fb91e6dea8), [Error Handling,](https://proandroiddev.com/from-rxjava-to-kotlin-flow-error-handling-da1f6a4f2708) [Stream Types](https://proandroiddev.com/from-rxjava-to-kotlin-flow-stream-types-7916be6cabc2)
 
-> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/from-rxjava-to-kotlin-flow-throttling-ed1778847619)
-[![](https://img.shields.io/badge/proandroiddevdigest-17-green)](https://proandroiddev.com/proandroiddev-digest-17-d52bc575edb6)
+[![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/from-rxjava-to-kotlin-flow-throttling-ed1778847619) [![](https://img.shields.io/badge/proandroiddevdigest-17-green#badge)](https://proandroiddev.com/proandroiddev-digest-17-d52bc575edb6)
 
 It is advised to take a look at the overview of Throttling operators in RxJava before reading this article:
 [**Throttling in RxJava 2**](https://proandroiddev.com/throttling-in-rxjava-2-d640ea5f7bf1)

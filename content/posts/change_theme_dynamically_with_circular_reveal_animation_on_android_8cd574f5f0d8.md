@@ -10,8 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/change-theme-dynamically-with-circular-reveal-animation-on-android-8cd574f5f0d8)
-[![](https://img.shields.io/badge/proandroiddevdigest-14-green)](https://proandroiddev.com/proandroiddev-digest-14-b7247f25292f)
+[![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/change-theme-dynamically-with-circular-reveal-animation-on-android-8cd574f5f0d8) [![](https://img.shields.io/badge/proandroiddevdigest-14-green#badge)](https://proandroiddev.com/proandroiddev-digest-14-b7247f25292f)
 
 ## Introduction
 

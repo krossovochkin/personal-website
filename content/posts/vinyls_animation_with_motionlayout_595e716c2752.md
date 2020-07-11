@@ -12,7 +12,7 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/Jm9P0mDPo6A)](https://images.unsplash.com/photo-1539375665275-f9de415ef9ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/Jm9P0mDPo6A)*
 
-> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/vinyls-animation-with-motionlayout-595e716c2752)
+[![](https://img.shields.io/badge/original-medium-green#badge)](https://medium.com/@krossovochkin/vinyls-animation-with-motionlayout-595e716c2752)
 
 ## Introduction
 

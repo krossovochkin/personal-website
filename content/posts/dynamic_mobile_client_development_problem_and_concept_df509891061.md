@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/dynamic-mobile-client-development-problem-and-concept-df509891061)
+[![](https://img.shields.io/badge/original-medium-green#badge)](https://medium.com/@krossovochkin/dynamic-mobile-client-development-problem-and-concept-df509891061)
 
 Data and interfaces — are two of the most important things in development.
 

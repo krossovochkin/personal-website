@@ -10,8 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/sqlite-triggers-android-room-2e7120bb3e3a)
-[![](https://img.shields.io/badge/androidweekly-397-blue)](https://androidweekly.net/issues/issue-397)
+[![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/sqlite-triggers-android-room-2e7120bb3e3a) [![](https://img.shields.io/badge/androidweekly-397-blue#badge)](https://androidweekly.net/issues/issue-397)
 
 ## Introduction
 

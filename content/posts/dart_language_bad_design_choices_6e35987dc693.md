@@ -10,9 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-Source: https://www.dartlang.org/assets/shared/dart-logo-for-shares.png?2
-
-> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/dart-language-bad-design-choices-6e35987dc693)
+[![](https://img.shields.io/badge/original-medium-green#badge)](https://medium.com/@krossovochkin/dart-language-bad-design-choices-6e35987dc693)
 
 ## Introduction
 

@@ -12,8 +12,7 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/Lks7vei-eAg)](https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/Lks7vei-eAg)*
 
-> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/the-real-kotlin-flow-benefits-over-rxjava-c19b99ba6eb9)
-[![](https://img.shields.io/badge/proandroiddevdigest-22-green)](https://proandroiddev.com/proandroiddev-digest-22-a7bf64f9f068)
+[![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/the-real-kotlin-flow-benefits-over-rxjava-c19b99ba6eb9) [![](https://img.shields.io/badge/proandroiddevdigest-22-green#badge)](https://proandroiddev.com/proandroiddev-digest-22-a7bf64f9f068)
 
 ## Introduction
 

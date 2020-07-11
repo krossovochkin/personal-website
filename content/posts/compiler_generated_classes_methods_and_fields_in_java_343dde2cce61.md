@@ -12,7 +12,7 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/tdsG7cUNrOo)](https://images.unsplash.com/photo-1563951163384-ddbc3fbaacd4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/tdsG7cUNrOo)*
 
-> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/javarevisited/compiler-generated-classes-methods-and-fields-in-java-343dde2cce61)
+[![](https://img.shields.io/badge/original-medium-green#badge)](https://medium.com/javarevisited/compiler-generated-classes-methods-and-fields-in-java-343dde2cce61)
 
 ## Introduction
 

@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/kotlin-java-interop-function-references-and-sam-conversions-3d0cd36f7967)
+[![](https://img.shields.io/badge/original-medium-green#badge)](https://medium.com/@krossovochkin/kotlin-java-interop-function-references-and-sam-conversions-3d0cd36f7967)
 
 Though all the things below are pretty obvious if being careful while dealing with Kotlin-Java interop, I decided still to write short note about one particular issue with function references (from Kotlin side) and SAM conversions (from Java side).
 

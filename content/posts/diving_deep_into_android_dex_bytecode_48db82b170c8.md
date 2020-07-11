@@ -12,8 +12,7 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/5MvL55-rSvI)](https://images.unsplash.com/photo-1501721709601-744e5bf3440d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/5MvL55-rSvI)*
 
-> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/diving-deep-into-android-dex-bytecode-48db82b170c8)
-[![](https://img.shields.io/badge/proandroiddevdigest-15-green)](https://proandroiddev.com/proandroiddev-digest-15-b467005869ce)
+[![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/diving-deep-into-android-dex-bytecode-48db82b170c8) [![](https://img.shields.io/badge/proandroiddevdigest-15-green#badge)](https://proandroiddev.com/proandroiddev-digest-15-b467005869ce)
 
 ## Introduction
 

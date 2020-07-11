@@ -12,8 +12,7 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/5EoKAdyStik)](https://images.unsplash.com/photo-1519963759188-0e9264cd7992?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/5EoKAdyStik)*
 
-> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/kotlin-useful-but-unfairly-not-mentioned-features-25ec41ea0a87)
-[![](https://img.shields.io/badge/proandroiddevdigest-21-green)](https://proandroiddev.com/proandroiddev-digest-21-60de024d6337)
+[![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/kotlin-useful-but-unfairly-not-mentioned-features-25ec41ea0a87) [![](https://img.shields.io/badge/proandroiddevdigest-21-green#badge)](https://proandroiddev.com/proandroiddev-digest-21-60de024d6337)
 
 ## Introduction
 

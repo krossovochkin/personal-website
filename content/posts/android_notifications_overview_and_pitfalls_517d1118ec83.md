@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/android-notifications-overview-and-pitfalls-517d1118ec83)
+[![](https://img.shields.io/badge/original-medium-green#badge)](https://medium.com/@krossovochkin/android-notifications-overview-and-pitfalls-517d1118ec83)
 
 # Introduction
 

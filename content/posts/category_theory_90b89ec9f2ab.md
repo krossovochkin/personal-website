@@ -12,7 +12,7 @@ showFullContent = false
 
 ![[Source](https://unsplash.com/photos/5mZ_M06Fc9g)](https://images.unsplash.com/photo-1453733190371-0a9bedd82893?ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80)*[Source](https://unsplash.com/photos/5mZ_M06Fc9g)*
 
-> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/category-theory-90b89ec9f2ab)
+[![](https://img.shields.io/badge/original-medium-green#badge)](https://medium.com/@krossovochkin/category-theory-90b89ec9f2ab)
 
 ## Disclaimer
 

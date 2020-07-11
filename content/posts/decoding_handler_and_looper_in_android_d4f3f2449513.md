@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-proandroiddev-green)](https://proandroiddev.com/decoding-handler-and-looper-in-android-d4f3f2449513)
+[![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/decoding-handler-and-looper-in-android-d4f3f2449513)
 
 ## Introduction
 

@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-> [![](https://img.shields.io/badge/original-medium-green)](https://medium.com/@krossovochkin/random-interview-coding-task-retrospective-befa1b399f0d)
+[![](https://img.shields.io/badge/original-medium-green#badge)](https://medium.com/@krossovochkin/random-interview-coding-task-retrospective-befa1b399f0d)
 
 # Introduction
 
