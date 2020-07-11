@@ -10,8 +10,6 @@ description = ""
 showFullContent = false
 +++
 
-Source: https://github.com/ReactiveX
-
 [![](https://img.shields.io/badge/original-proandroiddev-green#badge)](https://proandroiddev.com/operator-fusion-in-rxjava-2-dcd6612cffae) [![](https://img.shields.io/badge/androidweekly-386-blue#badge)](https://androidweekly.net/issues/issue-386)
 
 ## Introduction
