@@ -62,3 +62,6 @@ staticDir = "static"
         identifier = "posts"
         name = "Posts"
         url = "/"
+
+[markup.goldmark.renderer]
+unsafe= true
