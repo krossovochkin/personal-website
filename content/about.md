@@ -48,6 +48,11 @@ Android Design Support Library [Slides](https://speakerdeck.com/krossovochkin/an
 
 ---
 
+###### Broadcasting
+[MobileUnderhood](https://mobileunderhood.ru/krossovochkin/]
+
+---
+
 ###### Certificates
 
 [Complete Python Bootcamp](https://www.udemy.com/certificate/UC-X4I1N9ME)  
