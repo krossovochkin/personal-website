@@ -10,6 +10,9 @@ description = ""
 showFullContent = false
 +++
 
+[![](https://img.shields.io/badge/kotlinweekly-220-purple#badge)](https://mailchi.mp/kotlinweekly/kotlin-weekly-220)
+
+
 ### Introduction
 
 About two years ago I [made a post](https://medium.com/@krossovochkin/kotlin-java-interop-function-references-and-sam-conversions-3d0cd36f7967) about a tricky case in Kotlin-Java interop related to the usage of function references and SAM conversion.
