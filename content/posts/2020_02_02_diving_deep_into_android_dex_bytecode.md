@@ -4,8 +4,8 @@ date = "2020-02-02"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["android", "dex", "bytecode"]
-keywords = []
+tags = ["android"]
+keywords = ["android", "dex", "bytecode"]
 description = "Analyzing memory and performance of our code at the low-level."
 showFullContent = false
 +++

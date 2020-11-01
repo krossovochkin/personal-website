@@ -4,8 +4,8 @@ date = "2020-01-25"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "threading"]
-keywords = []
+tags = ["rxjava", "kotlin", "kotlin flow"]
+keywords = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "threading"]
 description = "Comparing threading in RxJava 2 and Kotlin Flow"
 showFullContent = false
 +++

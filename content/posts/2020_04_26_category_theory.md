@@ -5,7 +5,7 @@ author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
 tags = ["category theory", "functional programming"]
-keywords = []
+keywords = ["category theory", "functional programming"]
 description = "Short synopsis on lectures about Category theory and programming"
 showFullContent = false
 +++

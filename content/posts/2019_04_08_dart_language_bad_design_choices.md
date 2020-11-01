@@ -5,7 +5,7 @@ author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
 tags = ["dart"]
-keywords = []
+keywords = ["dart"]
 description = ""
 showFullContent = false
 +++

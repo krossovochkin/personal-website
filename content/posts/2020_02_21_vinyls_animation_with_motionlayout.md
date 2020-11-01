@@ -4,8 +4,8 @@ date = "2020-02-21"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["android", "motion layout"]
-keywords = []
+tags = ["android"]
+keywords = ["android", "motion layout"]
 description = "Playing with dribbble and MotionLayout"
 showFullContent = false
 +++

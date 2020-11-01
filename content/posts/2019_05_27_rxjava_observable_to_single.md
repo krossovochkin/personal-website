@@ -4,8 +4,8 @@ date = "2019-05-27"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["rxjava", "rxjava2", "observable", "single"]
-keywords = []
+tags = ["rxjava"]
+keywords = ["rxjava", "rxjava2", "observable", "single"]
 description = ""
 showFullContent = false
 +++

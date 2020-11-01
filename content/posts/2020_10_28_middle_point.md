@@ -4,8 +4,8 @@ date = "2020-10-28"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["programming", "middle point", "overflow"]
-keywords = []
+tags = ["programming"]
+keywords = ["programming", "middle point", "overflow"]
 description = ""
 showFullContent = false
 +++

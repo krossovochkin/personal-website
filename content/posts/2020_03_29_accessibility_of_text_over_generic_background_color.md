@@ -5,7 +5,7 @@ author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
 tags = ["android", "accessibility"]
-keywords = []
+keywords = ["android", "accessibility"]
 description = "Investigating issues which might result in poor accessibility with text drawn over a random background color"
 showFullContent = false
 +++

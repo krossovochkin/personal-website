@@ -4,8 +4,8 @@ date = "2018-09-13"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["kotlin", "java", "interop", "interoperability"]
-keywords = []
+tags = ["kotlin", "java"]
+keywords = ["kotlin", "java", "interop", "interoperability", "sam"]
 description = ""
 showFullContent = false
 +++

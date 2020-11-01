@@ -4,8 +4,8 @@ date = "2019-09-27"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["java", "coding task"]
-keywords = []
+tags = ["other"]
+keywords = ["java", "interview", "programming", "coding task"]
 description = ""
 showFullContent = false
 +++

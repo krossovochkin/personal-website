@@ -4,8 +4,8 @@ date = "2020-05-17"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["kotlin", "kotlin flow", "flow", "rxjava", "rxjava2"]
-keywords = []
+tags = ["rxjava", "kotlin", "kotlin flow"]
+keywords = ["kotlin", "kotlin flow", "flow", "rxjava", "rxjava2"]
 description = "Attempt to analyze the benefits of Kotlin Flow over RxJava."
 showFullContent = false
 +++

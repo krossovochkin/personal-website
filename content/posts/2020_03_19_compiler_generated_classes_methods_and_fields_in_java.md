@@ -4,8 +4,8 @@ date = "2020-03-19"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["java", "synthetics"]
-keywords = []
+tags = ["java"]
+keywords = ["java", "synthetics"]
 description = "Looking at what compiler can generate and in which situations."
 showFullContent = false
 +++

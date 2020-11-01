@@ -4,8 +4,8 @@ date = "2017-11-09"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["NN", "neural networks"]
-keywords = []
+tags = ["machine learning"]
+keywords = ["machine learning", "ai", "nn", "neural networks"]
 description = ""
 showFullContent = false
 +++

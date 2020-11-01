@@ -4,8 +4,8 @@ date = "2020-02-24"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "error", "error handling"]
-keywords = []
+tags = ["rxjava", "kotlin", "kotlin flow"]
+keywords = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "error", "error handling"]
 description = "Comparing Error Handling in RxJava and Kotlin Flow"
 showFullContent = false
 +++

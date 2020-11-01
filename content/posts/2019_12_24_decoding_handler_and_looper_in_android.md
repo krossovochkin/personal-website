@@ -4,8 +4,8 @@ date = "2019-12-24"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["android", "handler", "looper"]
-keywords = []
+tags = ["android"]
+keywords = ["android", "handler", "looper"]
 description = ""
 showFullContent = false
 +++

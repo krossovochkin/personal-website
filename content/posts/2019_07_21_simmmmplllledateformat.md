@@ -4,8 +4,8 @@ date = "2019-07-21"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["android", "java", "dateformat"]
-keywords = []
+tags = ["android", "java"]
+keywords = ["android", "java", "dateformat", "l10n", "localization", "i18n", "internationalization"]
 description = ""
 showFullContent = false
 +++

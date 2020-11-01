@@ -4,8 +4,8 @@ date = "2019-02-18"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["android", "synthetics", "butterknife", "findViewById"]
-keywords = []
+tags = ["android"]
+keywords = ["android", "synthetics", "butterknife", "findViewById"]
 description = ""
 showFullContent = false
 +++

@@ -4,8 +4,8 @@ date = "2019-07-07"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["rubik's cube", "rubik", "cube"]
-keywords = []
+tags = ["other"]
+keywords = ["rubik's cube", "rubik", "cube"]
 description = ""
 showFullContent = false
 +++

@@ -4,8 +4,8 @@ date = "2018-07-21"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["android", "dynamic"]
-keywords = []
+tags = ["android"]
+keywords = ["android", "dynamic"]
 description = ""
 showFullContent = false
 +++

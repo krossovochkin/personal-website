@@ -4,8 +4,8 @@ date = "2018-06-17"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["fairytales", "russian", "ru"]
-keywords = []
+tags = ["other", "russian"]
+keywords = ["fairytales", "russian", "ru"]
 description = ""
 showFullContent = false
 +++

@@ -4,8 +4,8 @@ date = "2018-10-15"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["movies"]
-keywords = []
+tags = ["other"]
+keywords = ["movies"]
 description = ""
 showFullContent = false
 +++

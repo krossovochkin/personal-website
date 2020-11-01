@@ -5,7 +5,7 @@ author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
 tags = ["kotlin"]
-keywords = []
+keywords = ["kotlin", "mutability", "visibility"]
 description = "Exploring some good Kotlin features which are not so widely discussed"
 showFullContent = false
 +++

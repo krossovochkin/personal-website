@@ -4,8 +4,8 @@ date = "2020-01-17"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["android", "sqlite", "trigger"]
-keywords = []
+tags = ["android", "sqlite"]
+keywords = ["android", "sqlite", "trigger"]
 description = ""
 showFullContent = false
 +++

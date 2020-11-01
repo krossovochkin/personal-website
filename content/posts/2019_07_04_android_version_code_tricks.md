@@ -4,8 +4,8 @@ date = "2019-07-04"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["android", "gradle", "version"]
-keywords = []
+tags = ["android"]
+keywords = ["android", "gradle", "version"]
 description = ""
 showFullContent = false
 +++

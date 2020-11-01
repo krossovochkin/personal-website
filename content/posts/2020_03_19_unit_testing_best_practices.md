@@ -4,8 +4,8 @@ date = "2020-03-19"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["programming", "unit testing", "unit", "test"]
-keywords = []
+tags = ["programming"]
+keywords = ["programming", "unit testing", "unit", "test"]
 description = "A list of practical suggestions that can help you write better tests"
 showFullContent = false
 +++

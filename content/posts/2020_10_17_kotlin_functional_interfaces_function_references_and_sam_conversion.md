@@ -4,8 +4,8 @@ date = "2020-10-17"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["kotlin", "sam", "functional interface"]
-keywords = []
+tags = ["kotlin"]
+keywords = ["kotlin", "sam", "functional interface"]
 description = ""
 showFullContent = false
 +++

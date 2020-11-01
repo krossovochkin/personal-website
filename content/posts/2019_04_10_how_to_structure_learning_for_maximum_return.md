@@ -4,8 +4,8 @@ date = "2019-04-10"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["education", "learning"]
-keywords = []
+tags = ["productivity"]
+keywords = ["productivity", "education", "learning"]
 description = "A learning framework I developed after many meandering attempts at self-development."
 showFullContent = false
 +++

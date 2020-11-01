@@ -4,8 +4,8 @@ date = "2020-05-07"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["android", "nostalgia"]
-keywords = []
+tags = ["other"]
+keywords = ["android", "nostalgia"]
 description = "Story about the first commercial project I took part in and how I tried to breathe life into it"
 showFullContent = false
 +++

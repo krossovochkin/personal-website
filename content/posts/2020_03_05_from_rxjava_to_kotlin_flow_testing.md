@@ -4,8 +4,8 @@ date = "2020-03-05"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "testing"]
-keywords = []
+tags = ["rxjava", "kotlin", "kotlin flow"]
+keywords = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "testing"]
 description = "Comparing approaches to testing in RxJava and Kotlin Flow"
 showFullContent = false
 +++

@@ -4,8 +4,8 @@ date = "2020-02-06"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "backpressure"]
-keywords = []
+tags = ["rxjava", "kotlin", "kotlin flow"]
+keywords = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "backpressure"]
 description = "Quick comparison between backpressure solutions in RxJava and Kotlin Flow"
 showFullContent = false
 +++

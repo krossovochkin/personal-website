@@ -4,8 +4,8 @@ date = "2020-03-02"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "throttling"]
-keywords = []
+tags = ["rxjava", "kotlin", "kotlin flow"]
+keywords = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "throttling"]
 description = "Comparing Throttling operators in RxJava and Kotlin Flow"
 showFullContent = false
 +++

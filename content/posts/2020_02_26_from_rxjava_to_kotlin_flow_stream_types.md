@@ -4,8 +4,8 @@ date = "2020-02-26"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
-tags = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "stream", "stream types"]
-keywords = []
+tags = ["rxjava", "kotlin", "kotlin flow"]
+keywords = ["rxjava", "rxjava2", "kotlin", "kotlin flow", "flow", "stream", "stream types"]
 description = "Comparing Stream Types in RxJava and Kotlin Flow"
 showFullContent = false
 +++
