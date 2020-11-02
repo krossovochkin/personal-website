@@ -4,6 +4,8 @@ theme = "terminal"
 paginate = 10
 staticDir = "static"
 
+googleAnalytics = "UA-148934073-1"
+
 [params]
   # dir name of your blog content (default is `content/posts`)
   contentTypeName = "posts"
