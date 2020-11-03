@@ -10,6 +10,8 @@ description = ""
 showFullContent = false
 +++
 
+[![](https://img.shields.io/badge/kotlinweekly-222-purple#badge)](https://mailchi.mp/kotlinweekly/gjz7gia1eq)
+
 ### Introduction
 
 Boolean is one of the essential types in programming and probably one of the simplest because it has only two values: true and false. Boolean are usually used as flags for control flow, specifically, conditions. 
