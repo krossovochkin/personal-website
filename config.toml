@@ -1,69 +1,74 @@
+## Basic Configuration
 baseurl = "https://krossovochkin.github.io/"
-languageCode = "en-us"
-theme = "terminal"
-paginate = 10
-staticDir = "static"
+languageCode = "en"
 
+title = "Vasya Drobushkov"
+theme = "hyde-hyde"
+
+## Hugo Built-in Features
+# disqusShortname = "your-disqus-shortname"
 googleAnalytics = "UA-148934073-1"
+# enableRobotsTXT = true
 
+# summarylength = 30
+
+#paginate = 5
+
+## Site Settings
 [params]
-  # dir name of your blog content (default is `content/posts`)
-  contentTypeName = "posts"
-
-  # ["orange", "blue", "red", "green", "pink"]
-  themeColor = "yellow"
-
-  # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 2
-
-  # show selector to switch language
-  showLanguageSelector = false
-
-  # set theme to full screen width
-  fullWidthTheme = false
-
-  # center theme with default width
-  centerTheme = true
-
-  # set a custom favicon (default is a `themeColor` square)
-  # favicon = "favicon.ico"
-
-  # set all headings to their default size (depending on browser settings)
-  # it's set to `true` by default
-  # oneHeadingSize = false
-
-[params.twitter]
-  # set Twitter handles for Twitter cards
-  # see https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started#card-and-content-attribution
-  # do not include @
-  creator = "krossovochkin"
-  site = "krossovochkin"
-
-[languages]
-  [languages.en]
-    languageName = "English"
+    author = "Vasya Drobushkov"
     title = "Krossovochkin"
-    subtitle = "Android Developer"
-    owner = ""
-    keywords = ""
-    copyright = "© 2020 Vasya Drobushkov"
-    menuMore = "Show more"
-    readMore = "Read more"
-    readOtherPosts = "Read other posts"
+    themeColor = "theme-base-0a"
+    # description = "..."
+    authorimage = "../img/avatar.png"
+    dateformat = "Jan 2, 2006"
 
-    [languages.en.params.logo]
-      logoText = "Krossovochkin"
-      logoHomeLink = "/"
+    # sidebar, copyright & license
+    #logoimage = "/img/hugo.png"
+    copyright = "Vasya Drobushkov"
+    since = 2019
+    license = "CC BY-SA 4.0"
+    licenseURL = "https://creativecommons.org/licenses/by-sa/4.0"
+    showBuiltWith = false
 
-    [languages.en.menu]
-      [[languages.en.menu.main]]
-        identifier = "about"
-        name = "About me"
-        url = "/about"
-      [[languages.en.menu.main]]
-        identifier = "posts"
-        name = "Posts"
-        url = "/"
+    # https://highlightjs.org
+    highlightjs = true
+    highlightjsstyle = "androidstudio"
+    highlightjslanguages = ["bash", "java", "kotlin"]
+    
+    # please choose either GraphComment or Disqus or Utterances
+    #GraphCommentId = "..."
+    #UtterancesRepo = "..." # https://utteranc.es/
+    #UtterancesIssueTerm = "..." # pathname, url, title, og:title
+    #UtterancesTheme = "..." # github-light or github-dark
 
-[markup.goldmark.renderer]
-unsafe= true
+    # Table of contents
+    #toc = none, "hugo", or "tocbot"
+
+## Social Accounts
+[params.social]
+    github = "krossovochkin"
+    #instagram = "<username>"
+    #xing = "<username>"
+    linkedin = "vasyadrobushkov"
+    twitter = "krossovochkin"
+    facebook = "vasya.drobushkov"
+    #microblog = "<username>"
+    stackoverflow = "1533933/krossovochkin"
+    #telegram = "<username>"
+    # orcid = "<xxxx-xxxx-xxxx-xxxx>"
+    #email = "your-email@example.com"
+    # gravatar = "your-email@example.com"
+    # pgpkey = "<path-to-your-key-in-/static>"
+
+## Main Menu
+[[menu.main]]
+    name = "Posts"
+    weight = 100
+    identifier = "posts"
+    url = "/posts/"
+[[menu.main]]
+    name = "About"
+    identifier = "about"
+    weight = 300
+    url = "/about/"
