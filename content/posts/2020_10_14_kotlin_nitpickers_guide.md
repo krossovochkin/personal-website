@@ -30,7 +30,7 @@ This is a code smell, we might have a crash!
 
 Yes, !! in code should warn you, because the operation is unsafe.
 But in some situations, you might be fine with that. Sometimes Kotlin compiler can't infer that the value is not null in some given moment.
-And you are 100% sure that it is safe. For example let's take a look at the [reverse list function](https://krossovochkin.github.io/posts/2019_09_27_random_interview_coding_task_retrospective/):
+And you are 100% sure that it is safe. For example let's take a look at the [reverse list function](https://krossovochkin.com/posts/2019_09_27_random_interview_coding_task_retrospective/):
 
 ```kotlin
 fun <T> Node<T>.reverse(): Node<T> {
