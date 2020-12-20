@@ -10,6 +10,8 @@ description = ""
 showFullContent = false
 +++
 
+[![](https://img.shields.io/badge/androidweekly-445-blue#badge)](https://androidweekly.net/issues/issue-445)
+
 ### Introduction
 
 Android Room is an awesome AndroidX library. It is great because it provides a clean way of how to deal with databases without introducing some heavy concepts. Out of the box with Room one gets:
