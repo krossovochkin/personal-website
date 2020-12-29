@@ -1,25 +1,22 @@
 #!/bin/sh
 
-# If a command fails then the deploy stops
 set -e
 
-printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
-
-# Build the project.
-hugo # if using a theme, replace with `hugo -t <YOURTHEME>`
-
-# Go To Public folder
+printf "\033[0;32mClean up public folder...\033[0m\n"
 cd public
+shopt -s extglob
+rm -rf -- !(CNAME|.git|.|..)
+cd ..
 
-# Add changes to git.
+printf "\033[0;32mBuilding website...\033[0m\n"
+hugo
+
+printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
+cd public
 git add .
-
-# Commit changes.
 msg="rebuilding site $(date)"
 if [ -n "$*" ]; then
 	msg="$*"
 fi
 git commit -m "$msg"
-
-# Push source and build repos.
 git push origin master
