@@ -151,6 +151,10 @@ protected InvalidationTracker createInvalidationTracker() {
 
 By doing that we can verify in SqlLiteStatements that `InvalidationTracker` queries its internal table no more.
 
+> **UPDATE**  
+Thanks to [Yigit Boyar](https://twitter.com/yigitboyar) for pointing out that internal table Room uses is in-memory. Indeed, that table is temp. So, the most of the performance impact is related to SQLite triggers, not querying internal temp table. And triggers are not created unless you subscribe to some Observable declared.  
+Though the last is still not free, as querying uses android Cursor, which allocates memory when populating its CursorWindow.
+
 ### Conclusion
 
 Android Room is a great library, but it still might impact performance. And if your app is critical to performance one should be very careful. Still, it is possible to remove some overhead in the cases where you need that.  
