@@ -26,7 +26,9 @@ fi
 git commit -m "$msg"
 
 if [[ -z "${GITHUB_TOKEN}" || -z "${GITHUB_REPO}" ]]; then
+  echo "local"
   git push origin "${GITHUB_BRANCH}"
 else
+  echo "ci"
   git push --quiet "https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${GITHUB_REPO}.git" "${GITHUB_BRANCH}"
 fi
