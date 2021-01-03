@@ -17,8 +17,5 @@ jobs:
           extended: true
       - name: Deploy
         run: |
-          git config --global user.email "ci@github"
-          git config --global user.name "GitHub Actions CI"
-          
           chmod +x deploy.sh
           ./deploy.sh "${{ secrets.USER_GITHUB_TOKEN }}"
