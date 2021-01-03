@@ -5,8 +5,6 @@ set -e
 GITHUB_TOKEN="${1}"
 GITHUB_REPO="krossovochkin/krossovochkin.github.io"
 GITHUB_BRANCH="master"
-GITHUB_USERNAME="GitHub Actions CI"
-GITHUB_EMAIL="ci@github"
 
 printf "\033[0;32mClean up public folder...\033[0m\n"
 cd public
@@ -29,8 +27,8 @@ if [[ -z "${GITHUB_TOKEN}" || -z "${GITHUB_REPO}" ]]; then
   git commit -m "$MESSAGE"
   git push origin "${GITHUB_BRANCH}"
 else
-  git config --global user.email ${GITHUB_EMAIL}
-  git config --global user.name ${GITHUB_USERNAME}
+  git config --global user.email "ci@github"
+  git config --global user.name "GitHub Actions CI"
   
   git commit -m "$MESSAGE"
   
