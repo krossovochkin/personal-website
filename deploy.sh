@@ -26,13 +26,13 @@ MESSAGE="rebuilding site $(date)"
 git add .
 
 if [[ -z "${GITHUB_TOKEN}" || -z "${GITHUB_REPO}" ]]; then
-  git commit -m $MESSAGE
+  git commit -m "$MESSAGE"
   git push origin "${GITHUB_BRANCH}"
 else
   git config --global user.email GITHUB_EMAIL
   git config --global user.name GITHUB_USERNAME
   
-  git commit -m $MESSAGE
+  git commit -m "$MESSAGE"
   
   git push --quiet "https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${GITHUB_REPO}.git" "${GITHUB_BRANCH}"
 fi
