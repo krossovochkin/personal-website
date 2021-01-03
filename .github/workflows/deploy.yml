@@ -11,7 +11,7 @@ jobs:
       - name: Setup SSH
         run: |
           eval $(ssh-agent -s)
-          ssh-add - <<< ${{secrets.SSH_KEY}}
+          ssh-add - <<< "${{secrets.SSH_KEY}}"
       - name: Deploy
         run: |
           git submodule update --init --recursive
