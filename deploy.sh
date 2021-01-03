@@ -4,6 +4,7 @@ set -e
 
 printf "\033[0;32mClean up public folder...\033[0m\n"
 cd public
+git pull origin master
 shopt -s extglob
 rm -rf -- !(CNAME|.git|.|..)
 cd ..
