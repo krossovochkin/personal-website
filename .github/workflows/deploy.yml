@@ -11,4 +11,4 @@ jobs:
       - name: Checkout
         run: git submodule update --init --recursive
       - name: Deploy
-        run: deploy.sh
+        run: ./deploy.sh
