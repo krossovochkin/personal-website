@@ -2,7 +2,7 @@
 
 set -e
 
-GITHUB_REPO="krossovochkin.github.io"
+GITHUB_REPO="krossovochkin/krossovochkin.github.io"
 GITHUB_BRANCH="develop"
 
 printf "\033[0;32mClean up public folder...\033[0m\n"
