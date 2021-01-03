@@ -21,9 +21,7 @@ printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
 cd public
 git add .
 msg="rebuilding site $(date)"
-if [ -n "$*" ]; then
-	msg="$*"
-fi
+echo $msg
 git commit -m "$msg"
 
 if [[ -z "${GITHUB_TOKEN}" ]]; then
