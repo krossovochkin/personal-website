@@ -26,6 +26,14 @@ if [ -n "$*" ]; then
 fi
 git commit -m "$msg"
 
+if [[ -z "${GITHUB_TOKEN}"]]; then
+  echo "token missing"
+fi
+
+if [[ -z "${GITHUB_REPO}" ]]; then
+  echo "repo missing"
+fi
+
 if [[ -z "${GITHUB_TOKEN}" || -z "${GITHUB_REPO}" ]]; then
   echo "local"
   git push origin "${GITHUB_BRANCH}"
