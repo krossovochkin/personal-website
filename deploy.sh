@@ -26,7 +26,7 @@ if [ -n "$*" ]; then
 fi
 git commit -m "$msg"
 
-if [[ -z "${GITHUB_TOKEN}"]]; then
+if [[ -z "${GITHUB_TOKEN}" ]]; then
   echo "token missing"
 fi
 
