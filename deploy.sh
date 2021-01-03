@@ -2,6 +2,7 @@
 
 set -e
 
+GITHUB_TOKEN="${1}"
 GITHUB_REPO="krossovochkin/krossovochkin.github.io"
 GITHUB_BRANCH="develop"
 
