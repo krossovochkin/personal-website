@@ -39,5 +39,6 @@ if [[ -z "${GITHUB_TOKEN}" || -z "${GITHUB_REPO}" ]]; then
   git push origin "${GITHUB_BRANCH}"
 else
   echo "ci"
-  git push --quiet "https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${GITHUB_REPO}.git" "${GITHUB_BRANCH}"
+  git remote set-url origin "https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${GITHUB_REPO}.git"
+  git push --quiet origin "${GITHUB_BRANCH}"
 fi
