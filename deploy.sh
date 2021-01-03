@@ -29,8 +29,8 @@ if [[ -z "${GITHUB_TOKEN}" || -z "${GITHUB_REPO}" ]]; then
   git commit -m "$MESSAGE"
   git push origin "${GITHUB_BRANCH}"
 else
-  git config --global user.email GITHUB_EMAIL
-  git config --global user.name GITHUB_USERNAME
+  git config --global user.email ${GITHUB_EMAIL}
+  git config --global user.name ${GITHUB_USERNAME}
   
   git commit -m "$MESSAGE"
   
