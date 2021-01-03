@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Start SSH agent
-        run: eval `ssh-agent -s`
-      - name: Setup SSH key
-        run: ssh-add - <<< "${{secrets.SSH_KEY}}"
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
       - name: Deploy
         run: git submodule update --init --recursive
