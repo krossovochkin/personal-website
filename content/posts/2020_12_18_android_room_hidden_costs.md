@@ -6,7 +6,7 @@ authorTwitter = "krossovochkin" #do not include @
 cover = ""
 tags = ["android", "sqlite"]
 keywords = ["android", "room", "sqlite"]
-description = ""
+description = "Note on how Room might affect performance of you app if you perform many database requests."
 showFullContent = false
 +++
 

@@ -6,7 +6,7 @@ authorTwitter = "krossovochkin" #do not include @
 cover = ""
 tags = ["kotlin"]
 keywords = ["kotlin"]
-description = ""
+description = "It happens so that developers might want to use Boolean#not method. In this article I try to give a clear vision why there is no need to do so."
 showFullContent = false
 +++
 

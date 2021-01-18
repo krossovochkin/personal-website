@@ -6,7 +6,7 @@ authorTwitter = "krossovochkin" #do not include @
 cover = ""
 tags = ["kotlin"]
 keywords = ["kotlin", "sam", "functional interface"]
-description = ""
+description = "Overview of Kotlin functional interfaces and how they work with SAM conversions."
 showFullContent = false
 +++
 

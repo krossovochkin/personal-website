@@ -6,7 +6,7 @@ authorTwitter = "krossovochkin" #do not include @
 cover = ""
 tags = ["rss"]
 keywords = ["rss", "telegram"]
-description = ""
+description = "Guide on how one can optimize experience on reading articles by managing them via RSS feeds"
 showFullContent = false
 +++
 

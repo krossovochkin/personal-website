@@ -6,7 +6,7 @@ authorTwitter = "krossovochkin" #do not include @
 cover = ""
 tags = ["kotlin", "programming"]
 keywords = ["kotlin", "programming", "code review"]
-description = ""
+description = "Guide on how not to do code review of Kotlin code."
 showFullContent = false
 +++
 
