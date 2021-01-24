@@ -12,6 +12,8 @@ showFullContent = false
 
 ![](https://images.unsplash.com/photo-1590249002987-c3d0e38db7a4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)
 
+[!](https://img.shields.io/badge/androidweekly-450-blue#badge)](https://androidweekly.net/issues/issue-450)
+
 # Introduction
 
 It might happen so that there is a bug in your release build while in debug everything works fine. In many cases, it might be an issue with Proguard/R8 configuration. Of course, it is better to test your code thoroughly, properly configure Proguard if you, let's say, load some classes only via reflection and so on. But reality sometimes strikes and bugs might go to production.  
