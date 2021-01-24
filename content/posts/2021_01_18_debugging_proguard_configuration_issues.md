@@ -12,7 +12,7 @@ showFullContent = false
 
 ![](https://images.unsplash.com/photo-1590249002987-c3d0e38db7a4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)
 
-![](https://img.shields.io/badge/androidweekly-450-blue#badge)](https://androidweekly.net/issues/issue-450)
+[![](https://img.shields.io/badge/androidweekly-450-blue#badge)](https://androidweekly.net/issues/issue-450)
 
 # Introduction
 
