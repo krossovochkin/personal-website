@@ -88,6 +88,6 @@ Android Design Support Library [Slides](https://speakerdeck.com/krossovochkin/an
 ###### Education
 
 [Belarusian State University](https://www.bsu.by) 2009 - 2014 Mechanics/Applied Mathematics (Robotics)
-[Lyceum BSU](https://lyceum.by/) 2007 - 2019 Physics
+[Lyceum BSU](https://lyceum.by/) 2007 - 2009 Physics
 
 ---
