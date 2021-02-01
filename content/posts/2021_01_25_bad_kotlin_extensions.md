@@ -12,6 +12,8 @@ showFullContent = false
 
 ![](https://images.unsplash.com/photo-1598518619776-eae3f8a34eac?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80)
 
+[![](https://img.shields.io/badge/androidweekly-451-blue#badge)](https://androidweekly.net/issues/issue-451) [![](https://img.shields.io/badge/oncreate-41-ff69b4#badge)](https://www.oncreatedigest.com/issues/oncreate-digest-issue-41-309824)
+
 ### Introduction
 
 Kotlin extensions are a cool feature. Though trying to write 'idiomatic' Kotlin code some developers tend to overuse that feature making code worse than it could be without extensions. In this article, we'll go through some examples of how not to write Kotlin extensions.
