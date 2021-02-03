@@ -147,7 +147,7 @@ inline fun FragmentManager.inTransaction(
     block: (FragmentManager) -> Unit
 ) {
     val transaction = this.beginTransaction()
-	transaction.setReordingAllowed(true)
+	transaction.setReorderingAllowed(true)
 	block(transaction)
 	if (allowStateLoss) {
 		transaction.commitAllowingStateLoss()
