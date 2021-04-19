@@ -74,7 +74,8 @@ Android Design Support Library [Slides](https://speakerdeck.com/krossovochkin/an
 
 ###### Work Experience
 
-[Easybrain](https://easybrain.com) Senior Android Developer 11/2019 - Present  
+[Lyft](https://www.lyft.com) Software Engineer 04/2021 - Present  
+[Easybrain](https://easybrain.com) Senior Android Developer 11/2019 - 04/2021  
 [Ciklum/Coople](https://www.ciklum.com) Senior Android Developer 02/2019 - 11/2019  
 [Inspectorio](https://www.inspectorio.com) Senior Android Developer 01/2019 - 02/2019  
 [Ciklum/Coople](https://www.ciklum.com) Senior Android Developer 11/2017 - 01/2019  
