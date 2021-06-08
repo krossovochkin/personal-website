@@ -12,19 +12,19 @@ Fast learner, greedy for knowledge.
 
 ###### Links
 
-[LinkedIn](https://www.linkedin.com/in/vasyadrobushkov/) 
-[Github](https://github.com/krossovochkin) 
-[StackOverflow](https://stackoverflow.com/users/1533933/krossovochkin) 
-[GoodReads](https://www.goodreads.com/user/show/21544616-krossovochkin) 
-[Medium](https://medium.com/@krossovochkin) 
-[HackerNoon](https://hackernoon.com/u/krossovochkin) 
-[Facebook](https://www.facebook.com/vasya.drobushkov) 
-[Twitter](https://twitter.com/krossovochkin) 
-[Kaggle](https://www.kaggle.com/krossovochkin) 
-[SpeakerDeck](https://speakerdeck.com/krossovochkin) 
-[Reddit](https://www.reddit.com/user/krossovochkin) 
-[HackerRank](https://www.hackerrank.com/krossovochkin) 
-[LeetCode](https://leetcode.com/krossovochkin/)  
+[LinkedIn](https://www.linkedin.com/in/vasyadrobushkov/)  
+[Github](https://github.com/krossovochkin)  
+[StackOverflow](https://stackoverflow.com/users/1533933/krossovochkin)  
+[GoodReads](https://www.goodreads.com/user/show/21544616-krossovochkin)  
+[Medium](https://medium.com/@krossovochkin)  
+[HackerNoon](https://hackernoon.com/u/krossovochkin)  
+[Facebook](https://www.facebook.com/vasya.drobushkov)  
+[Twitter](https://twitter.com/krossovochkin)  
+[Kaggle](https://www.kaggle.com/krossovochkin)  
+[SpeakerDeck](https://speakerdeck.com/krossovochkin)  
+[Reddit](https://www.reddit.com/user/krossovochkin)  
+[HackerRank](https://www.hackerrank.com/krossovochkin)  
+[LeetCode](https://leetcode.com/krossovochkin/)   
 
 ---
 
@@ -49,7 +49,7 @@ Android Design Support Library [Slides](https://speakerdeck.com/krossovochkin/an
 ---
 
 ###### Broadcasting
-[MobileUnderhood](https://mobileunderhood.ru/krossovochkin/]
+[MobileUnderhood](https://mobileunderhood.ru/krossovochkin/)
 
 ---
 
@@ -74,7 +74,8 @@ Android Design Support Library [Slides](https://speakerdeck.com/krossovochkin/an
 
 ###### Work Experience
 
-[Easybrain](https://easybrain.com) Senior Android Developer 11/2019 - Present  
+[Lyft](https://www.lyft.com) Software Engineer 04/2021 - Present  
+[Easybrain](https://easybrain.com) Senior Android Developer 11/2019 - 03/2021  
 [Ciklum/Coople](https://www.ciklum.com) Senior Android Developer 02/2019 - 11/2019  
 [Inspectorio](https://www.inspectorio.com) Senior Android Developer 01/2019 - 02/2019  
 [Ciklum/Coople](https://www.ciklum.com) Senior Android Developer 11/2017 - 01/2019  
@@ -88,6 +89,6 @@ Android Design Support Library [Slides](https://speakerdeck.com/krossovochkin/an
 ###### Education
 
 [Belarusian State University](https://www.bsu.by) 2009 - 2014 Mechanics/Applied Mathematics (Robotics)
-[Lyceum BSU](https://lyceum.by/) 2007 - 2019 Physics
+[Lyceum BSU](https://lyceum.by/) 2007 - 2009 Physics
 
 ---
