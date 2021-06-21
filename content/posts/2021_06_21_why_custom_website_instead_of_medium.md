@@ -1,14 +1,14 @@
 +++
- title = "Why custom website instead of Medium"
- date = "2021-06-21"
- author = "Vasya Drobushkov"
- authorTwitter = "krossovochkin" #do not include @
- cover = ""
- tags = ["writing"]
- keywords = ["writing", "medium"]
- description = "Some time ago I switched from Medium to own website. Here I try to give insides on pros and cons of using Medium and reasons why I decided to move to a web blog."
- showFullContent = false
- +++
+title = "Why custom website instead of Medium"
+date = "2021-06-21"
+author = "Vasya Drobushkov"
+authorTwitter = "krossovochkin" #do not include @
+cover = ""
+tags = ["writing"]
+keywords = ["writing", "medium"]
+description = "Some time ago I switched from Medium to own website. Here I try to give insides on pros and cons of using Medium and reasons why I decided to move to a web blog."
+showFullContent = false
++++
  
 ### Introduction
 
