@@ -10,6 +10,8 @@ description = "Sometimes there are situations when simple parsing JSON-string in
 showFullContent = false
 +++
 
+[![](https://img.shields.io/badge/kotlinweekly-254-purple#badge)](https://mailchi.mp/kotlinweekly/kotlin-weekly-254)
+
 ### Introduction
 
 Parsing JSON strings is a must-have on most Android projects that have server-client communication (of course there are some other formats like XML or [Protobuf](https://developers.google.com/protocol-buffers), but I guess JSON is the most common one at least at the moment). Setting up this communication is relatively straightforward: choose a library, add it to a project, describe models, create mappers, and so on. There are a bunch of various libraries to parse JSON: good old [Gson](https://github.com/google/gson), [Jackson](https://github.com/FasterXML/jackson), or more modern [Moshi](https://github.com/square/moshi), [kotlinx-serialization](https://github.com/Kotlin/kotlinx.serialization) and there are more. Set up of these libraries is different, there are differences in the internal implementation, but the general idea is the same for most of them: you can convert JSON-string into a set of objects and vice versa.
