@@ -6,7 +6,7 @@ authorTwitter = "krossovochkin" #do not include @
 cover = ""
 tags = ["kotlin", "coroutines", "test"]
 keywords = ["kotlin", "coroutines", "test", "junit"]
-description = ""
+description = "Writing tests for kotlin code with coroutines requires adding runBlockingTest for each test method. In the article we'll try to work around that so that we don't need to write it."
 showFullContent = false
 +++
 

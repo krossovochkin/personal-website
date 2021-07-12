@@ -10,6 +10,8 @@ description = "When it comes to reactive streams it is likely everyone heard abo
 showFullContent = false
 +++
 
+[![](https://img.shields.io/badge/androidweekly-474-blue#badge)](https://androidweekly.net/issues/issue-474) [![](https://img.shields.io/badge/kotlinweekly-258-purple#badge)](https://mailchi.mp/kotlinweekly/kotlin-weekly-258)
+
 ### Introduction
 
 When it comes to reactive streams it is likely everyone heard about huge 'Rx-chains'. But reactive streams are not only about chaining but also about nesting. Let's find out what are they, what are the differences, and why it matters.  
