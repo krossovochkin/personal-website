@@ -10,6 +10,8 @@ description = "Diving into Matchers API of various mocking libraries such as Moc
 showFullContent = false
 +++
 
+[![](https://img.shields.io/badge/androidweekly-483-blue#badge)](https://androidweekly.net/issues/issue-483)
+
 ### Introduction
 
 Recently, I faced an issue that in the first place I found weird. I even considered that the behavior is generally incorrect. Diving deeper I got few insights on the problem - and this is what I'd like to share with you.  
