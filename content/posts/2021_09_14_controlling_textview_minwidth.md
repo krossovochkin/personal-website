@@ -139,7 +139,7 @@ protected int getSuggestedMinimumWidth() {
     return (mBackground == null) ? mMinWidth : max(mMinWidth, mBackground.getMinimumWidth());
 }
 ```
-So, not only `View#minimumWidth` is taken into consideration, but also background height.
+So, not only `View#minimumWidth` is taken into consideration, but also background width.
 That means that if we set some width on a background:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
