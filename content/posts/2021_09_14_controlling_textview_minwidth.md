@@ -10,6 +10,8 @@ description = "Full investigation on controlling minimum width of a TextView"
 showFullContent = false
 +++
 
+[![](https://img.shields.io/badge/androidweekly-484-blue#badge)](https://androidweekly.net/issues/issue-484)
+
 ### Introduction
 
 Sometimes we might need our TextView with `wrap_content` width to occupy more space than it will based on amount of characters it displays. For that we can set minimum width. Usually, we do that via XML like this:
