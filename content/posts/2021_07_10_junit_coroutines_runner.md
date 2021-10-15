@@ -10,8 +10,6 @@ description = "Writing tests for kotlin code with coroutines requires adding run
 showFullContent = false
 +++
 
-[![](https://img.shields.io/badge/androidweekly-484-blue#badge)](https://androidweekly.net/issues/issue-484)
-
 ### Introduction
 
 Recently while writing tests for kotlin code with coroutines I found one annoying thing: almost all the tests start with `runBlockingTest`. Typing the same stuff repeatedly is something we can't accept! So, I decided to think about how to improve this.
