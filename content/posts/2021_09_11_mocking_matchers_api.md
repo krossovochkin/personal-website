@@ -10,7 +10,7 @@ description = "Diving into Matchers API of various mocking libraries such as Moc
 showFullContent = false
 +++
 
-[![](https://img.shields.io/badge/androidweekly-483-blue#badge)](https://androidweekly.net/issues/issue-483)
+[![](https://img.shields.io/badge/androidweekly-483-blue#badge)](https://androidweekly.net/issues/issue-483) [![](https://img.shields.io/badge/kotlinweekly-268-purple#badge)](https://mailchi.mp/kotlinweekly/kotlin-weekly-268)
 
 ### Introduction
 
