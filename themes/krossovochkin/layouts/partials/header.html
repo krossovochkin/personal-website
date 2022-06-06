@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+  <title>{{ .Title }}</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/6d5aec2882.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL}}" />
+
+  <!-- Chrome for Android -->
+  <meta name="theme-color" content="#1e2327">
+
+  {{ template "_internal/twitter_cards.html" . }}
+</head>
+
+<body>
+
+{{ template "_internal/google_analytics_async.html" . }}
+
+<header>
+{{ partial "menu.html" . }}
+</header>
+
+<br/>

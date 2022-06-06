@@ -1,0 +1,81 @@
+baseUrl: "https://krossovochkin.com"
+languageCode: "en-us"
+
+title: "Vasya Drobushkov"
+theme: "krossovochkin"
+
+googleAnalytics: "UA-148934073-1"
+
+menu:
+  left:
+    - name: "Posts"
+      url: "/"
+      weight: 1
+    - name: "About"
+      url: "/about"
+      weight: 2
+  right:
+    - name: "GitHub"
+      url: "https://github.com/krossovochkin"
+      weight: 7
+      pre: "fa-brands fa-github"
+    - name: "Twitter"
+      url: "https://twitter.com/krossovochkin"
+      weight: 6
+      pre: "fa-brands fa-twitter"
+    - name: "RSS"
+      url: "/index.xml"
+      weight: 5
+      pre: "fa-solid fa-rss"
+    - name: "Facebook"
+      url: "https://facebook.com/vasya.drobushkov"
+      weight: 4
+      pre: "fa-brands fa-facebook"
+    - name: "Linkedin"
+      url: "https://linkedin.com/in/vasyadrobushkov"
+      weight: 3
+      pre: "fa-brands fa-linkedin"
+    - name: "Stackoverflow"
+      url: "https://stackoverflow.com/users/1533933/krossovochkin"
+      weight: 2
+      pre: "fa-brands fa-stack-overflow"
+    - name: "Telegram"
+      url: "https://t.me/krossovochkin_newsletter"
+      weight: 1
+      pre: "fa-brands fa-telegram"
+
+params:
+  description: "Vasya Drobushkov blog"
+  googleSearchCode: ""
+
+social:
+  twitter: "krossovochkin"
+
+disableHugoGeneratorInject: true
+enableEmoji: true
+footnoteReturnLinkContents: "↩"
+
+disableKinds:
+  - taxonomy
+  - taxonomyTerm
+  - section
+
+pygmentsCodeFences: true
+pygmentsUseClasses: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    anchorLineNos: false
+    codeFences: true
+    guessSyntax: false
+    hl_Lines: ""
+    lineAnchors: ""
+    lineNoStart: 1
+    lineNos: false
+    lineNumbersInTable: true
+    noClasses: true
+    style: monokai
+    tabWidth: 4

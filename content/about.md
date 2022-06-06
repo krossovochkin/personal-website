@@ -1,7 +1,8 @@
 ![](https://avatars1.githubusercontent.com/u/1792204?size=200#circle)
+
 *Vasya Drobushkov @krossovochkin*
 
-###### About me
+#### About me
 
 Android developer with mathematical background.
 Experienced in developing smart applications for Android, and also in mobile game development.
@@ -10,7 +11,7 @@ Fast learner, greedy for knowledge.
 
 ---
 
-###### Links
+#### Links
 
 [LinkedIn](https://www.linkedin.com/in/vasyadrobushkov/)  
 [Github](https://github.com/krossovochkin)  
@@ -28,7 +29,7 @@ Fast learner, greedy for knowledge.
 
 ---
 
-###### Projects
+#### Projects
 
 [Fibery Unofficial](https://github.com/krossovochkin/FiberyUnofficial)  
 Android client for [fibery.io](https://fibery.io).  
@@ -40,7 +41,7 @@ MVI, Kotlin MPP, Jetpack Compose.
 
 ---
 
-###### Speaking
+#### Speaking
 [Android Academy Minsk] Intro to RxJava [Slides](https://drive.google.com/open?id=1d603jMjxT8x6EIMaINqt1ic7C_GjPl8-v6QMYoT9jHM) [Video](https://www.youtube.com/watch?v=ltleF2ifnC0)  
 [Android Academy Minsk] Hello World — First Project [Slides](https://docs.google.com/presentation/d/15we1hxp8MdBOQN-IShMASKgYJ8OywwEoLT2-1OBS9mE) [Video](https://www.youtube.com/watch?v=pX4ulg5Ytvo)  
 [Android Academy Minsk] Dark Theme [Slides](https://speakerdeck.com/krossovochkin/vasya-drobushkov-android-dark-theme) [Video](https://youtu.be/nj1di9yJoPE)  
@@ -48,12 +49,12 @@ Android Design Support Library [Slides](https://speakerdeck.com/krossovochkin/an
 
 ---
 
-###### Broadcasting
+#### Broadcasting
 [MobileUnderhood](https://mobileunderhood.ru/krossovochkin/)
 
 ---
 
-###### Certificates
+#### Certificates
 
 [Complete Python Bootcamp](https://www.udemy.com/certificate/UC-X4I1N9ME)  
 [The Complete SQL Bootcamp](https://www.udemy.com/certificate/UC-GMULYRW8)  
@@ -66,13 +67,13 @@ Android Design Support Library [Slides](https://speakerdeck.com/krossovochkin/an
 
 ---
 
-###### Skills
+#### Skills
 
 [Android] [Kotlin] [RxJava] [Git] [SQL] [JIRA] [Flutter] [JSON] [Android Studio] [Gradle] [Python] [Figma] [Dart] [HTML] [CSS] [JavaScript] [C++]
 
 ---
 
-###### Work Experience
+#### Work Experience
 
 [Lyft](https://www.lyft.com) Software Engineer 04/2021 - Present  
 [Easybrain](https://easybrain.com) Senior Android Developer 11/2019 - 03/2021  
@@ -86,9 +87,7 @@ Android Design Support Library [Slides](https://speakerdeck.com/krossovochkin/an
 
 ---
 
-###### Education
+#### Education
 
-[Belarusian State University](https://www.bsu.by) 2009 - 2014 Mechanics/Applied Mathematics (Robotics)
+[Belarusian State University](https://www.bsu.by) 2009 - 2014 Mechanics/Applied Mathematics (Robotics)  
 [Lyceum BSU](https://lyceum.by/) 2007 - 2009 Physics
-
----
