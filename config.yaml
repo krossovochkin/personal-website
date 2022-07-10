@@ -8,12 +8,15 @@ googleAnalytics: "UA-148934073-1"
 
 menu:
   left:
-    - name: "Posts"
-      url: "/"
-      weight: 1
     - name: "About"
       url: "/about"
+      weight: 1
+    - name: "Posts"
+      url: "/"
       weight: 2
+    - name: "Apps"
+      url: "/apps"
+      weight: 3
   right:
     - name: "GitHub"
       url: "https://github.com/krossovochkin"
@@ -58,7 +61,6 @@ footnoteReturnLinkContents: "↩"
 disableKinds:
   - taxonomy
   - taxonomyTerm
-  - section
 
 pygmentsCodeFences: true
 pygmentsUseClasses: true

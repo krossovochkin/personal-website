@@ -9,9 +9,9 @@
 {{ .Content }}
 
 <ul>
-  {{ range where .Site.RegularPages "Section" "posts" }}
+  {{ range where .Site.RegularPages "Section" "apps" }}
       <li>
-        <span class="date">{{ .Date.Format "2006/01/02" }} - </span><a href="{{ .RelPermalink}}">{{ .Title | markdownify }}</a>
+        - </span><a href="{{ .RelPermalink}}">{{ .Title | markdownify }}</a>
       </li>
   {{ end }}
 </ul>
