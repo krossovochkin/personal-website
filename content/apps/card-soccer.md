@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-<iframe width="275px" height="600px" src="../../card-soccer/index.html" style="margin: 0 auto; display: block;"></iframe>
+<iframe width="275px" height="600px" src="../../applications/card-soccer/index.html" style="margin: 0 auto; display: block;"></iframe>
 
 ### How to play
 
