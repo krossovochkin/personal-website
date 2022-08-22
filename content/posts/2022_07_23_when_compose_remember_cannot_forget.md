@@ -12,6 +12,8 @@ showFullContent = false
 
 [Чытаць на беларускай мове](../by/2022_07_23_when_compose_remember_cannot_forget)
 
+[![](https://img.shields.io/badge/androidweekly-529-blue#badge)](https://androidweekly.net/issues/issue-529)
+
 ## Introduction
 
 When developing [color-utils](https://krossovochkin.com/apps/color-utils/) app using Compose for Web I faced an issue that `remember` didn't want to forget the state. It was quite annoying experience as it felt stupid: composable function is recomposed with the new value provided but `remember` still kept old value.   
