@@ -12,6 +12,8 @@ showFullContent = false
 
 [Read in English](../../2022_07_23_when_compose_remember_cannot_forget)
 
+[![](https://img.shields.io/badge/androidweekly-529-blue#badge)](https://androidweekly.net/issues/issue-529)
+
 ## Уводзіны
 
 Пры распрацоўцы прыкладання [color-utils](https://krossovochkin.com/apps/color-utils/) з выкарыстаннем Compose для Web я сутыкнуўся з праблемай, што `remember` не хацеў забываць стан. Гэта быў вельмі раздражняльны вопыт, бо я адчуваў сябе па-дурному: Composable функцыя перакампанавана з новым значэннем, але `remember` па-ранейшаму захоўвала старое значэнне.
