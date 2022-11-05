@@ -22,10 +22,10 @@ menu:
       url: "https://github.com/krossovochkin"
       weight: 7
       pre: "fa-brands fa-github"
-    - name: "Twitter"
-      url: "https://twitter.com/krossovochkin"
+    - name: "Mastodon"
+      url: "https://androiddev.social/@krossovochkin"
       weight: 6
-      pre: "fa-brands fa-twitter"
+      pre: "fa-brands fa-mastodon"
     - name: "RSS"
       url: "/index.xml"
       weight: 5
