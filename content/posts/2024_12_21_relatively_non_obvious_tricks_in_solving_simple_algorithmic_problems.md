@@ -12,6 +12,8 @@ In this article, I’d like to walk through a few examples and provide simple, i
 
 ## Detect Whether a Singly Linked List Contains a Loop  
 
+[LeetCode](https://leetcode.com/problems/linked-list-cycle/)
+
 This is a classic problem with a two-pointer solution. We initialize a slow and a fast pointer at the beginning of the list. The slow pointer moves one step at a time, while the fast pointer moves two steps at a time.  
 
 - If the fast pointer reaches the end of the list, there is no loop. (If a loop existed, the list wouldn't have an "end.")  
@@ -24,6 +26,8 @@ The answer lies in the fact that at each iteration, the distance between the slo
 ---
 
 ## Find the Majority Element in an Array  
+
+[LeetCode](https://leetcode.com/problems/majority-element/)
 
 To solve this, we iterate through the array once using a counter that starts at zero.  
 
@@ -47,6 +51,8 @@ Finally, the majority element’s count minus the count of all other elements wi
 
 ## Climbing Stairs  
 
+[LeetCode](https://leetcode.com/problems/climbing-stairs/)
+
 You’re given a staircase, and on each step, you can climb one or two stairs. You need to calculate how many distinct ways you can reach the top.  
 
 At first, this problem seems confusing. Then, realizing the solution involves the Fibonacci sequence might make it seem even more mysterious.  
@@ -69,6 +75,8 @@ And that’s it.
 
 ## Maximum Subarray Sum  
 
+[LeetCode](https://leetcode.com/problems/maximum-subarray/)
+
 This problem asks us to find the maximum sum of a subarray. Brute-forcing through all subarrays would be too slow, so we use a linear-time solution with constant memory.  
 
 We maintain two variables:  
@@ -89,5 +97,5 @@ Why does this work?
 
 And that’s it for this time.  
 
-**Happy coding!**
+Happy coding!
 
