@@ -10,8 +10,6 @@ description = ""
 showFullContent = false
 +++
 
-# Relatively Non-Obvious Tricks in Solving Simple Algorithmic Problems  
-
 Blowing the dust off LeetCode once again, I found myself, as in the [past](https://krossovochkin.com/posts/2019_09_27_random_interview_coding_task_retrospective/), struggling with coding relatively simple algorithms. Just like with anything else, if you don’t practice for years, you lose some of the hands-on experience.  
 
 On the positive side, I noticed that for some problems, my new submissions were much better and more concise compared to my old ones. That’s an awesome feeling—a tangible measure of growth.  
