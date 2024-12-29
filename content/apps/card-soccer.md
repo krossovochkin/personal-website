@@ -34,4 +34,4 @@ So many years later I decided to develop that game so that somebody might wish t
 The game is insanely random, so there is no chance to have a guaranteed win, but there are some strategies and tactics.  
 I have hard times working with web, so for this I used kotlin multiplatform along with jetpack compose ui to develop first desktop version and then port it to the web.  
 
-Sources: https://github.com/krossovochkin/CardSoccer
+[Sources](https://github.com/krossovochkin/krossovochkin-web-apps/tree/main/apps/card-soccer)
