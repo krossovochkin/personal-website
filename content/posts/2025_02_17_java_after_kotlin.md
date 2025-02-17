@@ -1,6 +1,6 @@
 +++
 title = "Java after Kotlin"
-date = "2025-02-04"
+date = "2025-02-17"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
