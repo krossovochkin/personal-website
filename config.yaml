@@ -81,3 +81,19 @@ markup:
     noClasses: true
     style: monokai
     tabWidth: 4
+
+privacy:
+  googleAnalytics:
+    disable: false
+    respectDoNotTrack: true
+  twitter:
+    disable: false
+    enableDNT: true
+    simple: false
+  x:
+    disable: false
+    enableDNT: true
+    simple: false
+  youTube:
+    disable: false
+    privacyEnhanced: true
