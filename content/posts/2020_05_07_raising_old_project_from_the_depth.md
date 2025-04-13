@@ -18,8 +18,6 @@ I am an Android Developer from the beginning of my professional career. Straight
 
 The first project I took part in was called “nICE”. It was a match-3-like game. It was at the time when there was Android Market and not Google Play Store, when we used Eclipse and not Android Studio and, of course, used Java. The game was already available in the Market, but we wanted to develop it more by adding some power-ups to make game experience richer (and gain more from in-app purchases) and introduce some additional game modes (like puzzles).
 
-{{< youtube xoMFjzNXt0c >}}
-
 ![One could click on a penguin to get a hint!](../../img/0_cCNRPDsUFPSgYutl.jpg)*One could click on a penguin to get a hint!*
 
 As it was my first project, I have special feelings about it. Currently, it is not available in the Play Store, because without support over time app had more and more issues and some critical bugs, which not allow you to play. One of the most prominent bugs was that game progress not saved across app launches. Upset.
