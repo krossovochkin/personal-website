@@ -42,8 +42,6 @@ showFullContent = false
 **Bassnectar — Sideways
 Nightcore — Monster**
 
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/VoBEJEcWEH4" frameborder="0" allowfullscreen></iframe></center>
-
 Отдельно отметил бы **Borgore — Kiss My Lips. **Это что называется тяжелая артиллерия на самые исключительные ситуации. Когда ты злой как черт и думаешь “Так, баг, тебе п*зда”.
 После прослушивания обязательно включить что-нибудь расслабляющее вроде Massive Attack.
 
@@ -58,22 +56,16 @@ Nightcore — Monster**
 
 Что касается музыки специального назначения, то тут отметить хочется намного больше композиций (но чтобы не спамить буду себя сдерживать)
 
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/vMCbJB4yNXo" frameborder="0" allowfullscreen></iframe></center>
-
 **Static-X — The Only**
 Это саундтрек к NFS: Underground.
 Возможно якорь концетрации был заложен ещё тогда, играя за компьютером, и услышав эту песню годы спустя внутри что-то откликнулось.
 
 Ну и ударные хороши.
 
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/e8X3ACToii0" frameborder="0" allowfullscreen></iframe></center>
-
 **Rise Against — Savior
 **Песня с приятным ритмом и надрывным вокалом.
 
 Слова конечно немного сопливые, однако, как мы помним на работе мы слова не слушаем.
-
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/CxFiu5Yy2Os" frameborder="0" allowfullscreen></iframe></center>
 
 **The Devil Wears Prada — Hey John, What’s Your Name**
 и другие песни данной группы.
@@ -101,13 +93,9 @@ Nightcore — Monster**
 Ну и конечно трещание хай-хетов.
 **Lil Peep, XXXTENTACION **— вот это вот всё.
 
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/3rkJ3L5Ce80" frameborder="0" allowfullscreen></iframe></center>
-
 Как пример **Lil Peep — Benz Truck**.
 
 Это для спокойной работы.
-
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/wJGcwEv7838" frameborder="0" allowfullscreen></iframe></center>
 
 **XXXTENTACION — Look At Me!**
 
@@ -124,24 +112,18 @@ Nightcore — Monster**
 3) новая школа — **Скриптонит, ЛСП, Big Russian Boss** etc.
 4) не знаю что — **2H Company, Кровосток, ATL, MiyaGi & Эндшпиль**
 
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/XSAGKdCsd7s" frameborder="0" allowfullscreen></iframe></center>
-
 Отдельного уважения от меня получает **2H Company**.
 Музыка очень плохого качества и быстрый поток сознания в тексте.
 Шикарно!
 
 Внимание: слушайте на свой страх и риск.
 
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/Miqhq_3gQbg" frameborder="0" allowfullscreen></iframe></center>
-
 У **ATL **много приятных песен — **Марабу, Демоны**.
 Для достижения максимального эффекта лучше всего слушать в дождливую погоду (хех).
 
 ### Что ещё?
 
-Знаю людей, которые предпочитают работать под классическую музыку или под ambient. Я и сам не прочь взять например Баха и исправить какой-нибудь заковыристый баг:
-
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/PlGrCRyztR8" frameborder="0" allowfullscreen></iframe></center>
+Знаю людей, которые предпочитают работать под классическую музыку или под ambient. Я и сам не прочь взять например Баха и исправить какой-нибудь заковыристый баг.
 
 Но у такой музыки есть недостаток, что она спокойная настолько, что сквозь музыку все равно слышишь, что происходит вокруг (надо просто купить уже себе наушники с шумоподавлением).
 
