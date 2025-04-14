@@ -4,8 +4,6 @@ languageCode: "en-us"
 title: "Vasya Drobushkov"
 theme: "krossovochkin"
 
-googleAnalytics: "G-YEWQ4T95D5"
-
 menu:
   left:
     - name: "About"
@@ -49,7 +47,6 @@ menu:
 
 params:
   description: "Vasya Drobushkov blog"
-  googleSearchCode: ""
 
 social:
   twitter: "krossovochkin"
@@ -81,19 +78,4 @@ markup:
     noClasses: true
     style: monokai
     tabWidth: 4
-
-privacy:
-  googleAnalytics:
-    disable: false
-    respectDoNotTrack: true
-  twitter:
-    disable: false
-    enableDNT: true
-    simple: false
-  x:
-    disable: false
-    enableDNT: true
-    simple: false
-  youTube:
-    disable: false
-    privacyEnhanced: true
+    
