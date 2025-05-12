@@ -10,6 +10,8 @@ description = ""
 showFullContent = false
 +++
 
+[![](https://img.shields.io/badge/androidweekly-674-blue#badge)](https://androidweekly.net/issues/issue-674)
+
 A long time ago, when I had just started my journey into programming, development, and engineering, it wasn't easy to find information, and bikeshedding could happen quite often because of that. We read books to gain insights into best practices and learn how to do things correctly. The concepts from the past were usually crucial and provided a great ramp-up to avoid obvious mistakes.
 
 Over time, we became flooded with information and opinions. In such an environment, old-time thoughts may even seem better, as they’ve been tested by time and by many engineers in the field.
