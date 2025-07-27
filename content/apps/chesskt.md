@@ -10,6 +10,6 @@ description = ""
 showFullContent = false
 +++
 
-<iframe width="640px" height="640px" src="../../applications/chess.kt/index.html" style="margin: 0 auto; display: block; background-color: white;"></iframe>
+<iframe width="500px" height="500px" src="../../applications/chess.kt/index.html" style="margin: 0 auto; display: block; background-color: white;"></iframe>
 
 Sources: https://github.com/krossovochkin/chess.kt
