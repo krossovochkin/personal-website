@@ -103,8 +103,7 @@ scope.launch { throw RuntimeException() }
 **First important note**: the handler works only in top-level coroutines. That means, if you set it to an intermediate `launch`, the exception won't be handled.  
 This won't handle it:
 
-```
-kotlin
+```kotlin
 val handler = CoroutineExceptionHandler { _, _ -> println("handled") }
 val scope = CoroutineScope(Job())
 scope.launch {
@@ -116,8 +115,7 @@ scope.launch {
 
 **Second important note**: the handler can work in an intermediate `launch`, but only if there is a `SupervisorJob` in that scope. In the example below, we create a new `supervisorScope` that will have a `SupervisorJob`, so setting up a handler for its launches will handle them:
 
-```
-kotlin
+```kotlin
 val handler = CoroutineExceptionHandler { _, _ -> println("handled") }
 val scope = CoroutineScope(Job())
 scope.launch {
@@ -151,8 +149,7 @@ The exception is handled, and the app doesn't crash.
 
 **Second important note**: while the exception is re-thrown in `await`, `async` cancels with the exception at the time it happens. Why does this matter? Because cancelling with an exception cancels the parent job, which can eventually lead to a crash:
 
-```
-kotlin
+```kotlin
 val scope = CoroutineScope(Job())
 val job = scope.launch {
     async {
@@ -191,8 +188,7 @@ Also, `CoroutineExceptionHandler` only works for top-level coroutines or the one
 
 In the example above, I used `supervisorScope` to create a new scope with a `SupervisorJob`:
 
-```
-kotlin
+```kotlin
 scope.launch {
     supervisorScope {
         launch(handler) { throw RuntimeException() }
@@ -202,8 +198,7 @@ scope.launch {
 
 At the same time, it's possible to do something like this:
 
-```
-kotlin
+```kotlin
 scope.launch {
     launch(SupervisorJob() + handler) { throw RuntimeException() }
 }
