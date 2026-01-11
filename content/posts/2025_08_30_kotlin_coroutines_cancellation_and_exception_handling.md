@@ -1,6 +1,6 @@
 +++
 title = "Kotlin Coroutines Cancellation and Exception Handling"
-date = "2025-01-11"
+date = "2026-01-11"
 author = "Vasya Drobushkov"
 authorTwitter = "krossovochkin" #do not include @
 cover = ""
