@@ -10,6 +10,9 @@ description = ""
 showFullContent = false
 +++
 
+[![](https://img.shields.io/badge/androidweekly-710-blue#badge)](https://androidweekly.net/issues/issue-710)
+
+
 Cancellation and exception handling in coroutines is by far the most complex thing I've faced during my entire career. These two things are so complicated that I sometimes ask myself how people are using such a difficult-to-use framework. I read all the possible docs that I found, many different articles, video courses, and even tried to look at the code - and still, I feel that my understanding of this topic is quite bad.  
 When reading articles, I often thought that their structure was not good and that things were not clarified in a reasonable way. Usually, articles are just a collection of examples that show how certain combinations of suspending functions or coroutine builders will work. Learning by examples is good, but they should help with understanding core concepts so that all other situations are easy to relate to what was learned.
 
