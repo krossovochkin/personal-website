@@ -50,20 +50,20 @@ source ~/.bashrc
 
 Next we need to download platform and build tools and accept all licenses
 
-```
+```bash
 sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools"
 sdkmanager --licenses
 ```
 
 Installing Gradle - that simple
 
-```
+```bash
 pkg install gradle
 ```
 
 And Termux version of aapt2. Android SDK has an aapt2 tool in the main distribution, but it is for Linux and Termux is not compatible with that version. So we need to download a native version of aapt2 and set up an override in Gradle to point to that new binary
 
-```
+```bash
 apt install aapt2
 mkdir -p ~/.gradle && echo 'android.aapt2FromMavenOverride=/data/data/com.termux/files/usr/bin/aapt2' >> ~/.gradle/gradle.properties
 ```
@@ -72,7 +72,7 @@ And here we have all the setup for building the app ready
 
 Let's get into the app. We'll need to have a git package installed, then we clone the project (of course, better to set up SSH, but it will work the same way as everywhere, and as we are not going to push changes, we'll use HTTPS)
 
-```
+```bash
 pkg install git
 
 git clone https://github.com/android/architecture-samples.git
@@ -82,21 +82,20 @@ cd architecture-samples
 
 And now we can assemble the app (I had issues and lags when running a daemon, so disabled it for the sake of testing)
 
-```
+```bash
 ./gradlew assembleDebug --no-daemon
 ```
 
 And it builds! 
 
-
-![Build successful](../../img/Screenshot_20260426-122452_Termux.png)
+<img src="../../img/Screenshot_20260426-122452_Termux.png" width="300px" />
 
 Right on your phone  
 (Say goodbye to your phone's battery though, lol). Took around 6 minutes - not that great for a not that big project.
 
 Next and last thing - install Gemini (termux-api is a package that will allow opening a browser for auth request)
 
-```
+```bash
 pkg install termux-api
 pkg install nodejs
 npm install -g @google/gemini-cli
